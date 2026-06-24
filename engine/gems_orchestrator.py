@@ -1,0 +1,1 @@
+"# Set stdout encoding to UTF-8\nimport sys\nif hasattr(sys.stdout, 'reconfigure'):\n    sys.stdout.reconfigure(encoding='utf-8')\n\n# === CONFIG ==="

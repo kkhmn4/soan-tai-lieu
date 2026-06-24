@@ -1,0 +1,185 @@
+{
+  "meta": {
+    "schema_version": "1.1.0",
+    "awf_version": "4.0.2",
+    "last_updated": "2026-06-24T08:52:00+07:00"
+  },
+  "project": {
+    "name": "soạn tài liệu",
+    "type": "GEMS Physics Material Generation Suite",
+    "status": "active",
+    "description": "Hệ thống tự động sinh học liệu vật lý GEMS: phiếu học tập, bài tập về nhà LaTeX, slide bài giảng và infographic thông qua Gemini API + Google NotebookLM."
+  },
+  "tech_stack": {
+    "frontend": {},
+    "backend": {
+      "language": "Python 3.11",
+      "libraries": [
+        "google-genai (Gemini API client)",
+        "python-docx (xuất file Word)",
+        "pillow (xử lý ảnh)",
+        "rich (terminal UI)",
+        "python-pptx (đọc/kiểm tra PPTX)",
+        "pydantic (data validation & JSON schema)",
+        "latex2mathml",
+        "lxml"
+      ],
+      "nlm_cli": "nlm CLI – giao tiếp với Google NotebookLM để tạo slide & infographic",
+      "mcp_tools": "StitchMCP + NotebookLM MCP (tích hợp trong Anti Gravity platform)"
+    },
+    "database": {
+      "type": "File-based storage",
+      "formats": ["JSON (lesson_matrix, worksheet_data, homework_data)", "Markdown (.md)", "LaTeX (.tex)", "Word (.docx)", "PNG/SVG (ảnh TikZ)"]
+    }
+  },
+  "directory_structure": {
+    "engine/": "Các module Python: main.py, gems_analyzer.py, worksheet_generator.py, homework_generator.py, image_renderer.py, quality_checker.py, restructure_output.py",
+    "engine/templates/": "Template LaTeX cho bài tập về nhà (homework_template.tex)",
+    "output/hermes/[bai_X]/md/": "Markdown nguồn: dac_ta_gems.md, phieu_hoc_tap.md, dap_an.md, ke_hoach_bai_day.md, huong_dan_slide.md, bai_tap_ve_nha.md",
+    "output/hermes/[bai_X]/ready/": "Tài liệu đầu ra cuối cùng: slide_deck.pptx/pdf, infographic_*.png, phieu_hoc_tap.docx, bai_tap_ve_nha.tex, dap_an.tex",
+    "tai-lieu-goc/": "Tài liệu nguồn: SGK, khung chương trình GDPT 2018, YCCĐ",
+    "skills/": "AWF skills: hermes-gems-automation.md, awf-gems_workflow_skill.md",
+    "scratch/generate_notebook_materials.py": "CLI tool tạo học liệu NLM: nhận --phieu-hoc-tap, --dap-an, --title, --profile, --out-dir. Tự động: tạo notebook → upload sources → tạo slide + infographic → poll status → download về out-dir.",
+    "scratch/generate_gems_materials_bai4.py": "Script tạo toàn bộ file .md cho bài 4 (ghi trực tiếp vào output/hermes/bai4_nhiet_dung_rieng/md/)."
+  },
+  "current_progress": {
+    "completed_lessons": [
+      "Bài 4 – Nhiệt dung riêng (✅ HOÀN TOÀN XONG 24/06/2026: slide_deck.pptx (v1, cũ) + slide_deck_v2_viet.pdf (v2, đúng chuẩn mới) + 2 infographic PNG tiếng Việt + phieu_hoc_tap.docx + bai_tap_ve_nha.tex + dap_an.tex. Notebook ID mới (profile default): 469d71aa-3338-4951-b2a4-ecdd7a4571de)"
+    ],
+    "in_progress_lessons": [
+      "Bài 5 – Nhiệt độ nhiệt kế (md/ hoàn tất, chưa tạo NLM)",
+      "Bài 6 – Nhiệt nóng chảy riêng (md/ hoàn tất, chưa tạo NLM)",
+      "Bài 7 – Nhiệt hóa hơi riêng (md/ hoàn tất, chưa tạo NLM)"
+    ],
+    "next_step": "Chạy pipeline cho Bài 5: $env:PYTHONUTF8='1'; python scratch/generate_notebook_materials.py --phieu-hoc-tap [file.md] --dap-an [file.md] --title [title] --profile default --out-dir [output/hermes/bai5]"
+  },
+  "slide_design_rules": {
+    "updated": "2026-06-24",
+    "rules": [
+      "1. PHÂN CẤP TIÊU ĐỀ: Mỗi slide PHẢI có tiêu đề chứa mã phân cấp X.Y. Slide đề mục ĐVKT dùng X.0 (ví dụ: 1.0, 2.0). Slide nội dung: 1.1, 1.2, 1.3... 2.1, 2.2...",
+      "2. TÁCH NHIỆM VỤ / ĐÁP ÁN: Slide trình bày câu hỏi/nhiệm vụ (học sinh làm) PHẢI là slide riêng biệt. Slide đáp án là slide TIẾP THEO. TUYỆT ĐỐI KHÔNG gộp chung trên cùng 1 slide.",
+      "3. ĐỒNG BỘ TIÊU ĐỀ: Tiêu đề của từng ĐVKT và từng nhiệm vụ phải đồng bộ hoàn toàn (khớp 1-1) giữa Phiếu học tập (Worksheet) và Slide bài giảng.",
+      "4. MỞ RỘNG KIẾN THỨC: Bắt buộc có phần Mở rộng kiến thức ngay sau phần Vận dụng cho từng ĐVKT trên cả 3 tài liệu: KHBD, Phiếu học tập và Slide bài giảng. Tập trung vào ứng dụng thực tế trong máy móc, thiết bị kỹ thuật, công nghệ, hiện tượng tự nhiên và phải trích nguồn uy tín (sách, bài báo khoa học).",
+      "5. NGÔN NGỮ: Tuyệt đối 100% tiếng Việt. Không dùng bất kỳ chữ, nhãn, chú thích, ghi chú nào bằng tiếng Anh.",
+      "6. HIGHLIGHT: Dùng màu vàng (#FFD600) để nhấn mạnh từ khoá, định nghĩa, công thức.",
+      "7. MẬT ĐỘ: Tối đa 6–8 dòng chữ mỗi slide. Nền sáng."
+    ],
+    "slide_focus_template": "Thiết kế slide bài giảng bắt buộc bám sát 100% theo nội dung và cấu trúc chi tiết được mô tả trong tệp nguồn '[slug]_huong_dan_slide.md' đã tải lên. Quy tắc bắt buộc: 1. Mỗi slide PHẢI có tiêu đề chứa mã phân cấp dạng X.Y (ví dụ: 1.0, 1.1, 1.2, 2.1...). 2. Tiêu đề ĐVKT và nhiệm vụ phải đồng bộ khớp 1-1 với Phiếu học tập. 3. Slide trình bày nhiệm vụ/câu hỏi là slide riêng biệt, slide đáp án là slide tiếp theo — TUYỆT ĐỐI KHÔNG gộp chung nhiệm vụ và đáp án trên cùng một slide. 4. Slide thứ 7 của mỗi ĐVKT phải là slide Mở rộng kiến thức (ứng dụng thực tế trong máy móc, thiết bị, hiện tượng tự nhiên,... tham khảo nguồn uy tín từ sách, bài báo). 5. Tuyệt đối 100% tiếng Việt, không dùng bất kỳ chữ, nhãn, chú thích, ghi chú nào bằng tiếng Anh. 6. Highlight màu vàng cho từ khóa chính, định nghĩa, công thức. 7. Phông chữ UVN bai sau, nền sáng, tối đa 6-8 dòng chữ/slide. Giáo viên thực hiện: Kha Khung Hiệp."
+  },
+  "business_rules": [
+    {
+      "rule": "Quy chuẩn GEMS v7.1",
+      "explained": "7 nguyên tắc thiết kế phiếu học tập & slide. 15 tiêu chí kiểm định QA Self-Check. Yêu cầu: phông chữ UVN bai sau, tên GV Kha Khung Hiệp, slide >= 15 trang, 100% tiếng Việt, đồng bộ tiêu đề PHT-Slide và bổ sung Mở rộng kiến thức (sau Vận dụng) trích nguồn uy tín cho KHBD, PHT, Slide."
+    },
+    {
+      "rule": "Engine Python yêu cầu GEMINI_API_KEY bắt buộc",
+      "explained": "Tất cả module generator phải raise EnvironmentError khi thiếu API key. KHÔNG có offline mode trong engine chính."
+    },
+    {
+      "rule": "Quy trình tạo slide & infographic qua NLM CLI",
+      "explained": "Bước 1: Upload file .md lên NotebookLM (nlm source add). Bước 2: Tạo slide (nlm slides create --language vi --focus [prompt]). Bước 3: Tạo infographic (nlm infographic create --orientation portrait). Bước 4: Poll status (nlm studio status). Bước 5: Download (nlm download slide-deck -f pdf HOẶC pptx; nlm download infographic)."
+    },
+    {
+      "rule": "Đọc tài liệu nguồn bắt buộc",
+      "explained": "Mọi phân tích và đề xuất bài học phải bám sát Chương trình GDPT 2018 và SGK Kết nối tri thức trong tai-lieu-goc/."
+    },
+    {
+      "rule": "Cấu trúc tên tệp tin",
+      "explained": "Đặt tên file học liệu theo: [slug-bai]_[loai-tai-lieu]. Ví dụ: bai4_nhiet_dung_rieng_phieu_hoc_tap.md"
+    }
+  ],
+  "features": [
+    { "name": "Bước 1&2: Phân tích sư phạm + Ma trận bài học (gộp 1 lần gọi API – v7.1)", "status": "implemented" },
+    { "name": "Bước 3: Xuất bản Phiếu học tập (.docx, .md)", "status": "implemented" },
+    { "name": "Bước 4: Xuất bản Bài tập về nhà LaTeX + TikZ (.tex)", "status": "implemented" },
+    { "name": "Bước 5: Tạo ảnh AI (Imagen 3.0) + Render TikZ PNG", "status": "implemented" },
+    { "name": "Bước 6: Kiểm định chất lượng QA AI Self-Check", "status": "implemented" },
+    { "name": "Bước 7: Tích hợp NotebookLM – Slide & Infographic (CLI pipeline)", "status": "implemented" },
+    { "name": "Slide Design Rules v2 – phân cấp X.Y, tách nhiệm vụ/đáp án, 100% tiếng Việt", "status": "implemented" },
+    { "name": "Hermes Engine – Tự động hoá toàn chương Nhiệt (bài 4-7)", "status": "in_progress" }
+  ],
+  "knowledge_items": {
+    "patterns": [
+      {
+        "pattern": "Định dạng LaTeX công thức",
+        "description": "Biểu thức toán lý viết dạng $công_thức$. Ví dụ: $Q = mc\\Delta t$, $c = Q/(m \\cdot \\Delta t)$."
+      },
+      {
+        "pattern": "Dòng kẻ chấm trên PHT",
+        "description": "Bắt buộc dài đúng 90 ký tự. Placeholder: [DOT_LINE_90]."
+      },
+      {
+        "pattern": "Cấu trúc thư mục Hermes mỗi bài",
+        "description": "output/hermes/[slug]/md/ (6 file .md nguồn) + ready/ (slide.pptx/pdf, infographic*.png, phieu_hoc_tap.docx, bai_tap_ve_nha.tex, dap_an.tex)."
+      },
+      {
+        "pattern": "Slide guide chuẩn GEMS v7.1",
+        "description": "File [slug]_huong_dan_slide.md. Cấu trúc: QUY TẮC THIẾT KẾ BẮT BUỘC (5 quy tắc) → SLIDE MỞ ĐẦU → ĐVKT 1 (slide X.0 đề mục, X.1 nhiệm vụ, X.2 đáp án, X.3 trọng tâm, X.4 nhiệm vụ VD, X.5 đáp án VD, X.6 mở rộng) → ĐVKT 2 tương tự → SLIDE KẾT BÀI."
+      },
+      {
+        "pattern": "Notebook ID bài 4 (profile default)",
+        "description": "Notebook 'GEMS Vat ly 12 - Bai 4: Nhiet dung rieng' ID: 469d71aa-3338-4951-b2a4-ecdd7a4571de. Slide v1 (cũ, tiếng Anh): 61b283e9. Slide v2 (mới, tiếng Việt chuẩn): 90786605-c6a0-41ae-b057-b07688650856 (chỉ download được PDF, không có PPTX)."
+      },
+      {
+        "pattern": "Script pipeline generate_notebook_materials.py",
+        "description": "Env: $env:PYTHONUTF8='1'. Tham số: --phieu-hoc-tap [file.md] --dap-an [file.md] --title [title] --profile [default|account2|account3] --out-dir [output/hermes/baiX]. Script tự upload thêm file huong_dan_slide.md nếu có."
+      }
+    ],
+    "gotchas": [
+      {
+        "gotcha": "TikZ: rect vs rectangle",
+        "description": "Dùng 'rectangle' không phải 'rect' trong LaTeX TikZ. Lỗi này gây compile fail."
+      },
+      {
+        "gotcha": "NotebookLM CLI – Session timeout",
+        "description": "Cookie hết hạn → chạy 'nlm login --clear' để mở Chrome đăng nhập lại."
+      },
+      {
+        "gotcha": "nlm --profile đặt SAU subcommand",
+        "description": "ĐÚNG: 'nlm list notebooks --profile account2'. SAI: 'nlm --profile account2 list notebooks'."
+      },
+      {
+        "gotcha": "nlm download KHÔNG hỗ trợ --profile",
+        "description": "Dùng biến môi trường: $env:NLM_PROFILE='account2' trước lệnh download. Script Python set os.environ['NLM_PROFILE']."
+      },
+      {
+        "gotcha": "nlm download slide-deck: PPTX vs PDF",
+        "description": "Slide deck tạo bằng 'nlm slides create' MỚI (không phải slide đầu tiên) chỉ download được PDF (-f pdf), KHÔNG download được PPTX (-f pptx). Slide deck đầu tiên của notebook thường có PPTX. Nếu cần PPTX: dùng slide đầu tiên hoặc PDF cho slide mới hơn."
+      },
+      {
+        "gotcha": "UnicodeEncodeError trên Windows khi chạy nlm CLI",
+        "description": "Phải set $env:PYTHONUTF8='1' trước khi chạy Python hoặc đặt env PYTHONUTF8=1 trong subprocess. Nguyên nhân: stdout mặc định dùng cp1252 không encode được ký tự Unicode (✓, ✗...)."
+      },
+      {
+        "gotcha": "nlm download 'completed' nhưng vẫn lỗi",
+        "description": "Đôi khi studio status trả về 'completed' nhưng download ngay lập tức thất bại. Nguyên nhân: có thể pipeline NLM nội bộ chưa finalize. Giải pháp: đợi thêm 30-60s rồi thử lại, hoặc thử format khác (pdf thay pptx)."
+      },
+      {
+        "gotcha": "Rollback không có git",
+        "description": "Workspace không có git. Mọi rollback phải thực hiện thủ công bằng cách đảo ngược thay đổi từ transcript."
+      },
+      {
+        "gotcha": "Engine offline mode – KHÔNG được thêm vào engine chính",
+        "description": "Chỉ dry_run.py mới có quyền chạy không cần API key. Các module engine phải raise EnvironmentError khi thiếu GEMINI_API_KEY."
+      },
+      {
+        "gotcha": "Đường dẫn workspace đúng",
+        "description": "c:\\Users\\Admin\\.antigravity-ide\\soạn tài liệu\\ (không phải 'tài liệu 12')."
+      }
+    ],
+    "conventions": [
+      {
+        "convention": "Cấu trúc tên tệp tin",
+        "description": "[slug-bai]_[loai-tai-lieu]. Ví dụ: bai4_nhiet_dung_rieng_phieu_hoc_tap.md, bai4_nhiet_dung_rieng_infographic_khai_niem_nhiet_dung_rieng.png"
+      },
+      {
+        "convention": "Slug cho thư mục",
+        "description": "bai4_nhiet_dung_rieng, bai5_nhiet_do_nhiet_ke, bai6_nhiet_nong_chay_rieng, bai7_nhiet_hoa_hoi_rieng"
+      },
+      {
+        "convention": "NLM profile mặc định",
+        "description": "Dùng profile 'default' (khakhunghiep@gmail.com) làm mặc định. account2=hoatrang756@gmail.com, account3=aichampionhk1@gmail.com dùng khi default bị rate limit."
+      }
+    ]
+  }
+}

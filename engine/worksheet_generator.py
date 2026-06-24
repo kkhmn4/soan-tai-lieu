@@ -1,0 +1,1 @@
+"            p_theory = doc.add_paragraph()\n            p_theory.paragraph_format.left_indent = Inches(0.2)\n            cloze_text = unit.core_theory.summary_cloze.replace(\"[DOT_LINE_90]\", \".\" * 90)\n            run_theory = p_theory.add_run(cloze_text)\n            run_theory.font.size = Pt(10)"

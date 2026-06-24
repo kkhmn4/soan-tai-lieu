@@ -1,0 +1,86 @@
+{
+  "updated_at": "2026-06-24T08:52:00+07:00",
+  "working_on": {
+    "feature": "GEMS Bài 4 – Nhiệt dung riêng",
+    "task": "HOÀN THÀNH",
+    "status": "completed",
+    "files": [
+      "output/hermes/bai4_nhiet_dung_rieng/md/bai4_nhiet_dung_rieng_huong_dan_slide.md",
+      "output/hermes/bai4_nhiet_dung_rieng/ready/bai4_nhiet_dung_rieng_slide_deck_v2_viet.pdf",
+      "output/hermes/bai4_nhiet_dung_rieng/ready/bai4_nhiet_dung_rieng_infographic_khai_niem_nhiet_dung_rieng.png",
+      "output/hermes/bai4_nhiet_dung_rieng/ready/bai4_nhiet_dung_rieng_infographic_thuc_hanh_do_nhiet_dung_rieng.png",
+      "scratch/generate_notebook_materials.py",
+      "scratch/generate_gems_materials_bai4.py"
+    ],
+    "blockers": [],
+    "notes": "Bài 4 hoàn tất. Slide PDF (v2) đúng chuẩn mới: phân cấp X.Y, tách nhiệm vụ/đáp án, 100% tiếng Việt."
+  },
+  "pending_tasks": [
+    {
+      "task": "Tạo NLM materials cho Bài 5 – Nhiệt độ nhiệt kế",
+      "priority": "high",
+      "notes": "File md/ đã có sẵn. Chạy pipeline generate_notebook_materials.py với profile default."
+    },
+    {
+      "task": "Tạo NLM materials cho Bài 6 – Nhiệt nóng chảy riêng",
+      "priority": "medium",
+      "notes": "File md/ đã có sẵn."
+    },
+    {
+      "task": "Tạo NLM materials cho Bài 7 – Nhiệt hóa hơi riêng",
+      "priority": "medium",
+      "notes": "File md/ đã có sẵn."
+    }
+  ],
+  "recent_changes": [
+    {
+      "timestamp": "2026-06-24T07:33:00+07:00",
+      "type": "update",
+      "description": "Cập nhật slide design rules: phân cấp X.Y, tách slide nhiệm vụ/đáp án, 100% tiếng Việt",
+      "files": [
+        "output/hermes/bai4_nhiet_dung_rieng/md/bai4_nhiet_dung_rieng_huong_dan_slide.md",
+        "scratch/generate_notebook_materials.py",
+        "scratch/generate_gems_materials_bai4.py"
+      ]
+    },
+    {
+      "timestamp": "2026-06-24T07:25:00+07:00",
+      "type": "generated",
+      "description": "NotebookLM tạo xong: slide_deck_v2_viet.pdf (phân cấp X.Y, tiếng Việt) + 2 infographic tiếng Việt cho bài 4",
+      "files": [
+        "output/hermes/bai4_nhiet_dung_rieng/ready/bai4_nhiet_dung_rieng_slide_deck_v2_viet.pdf",
+        "output/hermes/bai4_nhiet_dung_rieng/ready/bai4_nhiet_dung_rieng_infographic_khai_niem_nhiet_dung_rieng.png",
+        "output/hermes/bai4_nhiet_dung_rieng/ready/bai4_nhiet_dung_rieng_infographic_thuc_hanh_do_nhiet_dung_rieng.png"
+      ]
+    }
+  ],
+  "errors_encountered": [
+    {
+      "error": "UnicodeEncodeError: 'charmap' codec can't encode character '\\u2713'",
+      "solution": "Set $env:PYTHONUTF8='1' trước khi chạy Python. Trong subprocess: env={'PYTHONUTF8':'1'}.",
+      "resolved": true
+    },
+    {
+      "error": "nlm download slide-deck Error: Download failed for slide_deck (PPTX format)",
+      "solution": "Slide tạo từ lần 2 trở đi chỉ download được PDF (-f pdf). Dùng -f pdf thay vì -f pptx.",
+      "resolved": true
+    }
+  ],
+  "decisions_made": [
+    {
+      "decision": "Slide design: phân cấp X.Y + tách nhiệm vụ/đáp án + 100% tiếng Việt",
+      "reason": "Yêu cầu của GV Kha Khung Hiệp ngày 24/06/2026. Áp dụng cho tất cả bài từ bài 4 trở đi.",
+      "date": "2026-06-24"
+    },
+    {
+      "decision": "Dùng profile 'default' (khakhunghiep@gmail.com) cho pipeline NLM",
+      "reason": "Account3 hết dùng. Default đã xác thực và hoạt động tốt.",
+      "date": "2026-06-24"
+    },
+    {
+      "decision": "Infographic tiếng Việt: upload huong_dan_slide.md lên NLM trước khi tạo slide",
+      "reason": "NLM cần file hướng dẫn cụ thể để sinh nội dung tiếng Việt chuẩn GEMS.",
+      "date": "2026-06-24"
+    }
+  ]
+}
