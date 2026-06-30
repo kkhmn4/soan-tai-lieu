@@ -1,0 +1,69 @@
+flowchart TD
+    %% Styling and Definitions
+    classDef step1 fill:#E3F2FD,stroke:#1E88E5,stroke-width:2px,color:#0D47A1;
+    classDef step2 fill:#E8F5E9,stroke:#43A047,stroke-width:2px,color:#1B5E20;
+    classDef step3 fill:#FFF3E0,stroke:#FB8C00,stroke-width:2px,color:#E65100;
+    classDef step4 fill:#F3E5F5,stroke:#8E24AA,stroke-width:2px,color:#4A148C;
+    classDef step5 fill:#FFEBEE,stroke:#E53935,stroke-width:2px,color:#B71C1C;
+    
+    %% Main Flow
+    subgraph pedagogical ["Giai đoạn 1: Phân tích Sư phạm (Pedagogy Analysis)"]
+        A["Tài liệu gốc (SGK CD & YCCĐ GDPT 2018)"] --> B("Trích xuất YCCĐ & Phân chia ĐVKT")
+        B --> C("Nhận diện Sai lầm (Misconceptions) & Liên hệ Thực tế")
+        C --> D["gems_analyzer.py <br> Đặc tả bài học: dac_ta_gems.md & lesson_matrix.json"]
+    end
+    
+    subgraph bulk_gen ["Giai đoạn 2: Sinh Học Liệu Hàng Loạt (Bulk MD Generation)"]
+        D --> E1("Worksheet Generator: phieu_hoc_tap.md")
+        D --> E2("Lesson Plan Generator: ke_hoach_bai_day.md")
+        D --> E3("Slide Guide Generator: huong_dan_slide.md")
+        D --> E4("Homework Generator: bai_tap_ve_nha.md & dap_an.md")
+    end
+    
+    subgraph docx_build ["Giai đoạn 3: Biên dịch Word & LaTeX chuyên nghiệp"]
+        E1 --> F1("pht_exporter.py: phieu_hoc_tap.docx <br> (Times New Roman, Navy/Mint, 35-40% White Space)")
+        E2 --> F2("khbd_exporter.py: ke_hoach_bai_day.docx <br> (Chuẩn CV5512, Bảng 2 cột, 2 chữ ký)")
+        E4 --> F3("homework_exporter.py: homework.docx <br> & LaTeX biên dịch qua XeLaTeX")
+    end
+    
+    subgraph nlm_integrate ["Giai đoạn 4: Tự động hóa NotebookLM (nlm CLI)"]
+        G["generate_notebook_materials.py"] --> H{"Kiểm tra Đăng nhập <br> (nlm login --check)"}
+        H -- "Chưa đăng nhập" --> H_err["Yêu cầu chạy 'nlm login'"]
+        H -- "Đã đăng nhập" --> I{"Quét danh sách Notebook <br> (nlm list notebooks)"}
+        
+        I -- "Tìm thấy GEMS notebook" --> J1["Tái sử dụng Notebook ID"]
+        I -- "Không thấy notebook" --> J2["Tạo Notebook mới: <br> 'GEMS Vat ly 12 - Bai X'"]
+        
+        J1 --> K["Tải các file nguồn lên NotebookLM <br> (nlm source add --wait)"]
+        J2 --> K
+        
+        K --> L["Sinh file prompt: notebooklm_prompt.md <br> (Chỉ thị Việt hóa 100%, slide tên dễ hiểu, infographic portrait)"]
+        
+        L --> M1["Yêu cầu sinh Slide Deck <br> (nlm create slides --focus @prompt)"]
+        L --> M2["Yêu cầu sinh Infographic <br> (nlm create infographic --focus @prompt)"]
+    end
+    
+    subgraph smart_polling ["Giai đoạn 5: Smart Polling & Auto-Download (Mỗi 5 phút)"]
+        M1 --> N["Vòng lặp Smart Polling <br> (nlm list artifacts --json)"]
+        M2 --> N
+        
+        N --> O{"Đợi 5 phút. Kiểm tra status?"}
+        O -- "Pending/Processing" --> P["Tiếp tục ngủ 5 phút và kiểm tra lại"]
+        P --> O
+        
+        O -- "Completed" --> Q["Auto-Download thành phẩm về máy: <br> - Slide Deck PPTX & PDF <br> - Infographic PNG dọc"]
+        O -- "Failed" --> R["Ghi nhận lỗi & Dừng quy trình"]
+    end
+    
+    subgraph post_qa ["Giai đoạn 6: Hậu kỳ & Kiểm định Chất lượng (QA)"]
+        Q --> S["restructure_output.py <br> Chuẩn hóa cấu trúc thư mục & Tạo metadata.json"]
+        S --> T["quality_checker.py <br> Chạy QA Self-Check: Đánh giá 15 tiêu chí GEMS"]
+        T --> U["Xuất bản học liệu: ready/"]
+    end
+
+    %% Apply Classes
+    class A,B,C,D step1;
+    class E1,E2,E3,E4 step2;
+    class F1,F2,F3 step3;
+    class G,H,H_err,I,J1,J2,K,L,M1,M2 step4;
+    class N,O,P,Q,R,S,T,U step5;

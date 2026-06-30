@@ -66,9 +66,40 @@ version: 7.0.0
 * **Thiết kế:** Font chữ `"UVN bai sau"`. Cỡ chữ: tiêu đề 28-32pt, nội dung 24-28pt. Tối đa 6-8 dòng mỗi slide.
 
 ### 4.3 Kế hoạch bài dạy (KHBD / Giáo án)
-* **Đồng bộ tiến trình dạy học:** Tiến trình dạy học trong KHBD phải phản ánh chính xác các ĐVKT và các nhiệm vụ tương ứng trong Phiếu học tập và Slide.
-* **Cấu trúc hoạt động dạy học:** Mỗi ĐVKT trong bài dạy phải đi qua đầy đủ tiến trình Khám phá, Trọng tâm, Vận dụng và Mở rộng kiến thức.
-* **Hoạt động Mở rộng kiến thức:** KHBD bắt buộc phải có hoạt động hướng dẫn học sinh tìm hiểu phần Mở rộng kiến thức (sau hoạt động Vận dụng), giới thiệu các ứng dụng thực tế trong thiết bị, máy móc, hiện tượng tự nhiên,... dựa trên nguồn tài liệu khoa học uy tín, sách chuyên khảo hoặc bài báo.
+* **Quy chuẩn cấu trúc bám sát PDF mẫu (BẮT BUỘC):**
+  * Tiêu đề đầu giáo án:
+    ```markdown
+    GIÁO ÁN VẬT LÝ LỚP [X]
+    Tên bài học: [Tên bài]
+    Thời gian thực hiện: [Số tiết] tiết ([Số phút] phút)
+    Bộ sách giáo khoa: Kết nối tri thức với cuộc sống
+    ```
+  * Không được tích hợp 5E, IDB hay bất kỳ khung hoạt động nước ngoài nào khác. Tiến trình dạy học gồm 4 hoạt động cơ bản:
+    1. Hoạt động 1: Khởi động
+    2. Hoạt động 2: Khám phá (Tích hợp năng lực số)
+    3. Hoạt động 3: Luyện tập
+    4. Hoạt động 4: Vận dụng – Mở rộng
+* **Quy chuẩn định dạng các mục và gạch đầu dòng:**
+  * Mục I. YÊU CẦU CẦN ĐẠT: Sử dụng định dạng gạch đầu dòng dùng dấu `-` cho các năng lực và phẩm chất con:
+    * `- Nhận thức vật lí: ...`
+    * `- Tìm hiểu thế giới tự nhiên dưới góc độ vật lí: ...`
+    * `- Vận dụng kiến thức: ...`
+    * `- Tự chủ và tự học: ...`
+    * `- Giao tiếp và hợp tác: ...`
+    * `- Miền 1 - Khai thác dữ liệu và thông tin: Mã chỉ báo 6.3.TC2b:- Thực hiện phân tích, diễn giải và đánh giá được dữ liệu, thông tin và nội dung số (Cụ thể: ...)`
+    * `- Miền 5 - Giải quyết vấn đề: Mã chỉ báo 6.3.TC2a:- Phân biệt được các công cụ và công nghệ số có thể được sử dụng để tạo ra kiến thức và đổi mới quy trình (Cụ thể: ...)`
+    * `- Chăm chỉ: ...`
+    * `- Trung thực: ...`
+  * Mục II. THIẾT BỊ DẠY HỌC VÀ HỌC LIỆU: Chia làm `1. Giáo viên:` và `2. Học sinh:` với các gạch đầu dòng `-`.
+  * Mục IV. ĐIỀU CHỈNH SAU BÀI DẠY: Bắt buộc có 3 dòng chấm mẫu:
+    * `- **Ưu điểm:** .....................................................................................................................................................................`
+    * `- **Hạn chế:** .....................................................................................................................................................................`
+    * `- **Hướng điều chỉnh:** .....................................................................................................................................................................`
+* **Quy chuẩn định dạng Bảng biểu Hoạt động dạy học:**
+  * Bảng tiến trình dạy học phải chia làm 2 cột: `Hoạt động của Giáo viên` và `Hoạt động của Học sinh`.
+  * Ở cột Giáo viên, sử dụng các nhãn in đậm: `**Chuyển giao nhiệm vụ:**`, `**Kết luận:**` (hoặc `**Thực hiện & Báo cáo:**`, `**Bước 1: Chuẩn bị công cụ**`, `**Bước 2: Giao nhiệm vụ (Phiếu học tập)**`, `**Bước 3: Hỗ trợ & Đánh giá**` đối với hoạt động khám phá/NLS).
+  * Ở cột Học sinh, sử dụng các nhãn in đậm: `**Thực hiện nhiệm vụ:**`, `**Báo cáo, thảo luận:**`, `**Sản phẩm:**`, `**Báo cáo:**`, `**Thảo luận cặp đôi (Bài tập 2):**`.
+  * Các nội dung hành động dưới nhãn phải thụt dòng dùng dấu `-`.
 
 
 ### 4.4 Bài tập về nhà (Homework)
@@ -78,12 +109,60 @@ version: 7.0.0
 * **Hình vẽ TikZ:** Sử dụng mã TikZ chính xác về mặt vật lý chèn trực tiếp dưới dạng khối mã Markdown (không tạo file `.tex` độc lập). Chú thích bằng Tiếng Việt.
 
 ### 4.4 Quy Chuẩn Slide & Infographic Từ Google NotebookLM (Học Sinh)
-* **Prompt tạo Slide:** Thiết kế định hướng sinh slide bám sát cấu trúc GEMS v7.0 (Kha Khung Hiệp, font "UVN bai sau", nền sáng, 7 slide cho mỗi ĐVKT).
+* **Quy trình tự động hóa tích hợp NotebookLM:**
+  1. **Sinh File Prompt trung tâm:** Hệ thống tự động tạo tệp `output/hermes/[slug_bai]/notebooklm/[slug]_notebooklm_prompt.md` chứa cấu trúc bài học, nội dung slide guide và các chỉ dẫn thiết kế infographic đục lỗ.
+  2. **Nạp nguồn vào NotebookLM:** Tải tệp tài liệu đặc tả GEMS và giáo án đã duyệt lên Google NotebookLM làm tài liệu nguồn (sources).
+  3. **Thực thi sinh Slide & Infographic:** **Bắt buộc sao chép toàn bộ nội dung của tệp `[slug]_notebooklm_prompt.md` và nhập trực tiếp lên Google NotebookLM**. Prompt này hướng dẫn chi tiết cách tạo nội dung slide và infographic đồng bộ 1-1 với cấu trúc nhiệm vụ của `phieu_hoc_tap.docx` và `ke_hoach_bai_day.docx`.
+  4. **Đồng bộ Theme và Thiết kế (Theme & Design Sync):** Các tệp Slide PPTX và Infographic tải xuống phải tuân thủ đồng bộ bảng màu và phong cách thiết kế GEMS v8.0:
+     - Sử dụng gam màu Navy `#1E3A5F` làm màu chủ đạo cho tiêu đề, khung viền chính.
+     - Sử dụng gam màu Mint `#E8F5E9` cho các nền vùng phụ trợ, hộp ghi nhớ.
+     - Đồng nhất sử dụng font chữ Times New Roman xuyên suốt.
+  5. **Xuất bản & Tải về:** Xuất slide thành tệp PowerPoint (`[slug]_slide_deck.pptx` hoặc `.pdf`) và tải các hình ảnh infographic đục lỗ về, lưu trực tiếp vào thư mục `output/hermes/[slug_bai]/ready/` của bài học để hoàn thiện học liệu xuất bản.
+* **Prompt tạo Slide:** Thiết kế định hướng sinh slide bám sát cấu trúc GEMS v7.0 (Kha Khung Hiệp, font "Times New Roman" đồng bộ, nền sáng, 7 slide cho mỗi ĐVKT).
 * **Mô tả Infographic học sinh (Bắt buộc):**
   - Thiết kế infographic phục vụ cho Phiếu học tập của học sinh phải **không có sẵn đáp án/chữ viết cố định** và phải chứa các **khoảng trống/hộp điền khuyết** để học sinh tự hoàn thành nhiệm vụ học tập.
   - 🚫 KHÔNG nhúng văn bản (Tiếng Việt/Tiếng Anh) trực tiếp lên ảnh của AI vẽ (sử dụng prompt tiếng Anh sinh ảnh trống không văn bản để tránh sai chính tả).
   - ⚠️ Thiết lập các bong bóng thoại trống, bệ đỡ, hoặc ô chứa nhãn đi kèm ký hiệu đục lỗ `?` hoặc `(1)`, `(2)`, `(3)` trực tiếp trên ảnh.
   - Đối với sơ đồ thiết bị thí nghiệm, phải vẽ rõ ràng các đường chỉ dẫn (leader lines) trỏ đến bộ phận thiết bị và kết thúc bằng một vòng tròn/ô vuông trống để học sinh tự điền tên dụng cụ.
+
+### 4.5 Quy chuẩn thiết kế và biên dịch Word (.docx) chuyên nghiệp
+Mọi tài liệu Word (`.docx`) xuất bản (bao gồm Giáo án và Phiếu học tập) phải tuân thủ nghiêm ngặt các thông số định dạng hành chính và kỹ thuật sau:
+* **Typography & Font chữ:**
+  - Phông chữ mặc định bắt buộc: **Times New Roman** cho toàn bộ tài liệu.
+  - Cỡ chữ: **13 pt** cho nội dung thân bài, **18 pt** cho H1 (Tiêu đề chính), **15 pt** cho H2 (Mục lớn), **13 pt** cho H3 (Mục con), **13 pt** cho H4 (Đề mục nhiệm vụ/tiến trình).
+  - Khoảng cách giãn dòng: **1.15 lines**, khoảng cách đoạn dưới (space after): **4 pt**.
+* **Căn lề trang (Page Margins):**
+  - Lề trang chuẩn in ấn đóng gáy: Lề trái **3.0 cm** (chừa đóng gáy), lề phải **1.5 cm**, lề trên/dưới **2.0 cm**.
+* **Bảng màu thiết kế (Design Tokens):**
+  - Màu Navy chủ đạo (`#1E3A5F`): cho các tiêu đề chính, đề mục lớn, nền của header hàng đầu trong bảng.
+  - Màu Mint nhạt (`#E8F5E9`): cho màu nền các hàng xen kẽ trong bảng.
+  - Màu xám tối (`#212121`): cho nội dung văn bản thường (body text).
+  - Màu xám nhạt (`#BFBFBF`): cho đường viền mỏng của bảng, các dòng kẻ chấm đục lỗ và thanh phân cách.
+* **Tiêu đề hành chính Giáo án (KHBD Header):**
+  - Đầu giáo án bắt buộc sử dụng bảng 2 cột không viền (borderless) để căn chỉnh song song:
+    * Cột trái: Tên Sở GD&ĐT và Trường THPT (cỡ 11 pt).
+    * Cột phải: Quốc hiệu - Tiêu ngữ in đậm (cỡ 12 pt, căn giữa) kèm đường kẻ liền mảnh ở dưới bằng 1/3 tiêu ngữ.
+  - Nội dung giáo án bắt đầu trực tiếp từ mục **I. YÊU CẦU CẦN ĐẠT** (lọc sạch các tiêu đề thừa/lặp ở file nguồn).
+* **Thông tin học sinh Phiếu học tập (PHT Header):**
+  - Bảng thông tin học sinh (Họ và tên, Lớp, Ngày) phải dùng cột có độ rộng cố định (`widths = [Cm(8.5), Cm(3.2), Cm(4.8)]`) và khống chế độ dài ký tự chấm chấm để đảm bảo nằm gọn gàng trên **1 dòng duy nhất**, tránh bị đẩy rớt dòng.
+* **Chân trang động (Footer):**
+  - Chân trang của mọi tài liệu phải có số trang tự động dạng `Trang X / Y` (Trang hiện tại / Tổng số trang) căn giữa, sử dụng các mã trường XML động `PAGE` và `NUMPAGES` của Word.
+* **Bảng biểu hoạt động học tập (Tables):**
+  - Cột Giáo viên (trái) và cột Học sinh (phải) cho hoạt động dạy học. Header hàng đầu tô nền màu Navy, chữ trắng bold. Các hàng dữ liệu xen kẽ nền màu Mint nhạt và trắng, viền mảnh màu xám nhạt `#BFBFBF`.
+  - Các nhãn in đậm như `**Chuyển giao nhiệm vụ:**`, `**Kết luận:**` ở cột GV, và `**Thực hiện nhiệm vụ:**`, `**Báo cáo, thảo luận:**`, `**Sản phẩm:**` ở cột HS phải được viết hoa in đậm bắt đầu khối văn bản.
+* **Tiền xử lý dòng & Gộp paragraph (Paragraph Folding):**
+  - Trước khi parse, bắt buộc chạy tiền xử lý gộp các dòng văn bản liền mạch (không bị cách bởi dòng trống) thành 1 paragraph duy nhất.
+  - Kể cả khi có dòng trống, vẫn phải gộp cưỡng bức nếu dòng sau bắt đầu bằng chữ thường, connective symbol (như `)`, `,`, `.`), hoặc công thức toán học ngắn (như `U = ...`), trừ khi dòng tiếp theo là tiêu đề hoặc danh sách mới.
+* **Lọc thẻ HTML & Dịch LaTeX:**
+  - Quét sạch toàn bộ các thẻ HTML nhiễu như `<br>`, `<br/>` trước khi chèn vào Word.
+  - Chạy hàm `clean_latex` trên toàn bộ dòng văn bản để chuyển đổi các ký hiệu LaTeX viết thô không có dấu `$` (như `\Delta`, `\omega`, `\varphi`, `\pi`) sang ký tự Unicode tương ứng (`Δ`, `ω`, `φ`, `π`) in nghiêng.
+* **Tự động nhúng ảnh cục bộ:**
+  - Phát hiện các đường dẫn ảnh thô trong text (ví dụ: `(ready/hinh_anh/...)`).
+  - Tự động nhúng bức ảnh đó vào ngay dưới paragraph (căn giữa), xóa đường dẫn thô khỏi văn bản và chèn khoảng trắng thay thế để tránh lỗi dính chữ.
+* **Hỗ trợ Heading level 4 (####):**
+  - Tự động phát hiện và định dạng dòng bắt đầu bằng `#### ` thành tiêu đề in đậm cỡ chữ 13pt màu xanh Navy, loại bỏ hoàn toàn các ký tự dấu thăng thô.
+* **Bố cục Không gian trống (White Space):**
+  - Đảm bảo PHT luôn chừa tối thiểu **35-40% không gian trống** để học sinh tự ghi câu trả lời, vẽ đồ thị hoặc làm bài tập (tự động chèn 3 dòng kẻ chấm khi phát hiện các động từ hành động học tập như `vẽ`, `mô tả`, `giải thích`...).
 
 ---
 
@@ -105,6 +184,11 @@ version: 7.0.0
 * **TC-SLD-05 (Ngôn ngữ Slide):** Thuần Việt 100%, tiêu đề bám sát SGK, không giải thích ngoài luồng.
 
 ### 5.3 Bài tập về nhà (HW)
+* **TC-HW-01 (Chẩn đoán):** Gài bẫy lỗi sai lầm, phần dẫn có bối cảnh chi tiết mở rộng tri thức.
+* **TC-HW-02 (Thực tế):** 50% câu hỏi là bài toán thực tế trích nguồn từ tài liệu/tạp chí uy tín quốc tế.
+* **TC-HW-03 (Cơ cấu):** Đúng số lượng 18 MCQ + 4 Đúng/Sai + 6 trả lời ngắn; có đủ hằng số, quy tắc làm tròn.
+* **TC-HW-04 (Kỹ thuật):** Mã LaTeX chuẩn sạch, hình vẽ TikZ chính xác, file đáp án riêng biệt có giải thuật tư duy.
+
 * **TC-HW-01 (Chẩn đoán):** Gài bẫy lỗi sai lầm, phần dẫn có bối cảnh chi tiết mở rộng tri thức.
 * **TC-HW-02 (Thực tế):** 50% câu hỏi là bài toán thực tế trích nguồn từ tài liệu/tạp chí uy tín quốc tế.
 * **TC-HW-03 (Cơ cấu):** Đúng số lượng 18 MCQ + 4 Đúng/Sai + 6 trả lời ngắn; có đủ hằng số, quy tắc làm tròn.

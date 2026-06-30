@@ -2,7 +2,7 @@
   "meta": {
     "schema_version": "1.1.0",
     "awf_version": "4.0.2",
-    "last_updated": "2026-06-24T08:52:00+07:00"
+    "last_updated": "2026-06-28T09:48:00+07:00"
   },
   "project": {
     "name": "soạn tài liệu",
@@ -44,14 +44,13 @@
   },
   "current_progress": {
     "completed_lessons": [
-      "Bài 4 – Nhiệt dung riêng (✅ HOÀN TOÀN XONG 24/06/2026: slide_deck.pptx (v1, cũ) + slide_deck_v2_viet.pdf (v2, đúng chuẩn mới) + 2 infographic PNG tiếng Việt + phieu_hoc_tap.docx + bai_tap_ve_nha.tex + dap_an.tex. Notebook ID mới (profile default): 469d71aa-3338-4951-b2a4-ecdd7a4571de)"
+      "Bài 3 – Nội năng. Định luật I của nhiệt động lực học (✅ HOÀN TOÀN XONG 28/06/2026: slide_deck.pptx/pdf + infographic PNG + phieu_hoc_tap.docx + ke_hoach_bai_day.docx + bai_tap_ve_nha.docx + dap_an.docx. Notebook ID: 5232f920-2257-46e4-b1cb-24cbf68f0716)",
+      "Bài 4 – Nhiệt dung riêng (✅ HOÀN TOÀN XONG 24/06/2026: slide_deck.pptx (v1, cũ) + slide_deck_v2_viet.pdf (v2, đúng chuẩn mới) + 2 infographic PNG tiếng Việt + phieu_hoc_tap.docx + bai_tap_ve_nha.tex + dap_an.tex. Notebook ID mới (profile default): 469d71aa-3338-4951-b2a4-ecdd7a4571de)",
+      "Bài 6 – Nhiệt nóng chảy riêng (✅ HOÀN TOÀN XONG 25/06/2026: slide_deck.pptx + 2 infographics PNG + phieu_hoc_tap.docx + ke_hoach_bai_day.docx + bai_tap_ve_nha.docx/tex + dap_an.docx/tex)",
+      "Bài 7 – Nhiệt hóa hơi riêng (✅ HOÀN TOÀN XONG 28/06/2026: slide_deck.pptx + 2 infographics PNG + phieu_hoc_tap.docx + ke_hoach_bai_day.docx + bai_tap_ve_nha.docx/tex + dap_an.tex)"
     ],
-    "in_progress_lessons": [
-      "Bài 5 – Nhiệt độ nhiệt kế (md/ hoàn tất, chưa tạo NLM)",
-      "Bài 6 – Nhiệt nóng chảy riêng (md/ hoàn tất, chưa tạo NLM)",
-      "Bài 7 – Nhiệt hóa hơi riêng (md/ hoàn tất, chưa tạo NLM)"
-    ],
-    "next_step": "Chạy pipeline cho Bài 5: $env:PYTHONUTF8='1'; python scratch/generate_notebook_materials.py --phieu-hoc-tap [file.md] --dap-an [file.md] --title [title] --profile default --out-dir [output/hermes/bai5]"
+    "in_progress_lessons": [],
+    "next_step": "Chạy pipeline cho Bài 5 – Nhiệt độ nhiệt kế để hoàn tất toàn chương Nhiệt học."
   },
   "slide_design_rules": {
     "updated": "2026-06-24",

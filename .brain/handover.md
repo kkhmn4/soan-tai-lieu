@@ -1,35 +1,30 @@
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # 📋 HANDOVER DOCUMENT – GEMS Hermes Pipeline
-# Lưu lúc: 2026-06-23T13:30:54+07:00
+# Lưu lúc: 2026-06-28T09:48:00+07:00
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ## 📍 Đang làm gì
 
 **Dự án:** GEMS Hermes – Tự động hoá sinh học liệu Vật lý Chương Nhiệt (Bài 4–7)  
-**Bước hiện tại:** Upload tài liệu lên NotebookLM → Tạo Slide + Infographic → Download
+**Bước tiếp theo:** Chạy pipeline sinh học liệu cho Bài 5 (Nhiệt độ. Thang nhiệt độ. Nhiệt kế) trên NotebookLM.
 
 ---
 
 ## ✅ Đã hoàn thành
 
-- [x] Sinh toàn bộ nội dung Markdown cho **Bài 4** (Nhiệt dung riêng): đặc tả, PHT, đáp án, KHBD, báo cáo NLM
-- [x] Sinh toàn bộ nội dung Markdown cho **Bài 5** (Nhiệt độ nhiệt kế)
-- [x] Sinh toàn bộ nội dung Markdown cho **Bài 6** (Nhiệt nóng chảy riêng)
-- [x] Sinh toàn bộ nội dung Markdown cho **Bài 7** (Nhiệt hóa hơi riêng)
-- [x] Tải ảnh minh họa cho Bài 4-7 vào `assets/images/`
-- [x] Rollback engine Python (main.py + 5 generator files) về trạng thái gốc trước 01:00 sáng – xóa offline mode
-- [x] Cập nhật session.json + brain.json
+- [x] **Bài 4 (Nhiệt dung riêng)**: Hoàn thành 100% tài liệu Markdown, Word, LaTeX, slide deck và infographics.
+- [x] **Bài 6 (Nhiệt nóng chảy riêng)**: Hoàn thành 100% tài liệu Markdown, Word, LaTeX, slide deck và infographics.
+- [x] **Bài 7 (Nhiệt hóa hơi riêng)**: Hoàn thành 100% tài liệu Markdown, Word, LaTeX, slide deck và infographics (vừa hoàn tất trong session này).
+- [x] **Khôi phục tệp hệ thống bị hỏng**: Phân tích lịch sử hội thoại IDE và khôi phục hoàn chỉnh tệp `engine/main.py` về trạng thái sạch sẽ, khôi phục các tệp theo dõi cục bộ bằng `git restore .`.
+- [x] **Dọn dẹp môi trường**: Xóa sạch toàn bộ các tệp tin chẩn đoán tạm thời (`scratch/*.py`, `scratch/*.txt`) để giữ không gian làm việc gọn gàng.
 
 ---
 
 ## ⏳ Còn lại
 
-1. **Upload PHT + đáp án bài 4 lên NotebookLM** qua MCP tool
-2. **Nhập prompt tạo slide** (xem prompt trong `output/hermes/bai4_nhiet_dung_rieng/notebooklm/`)
-3. **Nhập prompt tạo infographic**
-4. **Đợi xong → download PPTX + PNG**
-5. **Kiểm tra chất lượng** (slide có đúng phông, tên GV, ngôn ngữ không?)
-6. Lặp lại bước 1-5 cho Bài 5, 6, 7
+1. **Chạy pipeline tạo Slide & Infographic cho Bài 5**:
+   * File nguồn Markdown của Bài 5 đã có đầy đủ trong `output/hermes/bai5_nhiet_do_nhiet_ke/md/`.
+   * Cần tạo notebook trên NotebookLM, tải các file nguồn lên, nhập prompt tạo slide deck/infographics và download về thư mục `ready/` (có thể dùng script tự động hóa tương tự Bài 6/7).
 
 ---
 
@@ -37,21 +32,16 @@
 
 | Quyết định | Lý do |
 |---|---|
-| Dùng Anti Gravity MCP (không API key ngoài) | User yêu cầu: "chỉ dùng Anti Gravity platform" |
-| Engine Python PHẢI có GEMINI_API_KEY | Không offline mode trong engine chính; dry_run.py là script riêng |
-| Cấu trúc Hermes: `output/hermes/[bai]/[md\|notebooklm\|assets]` | Tách biệt rõ ràng từng loại file |
-| Tên file: `Bai X [ten]_[loai]_[phan]` | Nhất quán cho toàn hệ thống |
+| Phục hồi mã nguồn qua phân tích log IDE | Đảm bảo lấy lại mã nguồn gốc chính xác 100% khi HEAD commit bị ghi đè phiên bản hỏng và không có remote GitHub để kéo về. |
+| Giữ lại Bài 6 và Bài 7 ở dạng untracked | Khi khôi phục tệp hệ thống bằng `git restore .`, các thư mục bài học mới chưa theo dõi vẫn được bảo toàn nguyên vẹn trên đĩa. |
 
 ---
 
 ## ⚠️ Lưu ý cho session sau
 
-- **Không có git** → Nếu cần rollback, phải làm thủ công từ transcript. Nên chạy `git init` sớm!
-- **NotebookLM session:** Nếu bị timeout → `nlm login --clear`
-- **File cần upload lên NLM cho bài 4:**
-  - `output/hermes/bai4_nhiet_dung_rieng/md/bai4_nhiet_dung_rieng_phieu_hoc_tap.md`
-  - `output/hermes/bai4_nhiet_dung_rieng/md/bai4_nhiet_dung_rieng_dap_an.md`
-- **Prompt NLM:** xem file `output/hermes/bai4_nhiet_dung_rieng/notebooklm/bai4_nhiet_dung_rieng_notebooklm_prompt.md`
+- **Mã nguồn sạch**: Mọi tệp tin hệ thống hiện tại trong thư mục `engine/` và `skills/` đã được khôi phục về trạng thái chuẩn, hoạt động tốt.
+- **Biên dịch Word**: Tool `scratch/compile_docx.py` hoạt động bình thường, biên dịch trực tiếp từ Markdown sang DOCX bằng font *UVN bai sau*.
+- **Cách tiếp tục Bài 5**: Khi bắt đầu session mới, chỉ cần gõ `/recap` để khôi phục ngữ cảnh và triển khai pipeline cho Bài 5.
 
 ---
 
@@ -59,11 +49,10 @@
 
 | File | Vai trò |
 |---|---|
-| `.brain/brain.json` | Kiến thức dự án (kiến trúc, quy tắc, gotcha) |
-| `.brain/session.json` | Tiến độ session hiện tại |
-| `engine/main.py` | Entry point pipeline GEMS (282 dòng, đã rollback) |
-| `skills/hermes-gems-automation.md` | Skill hướng dẫn quy trình Hermes |
-| `output/hermes/bai4_nhiet_dung_rieng/` | Toàn bộ nội dung bài 4 đã sẵn sàng |
+| `.brain/brain.json` | Bộ nhớ dự án (kiến trúc, stack công nghệ, quy tắc, tiến độ cập nhật đến Bài 7) |
+| `.brain/session.json` | Nhật ký tiến độ phiên làm việc hiện tại |
+| `engine/main.py` | Entry point chính của GEMS Engine (đã khôi phục sạch sẽ) |
+| `output/hermes/bai7_nhiet_hoa_hoi_rieng/` | Tài liệu đầu ra hoàn chỉnh Bài 7 |
 
 ---
 

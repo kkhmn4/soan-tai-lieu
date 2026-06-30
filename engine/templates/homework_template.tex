@@ -1,0 +1,91 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{vietnam}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{tikz}
+\usepackage{enumitem}
+
+\usetikzlibrary{circuits.ee.IEC, optics, physics, positioning, calc, patterns}
+
+\geometry{
+    a4paper,
+    total={170mm,257mm},
+    left=20mm,
+    top=20mm,
+    right=20mm,
+    bottom=20mm
+}
+
+\begin{document}
+
+\begin{center}
+    {\bfseries\large PHIẾU BÀI TẬP VỀ NHÀ: {{ lesson_name.upper() }}} \\
+    \vspace{2mm}
+    Môn: Vật lý -- Khung GEMS\_VAT\_LY\_V6 \\
+    \vspace{1mm}
+    Họ và tên: \hrulefill\ Lớp: \hrulefill\ Ngày: \hrulefill
+\end{center}
+
+\vspace{5mm}
+
+\noindent\textbf{PHẦN I. Câu trắc nghiệm nhiều lựa chọn (18 câu).}
+\textit{Mỗi câu hỏi chỉ chọn một phương án trả lời đúng.}
+
+\begin{enumerate}[label=\textbf{Câu \arabic*.}]
+    {% for q in part1_questions %}
+    \item {{ q.question_text }}
+    {% if q.tikz_code %}
+    \begin{center}
+    {{ q.tikz_code }}
+    \end{center}
+    {% endif %}
+    \begin{enumerate}[label=\textbf{\Alph*.}]
+        \item {{ q.option_a }}
+        \item {{ q.option_b }}
+        \item {{ q.option_c }}
+        \item {{ q.option_d }}
+    \end{enumerate}
+    {% endfor %}
+\end{enumerate}
+
+\vspace{5mm}
+
+\noindent\textbf{PHẦN II. Câu trắc nghiệm Đúng/Sai (4 câu).}
+\textit{Trong mỗi câu hỏi, học sinh hãy chọn Đúng hoặc Sai cho mỗi ý a), b), c), d).}
+
+\begin{enumerate}[label=\textbf{Câu \arabic*.}]
+    {% for q in part2_questions %}
+    \item {{ q.question_text }}
+    {% if q.tikz_code %}
+    \begin{center}
+    {{ q.tikz_code }}
+    \end{center}
+    {% endif %}
+    \begin{enumerate}[label=\textbf{\alph*)}]
+        \item {{ q.statement_a }} \hfill \textbf{[Đúng / Sai]}
+        \item {{ q.statement_b }} \hfill \textbf{[Đúng / Sai]}
+        \item {{ q.statement_c }} \hfill \textbf{[Đúng / Sai]}
+        \item {{ q.statement_d }} \hfill \textbf{[Đúng / Sai]}
+    \end{enumerate}
+    {% endfor %}
+\end{enumerate}
+
+\vspace{5mm}
+
+\noindent\textbf{PHẦN III. Câu trắc nghiệm trả lời ngắn (6 câu).}
+\textit{Yêu cầu học sinh tính toán và ghi lại kết quả số cụ thể.}
+
+\begin{enumerate}[label=\textbf{Câu \arabic*.}]
+    {% for q in part3_questions %}
+    \item {{ q.question_text }}
+    {% if q.tikz_code %}
+    \begin{center}
+    {{ q.tikz_code }}
+    \end{center}
+    {% endif %}
+    \textbf{Đáp số:} \hrulefill
+    {% endfor %}
+\end{enumerate}
+
+\end{document}

@@ -1,86 +1,89 @@
 {
-  "updated_at": "2026-06-24T08:52:00+07:00",
+  "updated_at": "2026-06-28T18:44:00+07:00",
   "working_on": {
-    "feature": "GEMS Bài 4 – Nhiệt dung riêng",
-    "task": "HOÀN THÀNH",
+    "feature": "GEMS Bài 3 – Nội năng. Định luật I",
+    "task": "Tạo học liệu đầy đủ và chạy nlm CLI để tạo slide + infographic",
     "status": "completed",
     "files": [
-      "output/hermes/bai4_nhiet_dung_rieng/md/bai4_nhiet_dung_rieng_huong_dan_slide.md",
-      "output/hermes/bai4_nhiet_dung_rieng/ready/bai4_nhiet_dung_rieng_slide_deck_v2_viet.pdf",
-      "output/hermes/bai4_nhiet_dung_rieng/ready/bai4_nhiet_dung_rieng_infographic_khai_niem_nhiet_dung_rieng.png",
-      "output/hermes/bai4_nhiet_dung_rieng/ready/bai4_nhiet_dung_rieng_infographic_thuc_hanh_do_nhiet_dung_rieng.png",
-      "scratch/generate_notebook_materials.py",
-      "scratch/generate_gems_materials_bai4.py"
+      "output/hermes/bai3_noi_nang/md/bai3_noi_nang_dac_ta_gems.md",
+      "output/hermes/bai3_noi_nang/md/bai3_noi_nang_ke_hoach_bai_day.md",
+      "output/hermes/bai3_noi_nang/md/bai3_noi_nang_phieu_hoc_tap.md",
+      "output/hermes/bai3_noi_nang/md/bai3_noi_nang_huong_dan_slide.md",
+      "output/hermes/bai3_noi_nang/notebooklm/bai3_noi_nang_notebooklm_prompt.md",
+      "output/hermes/bai3_noi_nang/md/bai3_noi_nang_bai_tap_ve_nha.md",
+      "output/hermes/bai3_noi_nang/md/bai3_noi_nang_dap_an.md",
+      "output/hermes/bai3_noi_nang/ready/bai3_noi_nang_ke_hoach_bai_day.docx",
+      "output/hermes/bai3_noi_nang/ready/bai3_noi_nang_phieu_hoc_tap.docx",
+      "output/hermes/bai3_noi_nang/ready/bai3_noi_nang_bai_tap_ve_nha.docx",
+      "output/hermes/bai3_noi_nang/ready/bai3_noi_nang_dap_an.docx",
+      "output/hermes/bai3_noi_nang/ready/bai3_noi_nang_slide_deck.pptx",
+      "output/hermes/bai3_noi_nang/ready/bai3_noi_nang_slide_deck.pdf",
+      "output/hermes/bai3_noi_nang/ready/bai3_noi_nang_infographic.png"
     ],
     "blockers": [],
-    "notes": "Bài 4 hoàn tất. Slide PDF (v2) đúng chuẩn mới: phân cấp X.Y, tách nhiệm vụ/đáp án, 100% tiếng Việt."
+    "notes": "Đã hoàn thành 100% gói học liệu Bài 3, tự động hóa upload và tải slide/infographic qua nlm CLI."
   },
   "pending_tasks": [
     {
       "task": "Tạo NLM materials cho Bài 5 – Nhiệt độ nhiệt kế",
       "priority": "high",
-      "notes": "File md/ đã có sẵn. Chạy pipeline generate_notebook_materials.py với profile default."
-    },
-    {
-      "task": "Tạo NLM materials cho Bài 6 – Nhiệt nóng chảy riêng",
-      "priority": "medium",
-      "notes": "File md/ đã có sẵn."
-    },
-    {
-      "task": "Tạo NLM materials cho Bài 7 – Nhiệt hóa hơi riêng",
-      "priority": "medium",
-      "notes": "File md/ đã có sẵn."
+      "notes": "Chạy nlm CLI để tải lên và sinh slide/infographic cho Bài 5 để hoàn tất chương."
     }
   ],
   "recent_changes": [
     {
-      "timestamp": "2026-06-24T07:33:00+07:00",
-      "type": "update",
-      "description": "Cập nhật slide design rules: phân cấp X.Y, tách slide nhiệm vụ/đáp án, 100% tiếng Việt",
+      "timestamp": "2026-06-28T09:40:00+07:00",
+      "type": "completed",
+      "description": "Hoàn thành Bài 7: Nhiệt hóa hơi riêng (PPTX, infographics, DOCX, LaTeX)",
       "files": [
-        "output/hermes/bai4_nhiet_dung_rieng/md/bai4_nhiet_dung_rieng_huong_dan_slide.md",
-        "scratch/generate_notebook_materials.py",
-        "scratch/generate_gems_materials_bai4.py"
+        "output/hermes/bai7_nhiet_hoa_hoi_rieng/ready/bai7_nhiet_hoa_hoi_rieng_slide_deck.pptx",
+        "output/hermes/bai7_nhiet_hoa_hoi_rieng/ready/bai7_nhiet_hoa_hoi_rieng_infographic_khai_niem_nhiet_hoa_hoi_rieng.png",
+        "output/hermes/bai7_nhiet_hoa_hoi_rieng/ready/bai7_nhiet_hoa_hoi_rieng_infographic_thuc_hanh_do_nhiet_hoa_hoi_rieng.png",
+        "output/hermes/bai7_nhiet_hoa_hoi_rieng/ready/bai7_nhiet_hoa_hoi_rieng_phieu_hoc_tap.docx",
+        "output/hermes/bai7_nhiet_hoa_hoi_rieng/ready/bai7_nhiet_hoa_hoi_rieng_ke_hoach_bai_day.docx",
+        "output/hermes/bai7_nhiet_hoa_hoi_rieng/ready/bai7_nhiet_hoa_hoi_rieng_bai_tap_ve_nha.docx",
+        "output/hermes/bai7_nhiet_hoa_hoi_rieng/ready/bai7_nhiet_hoa_hoi_rieng_bai_tap_ve_nha.tex",
+        "output/hermes/bai7_nhiet_hoa_hoi_rieng/ready/bai7_nhiet_hoa_hoi_rieng_dap_an.tex"
       ]
     },
     {
-      "timestamp": "2026-06-24T07:25:00+07:00",
-      "type": "generated",
-      "description": "NotebookLM tạo xong: slide_deck_v2_viet.pdf (phân cấp X.Y, tiếng Việt) + 2 infographic tiếng Việt cho bài 4",
+      "timestamp": "2026-06-25T19:17:00+07:00",
+      "type": "completed",
+      "description": "Hoàn thành Bài 6: Nhiệt nóng chảy riêng (PPTX, infographics, DOCX, LaTeX)",
       "files": [
-        "output/hermes/bai4_nhiet_dung_rieng/ready/bai4_nhiet_dung_rieng_slide_deck_v2_viet.pdf",
-        "output/hermes/bai4_nhiet_dung_rieng/ready/bai4_nhiet_dung_rieng_infographic_khai_niem_nhiet_dung_rieng.png",
-        "output/hermes/bai4_nhiet_dung_rieng/ready/bai4_nhiet_dung_rieng_infographic_thuc_hanh_do_nhiet_dung_rieng.png"
+        "output/hermes/bai6_nhiet_nong_chay_rieng/ready/bai6_nhiet_nong_chay_rieng_slide_deck.pptx",
+        "output/hermes/bai6_nhiet_nong_chay_rieng/ready/bai6_nhiet_nong_chay_rieng_infographic_khai_niem_nhiet_nong_chay_rieng.png",
+        "output/hermes/bai6_nhiet_nong_chay_rieng/ready/bai6_nhiet_nong_chay_rieng_infographic_thuc_hanh_do_nhiet_nong_chay_rieng.png",
+        "output/hermes/bai6_nhiet_nong_chay_rieng/ready/bai6_nhiet_nong_chay_rieng_phieu_hoc_tap.docx",
+        "output/hermes/bai6_nhiet_nong_chay_rieng/ready/bai6_nhiet_nong_chay_rieng_ke_hoach_bai_day.docx",
+        "output/hermes/bai6_nhiet_nong_chay_rieng/ready/bai6_nhiet_nong_chay_rieng_bai_tap_ve_nha.docx",
+        "output/hermes/bai6_nhiet_nong_chay_rieng/ready/bai6_nhiet_nong_chay_rieng_bai_tap_ve_nha.tex",
+        "output/hermes/bai6_nhiet_nong_chay_rieng/ready/bai6_nhiet_nong_chay_rieng_dap_an.tex"
       ]
     }
   ],
   "errors_encountered": [
     {
-      "error": "UnicodeEncodeError: 'charmap' codec can't encode character '\\u2713'",
-      "solution": "Set $env:PYTHONUTF8='1' trước khi chạy Python. Trong subprocess: env={'PYTHONUTF8':'1'}.",
+      "error": "SyntaxError: unterminated string literal in engine/main.py",
+      "solution": "Khôi phục tệp mã nguồn engine/main.py bị hỏng bằng cách tái tạo từ nhật ký lịch sử IDE.",
       "resolved": true
     },
     {
-      "error": "nlm download slide-deck Error: Download failed for slide_deck (PPTX format)",
-      "solution": "Slide tạo từ lần 2 trở đi chỉ download được PDF (-f pdf). Dùng -f pdf thay vì -f pptx.",
+      "error": "Không có Git Remote",
+      "solution": "Khôi phục cục bộ các tệp hệ thống đã được theo dõi bằng lệnh git restore .",
       "resolved": true
     }
   ],
   "decisions_made": [
     {
-      "decision": "Slide design: phân cấp X.Y + tách nhiệm vụ/đáp án + 100% tiếng Việt",
-      "reason": "Yêu cầu của GV Kha Khung Hiệp ngày 24/06/2026. Áp dụng cho tất cả bài từ bài 4 trở đi.",
-      "date": "2026-06-24"
+      "decision": "Khôi phục mã nguồn hệ thống từ nhật ký lịch sử IDE",
+      "reason": "Mã nguồn trong commit HEAD bị hỏng và không có remote GitHub để kéo mã sạch. Giải pháp phân tích log IDE giúp lấy lại mã chính xác.",
+      "date": "2026-06-28"
     },
     {
-      "decision": "Dùng profile 'default' (khakhunghiep@gmail.com) cho pipeline NLM",
-      "reason": "Account3 hết dùng. Default đã xác thực và hoạt động tốt.",
-      "date": "2026-06-24"
-    },
-    {
-      "decision": "Infographic tiếng Việt: upload huong_dan_slide.md lên NLM trước khi tạo slide",
-      "reason": "NLM cần file hướng dẫn cụ thể để sinh nội dung tiếng Việt chuẩn GEMS.",
-      "date": "2026-06-24"
+      "decision": "Dọn dẹp các tệp chẩn đoán tạm thời",
+      "reason": "Giữ cho không gian làm việc sạch sẽ, tránh nhiễu thông tin.",
+      "date": "2026-06-28"
     }
   ]
 }

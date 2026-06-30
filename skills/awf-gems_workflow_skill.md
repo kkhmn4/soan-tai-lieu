@@ -64,3 +64,5 @@ version: 7.1.0
     4. **Biên dịch Word (.docx):** Gọi script `export_docx.py` biên dịch Markdown sang Word, tự động chuyển biểu thức thành native Office OMML và chuyển `[DOT_LINE_90]` thành dòng chấm thật.
 *   **Sản phẩm:** File Word `.docx`, File Slide bài giảng `.pptx`, Infographics `.png`, tệp `metadata.json` và Báo cáo kiểm định QA toàn diện.
 *   **Hành động:** Xuất báo cáo tổng kết tài nguyên và **KẾT THÚC WORKFLOW.**
+
+*   **Hành động:** Xuất báo cáo tổng kết tài nguyên và **KẾT THÚC WORKFLOW.**
