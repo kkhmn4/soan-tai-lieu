@@ -1,6 +1,0 @@
-Dựa trên 3 tài liệu đã tải lên (Kế hoạch bài dạy, Phiếu học tập, Hướng dẫn tạo slide của Bài 4: Nhiệt dung riêng - Vật lý 12):
-1. Hãy tạo một hướng dẫn chi tiết kèm theo bộ Prompt mẫu (bằng tiếng Việt và tiếng Anh) giúp giáo viên nhập vào các công cụ AI (như Gamma, SlidesAI, hoặc ChatGPT/Claude) để tự động sinh slide bài giảng đẹp mắt, bám sát cấu trúc slide GEMS v7.0 và nội dung bài dạy.
-2. Hãy phân tích nội dung kiến thức và đưa ra mô tả thiết kế chi tiết để tạo các ảnh infographic tương ứng với từng phần kiến thức của bài học. Hãy chia nhỏ thành các phần infographic riêng lẻ (Ví dụ: Khái niệm nhiệt dung riêng, Công thức tính nhiệt lượng, Sơ đồ thực nghiệm đo) để giáo viên có thể tạo độc lập rồi ghép lại thành một bức ảnh infographic hoàn chỉnh. Với mỗi phần infographic, hãy cung cấp:
-   - Tên phần kiến thức & mục tiêu truyền tải.
-   - Mô tả chi tiết bố cục trực quan, các thành phần đồ họa (bằng tiếng Việt).
-   - Prompt tạo ảnh chi tiết (bằng tiếng Anh) để nhập vào các AI sinh ảnh như Midjourney hoặc DALL-E 3.

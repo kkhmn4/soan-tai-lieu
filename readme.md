@@ -46,20 +46,23 @@ graph TD
     A[YCCĐ & SGK] -->|gems_analyzer.py| B[dac_ta_gems.md & lesson_matrix.json]
     B -->|worksheet_generator.py & homework_generator.py| C[Tạo file nguồn Markdown]
     C -->|main.py DOCX pipeline| D[Biên dịch file DOCX CV5512 & LaTeX]
-    D -->|generate_notebook_materials.py| E[Tải tài liệu nguồn lên NotebookLM CLI]
-    E -->|Smart Polling 5 phút| F[Tải xuống Slide Deck .pptx/pdf & Infographic .png]
-    F -->|restructure_output.py & quality_checker.py| G[Chuẩn hóa ready/ & QA report]
+    D -->|notebooklm_executor.py| E[Tự động phân tách 2 file Prompt Slide & Infographic]
+    E -->|generate_notebook_materials.py| F[Tải tài liệu nguồn & nạp Prompt tương ứng lên NotebookLM]
+    F -->|Smart Polling 5 phút| G[Tải xuống Slide Deck .pptx/pdf & Infographic .png]
+    G -->|restructure_output.py & quality_checker.py| H[Chuẩn hóa ready/ & QA report]
 ```
 
 ### Chi tiết các Giai đoạn:
 1. **Phân tích Sư phạm:** Trích xuất YCCĐ giáo dục phổ thông năm 2018 và phân chia thành các Đơn vị Kiến thức (ĐVKT).
 2. **Sinh Học liệu MD:** Sinh tự động các tệp markdown nguồn như phiếu học tập, kế hoạch bài dạy, hướng dẫn slide và bài tập về nhà.
-3. **Biên dịch DOCX:** Áp dụng luật GEMS v8.0 để chuyển đổi Markdown sang Word (.docx) chuyên nghiệp:
-   - **Font chữ:** Times New Roman.
-   - **Căn lề A4:** Trái 3.0 cm, Phải 1.5 cm, Trên/Dưới 2.0 cm.
-   - **Bảng biểu:** Header màu Navy (`#1E3A5F`), dòng dữ liệu xen kẽ Trắng / Mint (`#E8F5E9`), độ rộng bảng luôn là 16.5cm.
-   - **Kế hoạch bài dạy (KHBD):** Định dạng 2 cột theo chuẩn công văn 5512, có bảng chữ ký xác nhận ở cuối.
-4. **NotebookLM Cloud Integration:** Tự động tạo Notebook, upload tài liệu, và ra lệnh sinh Slide và Infographic dạng dọc bằng tệp prompt chỉ dẫn tập trung `notebooklm_prompt.md`.
+3. **Biên dịch DOCX (GEMS Formatting Engine):** Áp dụng luật GEMS v8.0 và SKILL định dạng giáo dục Việt Nam nâng cao:
+   - **Căn lề động theo loại tài liệu:** Phiếu học tập (2cm đều bốn bên); KHBD (Trái 3cm, Phải 2cm, Trên/Dưới 2cm); Đề thi (Trái/Phải 2cm, Trên/Dưới 1.5cm).
+   - **Giãn dòng & Thụt đầu dòng:** Thống nhất phông chữ Times New Roman, giãn dòng **1.3 lines** (Fixed 22pt), khoảng cách đoạn **6pt before/after**, và thụt dòng đầu **1.0 cm** cho văn bản thường.
+   - **Bảng biểu nâng cao:** Header màu Navy (`#1E3A5F`), dòng dữ liệu xen kẽ Mint (`#E8F5E9`), độ rộng bảng luôn là 16.5cm. Dòng bảng tự động chống ngắt trang (`cantSplit`) và lặp lại header (`tblHeader`).
+   - **Tối ưu hóa Đề thi:** Chống ngắt trang mồ côi (keepNext/keepLines) cho câu hỏi. Tự động xếp các phương án lựa chọn ABCD vào bảng không viền 2-4 cột linh hoạt theo độ dài phương án.
+4. **NotebookLM Cloud Integration:** 
+   - Tự động quét file Phiếu học tập để phân tích ĐVKT và file Hướng dẫn slide để bóc tách thông tin thiết kế đặc thù (giáo viên, phông chữ chủ đạo, trường phái thiết kế, quy tắc bắt buộc).
+   - Tạo ra **hai file prompt chuyên biệt**: prompt slide (`_slide_prompt.md`) và prompt infographic (`_info_prompt.md`) nạp tương ứng khi gọi CLI tạo slides và infographic để loại bỏ sự nhầm lẫn giữa hai loại.
 5. **Smart Polling & Auto-Download:** Tự động gửi yêu cầu thăm dò trạng thái lên Google Cloud mỗi **5 phút**, khi hoàn tất sẽ tự động tải các tệp PowerPoint (`.pptx`), Slide dạng `.pdf` và Infographic (`.png`) về thư mục bài học.
 6. **Hậu kỳ & QA:** Sắp xếp cấu trúc cây thư mục sạch sẽ, tự động tạo tệp `metadata.json` làm mục lục tài nguyên và đánh giá chất lượng học liệu dựa trên 15 tiêu chí QA của GEMS.
 

@@ -14,7 +14,7 @@ import re
 import os
 from datetime import date
 from gems_styles import (
-    Document, setup_a4_page, set_default_style,
+    Document, setup_page_margins, set_default_style,
     GEMSColors, GEMSFonts,
     add_heading, add_body, add_separator,
     add_student_info_block, make_navy_table,
@@ -70,7 +70,8 @@ def add_image(doc, img_path, caption):
 
 
 def _parse_lines_to_doc(doc, lines, start=0, md_path=""):
-    """Parse a block of markdown lines into the doc."""
+    """Parse a block of markdown lines into the doc with GEMS styling."""
+    from gems_styles import add_dot_line, smart_typography
     i = start
     while i < len(lines):
         line = lines[i].rstrip()
@@ -81,12 +82,24 @@ def _parse_lines_to_doc(doc, lines, start=0, md_path=""):
             continue
 
         if line.startswith('## '):
-            add_heading(doc, line[3:].strip(), level=2)
+            add_heading(doc, smart_typography(clean_latex(line[3:].strip())), level=2)
             i += 1
             continue
 
         if line.startswith('### '):
-            add_heading(doc, line[4:].strip(), level=3)
+            add_heading(doc, smart_typography(clean_latex(line[4:].strip())), level=3)
+            i += 1
+            continue
+
+        if line.startswith('#### '):
+            p = doc.add_paragraph()
+            p.paragraph_format.space_before = Pt(6)
+            p.paragraph_format.space_after = Pt(3)
+            run = p.add_run(smart_typography(clean_latex(line[5:].strip())))
+            run.bold = True
+            run.font.name = GEMSFonts.BODY
+            run.font.size = GEMSFonts.SIZE_BODY
+            run.font.color.rgb = GEMSColors.NAVY
             i += 1
             continue
 
@@ -125,11 +138,11 @@ def _parse_lines_to_doc(doc, lines, start=0, md_path=""):
                     rows.append(cells)
                 i += 1
             if headers:
-                # Clean LaTeX in headers and rows before making table
-                headers = [clean_latex(h) for h in headers]
+                # Clean LaTeX and typography in headers and rows before making table
+                headers = [smart_typography(clean_latex(h)) for h in headers]
                 cleaned_rows = []
                 for row in rows:
-                    cleaned_rows.append([clean_latex(cell) for cell in row])
+                    cleaned_rows.append([smart_typography(clean_latex(cell)) for cell in row])
                 make_navy_table(doc, headers, cleaned_rows)
             continue
 
@@ -144,47 +157,99 @@ def _parse_lines_to_doc(doc, lines, start=0, md_path=""):
             continue
 
         # normal paragraph
-        p = doc.add_paragraph()
-        p.paragraph_format.space_after = Pt(4)
-
         text = line.strip()
-        # list detection (- is level 1, + is level 2)
-        bullet = ''
-        if text.startswith('- ') or text.startswith('* '):
-            bullet = '- '
-            text = text[2:]
-            p.paragraph_format.left_indent = Cm(0.5)
-            p.paragraph_format.first_line_indent = Cm(-0.3)
-        elif text.startswith('+ '):
-            bullet = '+ '
-            text = text[2:]
-            p.paragraph_format.left_indent = Cm(1.0)
-            p.paragraph_format.first_line_indent = Cm(-0.3)
 
-        parts = re.split(r'(\*\*.*?\*\*|\$.*?\$)', text)
-        first = True
-        for part in parts:
-            if not part:
-                continue
-            if part.startswith('**') and part.endswith('**'):
-                run = p.add_run(part[2:-2])
-                run.bold = True
-            elif part.startswith('$') and part.endswith('$'):
-                formula = clean_latex(part[1:-1])
-                run = p.add_run(formula)
-                run.italic = True
-            else:
-                if bullet and first:
-                    run = p.add_run(bullet)
-                    run.font.name = GEMSFonts.BODY
-                    run.font.size = GEMSFonts.SIZE_BODY
-                    run.font.color.rgb = GEMSColors.DARK
-                    first = False
-                run = p.add_run(part)
-            run.font.name = GEMSFonts.BODY
-            run.font.size = GEMSFonts.SIZE_BODY
-            run.font.color.rgb = GEMSColors.DARK
+        # Rule 18: Blockquote handling
+        is_blockquote = False
+        if text.startswith('> '):
+            text = text[2:]
+            is_blockquote = True
+        elif text.startswith('>'):
+            text = text[1:]
+            is_blockquote = True
+
+        # Rule 7: Auto-detect and embed raw image paths in paragraph text
+        img_match = re.search(r'([\(\s]*)(ready[^\(\s]+\.(?:png|jpg|jpeg))([\s\)]*)', text)
+        embedded_img_path = None
+        if img_match:
+            entire_match = img_match.group(0)
+            img_path = img_match.group(2)
+            
+            resolved = img_path
+            if not os.path.exists(resolved):
+                lesson_root = os.path.dirname(os.path.dirname(md_path))
+                resolved = os.path.join(lesson_root, img_path)
+            if not os.path.exists(resolved):
+                lesson_root = os.path.dirname(os.path.dirname(md_path))
+                resolved = os.path.join(lesson_root, "ready", "hinh_anh", os.path.basename(img_path))
+            
+            if os.path.exists(resolved):
+                embedded_img_path = resolved
+                text = text.replace(entire_match, " ")
+                text = re.sub(r'\s+', ' ', text).strip()
+
+        text_content = smart_typography(clean_latex(text))
+
+        if text_content:
+            p = doc.add_paragraph()
+            p.paragraph_format.space_after = Pt(4)
+            p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+
+            if is_blockquote:
+                p.paragraph_format.left_indent = Cm(1.0)
+
+            # list detection (- is level 1, + is level 2)
+            bullet = ''
+            if text_content.startswith('- ') or text_content.startswith('* '):
+                bullet = '- '
+                text_content = text_content[2:]
+                p.paragraph_format.left_indent = Cm(0.5)
+                p.paragraph_format.first_line_indent = Cm(-0.3)
+            elif text_content.startswith('+ '):
+                bullet = '+ '
+                text_content = text_content[2:]
+                p.paragraph_format.left_indent = Cm(1.0)
+                p.paragraph_format.first_line_indent = Cm(-0.3)
+
+            parts = re.split(r'(\*\*.*?\*\*|\$.*?\$)', text_content)
+            first = True
+            for part in parts:
+                if not part:
+                    continue
+                if part.startswith('**') and part.endswith('**'):
+                    run = p.add_run(part[2:-2])
+                    run.bold = True
+                elif part.startswith('$') and part.endswith('$'):
+                    formula = clean_latex(part[1:-1])
+                    run = p.add_run(formula)
+                    run.italic = True
+                else:
+                    if bullet and first:
+                        run = p.add_run(bullet)
+                        run.font.name = GEMSFonts.BODY
+                        run.font.size = GEMSFonts.SIZE_BODY
+                        run.font.color.rgb = GEMSColors.DARK
+                        first = False
+                    run = p.add_run(part)
+                    if is_blockquote:
+                        run.italic = True
+                run.font.name = GEMSFonts.BODY
+                run.font.size = GEMSFonts.SIZE_BODY
+                run.font.color.rgb = GEMSColors.DARK
+
+            # Rule 17: Auto-add 2 extra dot lines after adjustment keywords
+            _ADJUST_KEYWORDS = ["Ưu điểm:", "Hạn chế:", "Hướng điều chỉnh:"]
+            if any(kw in text for kw in _ADJUST_KEYWORDS):
+                for _ in range(2):
+                    add_dot_line(doc)
+
+        # Embed the image below the paragraph
+        if embedded_img_path:
+            add_image(doc, embedded_img_path, "")
+
         i += 1
+
+    return i
 
     return i
 
@@ -214,65 +279,27 @@ def export_khbd(md_path, output_path):
             break
 
     doc = Document()
-    setup_a4_page(doc)
+    setup_page_margins(doc, doc_type="khbd")
     set_default_style(doc)
 
-    # -- Administrative Header Table (2 columns, borderless) --
-    header_table = doc.add_table(rows=1, cols=2)
-    header_table.autofit = True
-    header_table.alignment = WD_TABLE_ALIGNMENT.CENTER
+    # -- Administrative Header (Single-column, left-aligned, per Rule 3) --
+    p_hdr = doc.add_paragraph()
+    p_hdr.alignment = WD_ALIGN_PARAGRAPH.LEFT
+    p_hdr.paragraph_format.space_after = Pt(2)
     
-    # Left column: Sở & Trường
-    cell_left = header_table.rows[0].cells[0]
-    p_left = cell_left.paragraphs[0]
-    p_left.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    r_left1 = p_left.add_run("SỞ GIÁO DỤC VÀ ĐÀO TẠO\n")
-    r_left1.font.name = GEMSFonts.BODY
-    r_left1.font.size = Pt(11)
-    r_left1.font.color.rgb = GEMSColors.DARK
-    r_left2 = p_left.add_run("TRƯỜNG THPT: ................................\n")
-    r_left2.font.name = GEMSFonts.BODY
-    r_left2.font.size = Pt(11)
-    r_left2.bold = True
-    r_left2.font.color.rgb = GEMSColors.DARK
-    r_left3 = p_left.add_run("   -----------------   ")
-    r_left3.font.name = GEMSFonts.BODY
-    r_left3.font.size = Pt(9)
-    r_left3.font.color.rgb = GEMSColors.GRAY
-
-    # Right column: Quốc hiệu - Tiêu ngữ
-    cell_right = header_table.rows[0].cells[1]
-    p_right = cell_right.paragraphs[0]
-    p_right.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    r_right1 = p_right.add_run("CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM\n")
-    r_right1.font.name = GEMSFonts.BODY
-    r_right1.font.size = Pt(11)
-    r_right1.bold = True
-    r_right1.font.color.rgb = GEMSColors.DARK
-    r_right2 = p_right.add_run("Độc lập - Tự do - Hạnh phúc\n")
-    r_right2.font.name = GEMSFonts.BODY
-    r_right2.font.size = Pt(11)
-    r_right2.bold = True
-    r_right2.font.color.rgb = GEMSColors.DARK
-    r_right3 = p_right.add_run("   _____________________   ")
-    r_right3.font.name = GEMSFonts.BODY
-    r_right3.font.size = Pt(9)
-    r_right3.font.color.rgb = GEMSColors.DARK
-
-    # Make the table borderless
-    for row in header_table.rows:
-        for cell in row.cells:
-            tcPr = cell._tc.get_or_add_tcPr()
-            tcBorders = OxmlElement('w:tcBorders')
-            for side in ['w:top', 'w:left', 'w:bottom', 'w:right']:
-                el = OxmlElement(side)
-                el.set(qn('w:val'), 'none')
-                tcBorders.append(el)
-            tcPr.append(tcBorders)
-
-    # Spacer
-    p_space = doc.add_paragraph()
-    p_space.paragraph_format.space_before = Pt(12)
+    r_hdr1 = p_hdr.add_run("SỞ GIÁO DỤC VÀ ĐÀO TẠO\n")
+    r_hdr1.font.name = GEMSFonts.BODY
+    r_hdr1.font.size = Pt(12)
+    r_hdr1.font.color.rgb = GEMSColors.DARK
+    
+    r_hdr2 = p_hdr.add_run("TRƯỜNG THPT: ................................................")
+    r_hdr2.font.name = GEMSFonts.BODY
+    r_hdr2.font.size = Pt(12)
+    r_hdr2.bold = True
+    r_hdr2.font.color.rgb = GEMSColors.DARK
+    
+    # Kẻ đường separator mỏng ở dưới header
+    add_separator(doc)
 
     # -- Main Title (KẾ HOẠCH BÀI DẠY) --
     p_title = doc.add_paragraph()
@@ -291,40 +318,6 @@ def export_khbd(md_path, output_path):
     # Row 0: Môn học & Giáo viên
     m_cells0 = meta_table.rows[0].cells
     m_cells0[0].paragraphs[0].add_run("Môn học: ").bold = True
-    m_cells0[0].paragraphs[0].add_run("Vật lí 12 (Kết nối tri thức)")
-    m_cells0[1].paragraphs[0].add_run("Giáo viên soạn: ").bold = True
-    m_cells0[1].paragraphs[0].add_run("Kha Khung Hiệp")
-    
-    # Row 1: Ngày soạn & Thời lượng
-    today = date.today().strftime("%d/%m/%Y")
-    m_cells1 = meta_table.rows[1].cells
-    m_cells1[0].paragraphs[0].add_run("Ngày soạn: ").bold = True
-    m_cells1[0].paragraphs[0].add_run(today)
-    m_cells1[1].paragraphs[0].add_run("Thời lượng thực hiện: ").bold = True
-    m_cells1[1].paragraphs[0].add_run("2 tiết")
-
-    # Set styles and margins for meta table cells
-    for row in meta_table.rows:
-        for cell in row.cells:
-            set_cell_margins(cell, top=30, bottom=30, left=50, right=50)
-            tcPr = cell._tc.get_or_add_tcPr()
-            tcBorders = OxmlElement('w:tcBorders')
-            for side in ['w:top', 'w:left', 'w:bottom', 'w:right']:
-                el = OxmlElement(side)
-                el.set(qn('w:val'), 'none')
-                tcBorders.append(el)
-            tcPr.append(tcBorders)
-            
-            p = cell.paragraphs[0]
-            for r in p.runs:
-                r.font.name = GEMSFonts.BODY
-                r.font.size = GEMSFonts.SIZE_BODY
-                r.font.color.rgb = GEMSColors.DARK
-
-    add_separator(doc)
-
-    _parse_lines_to_doc(doc, lines, md_path=md_path)
-
     m_cells0[0].paragraphs[0].add_run("Vật lí 12 (Kết nối tri thức)")
     m_cells0[1].paragraphs[0].add_run("Giáo viên soạn: ").bold = True
     m_cells0[1].paragraphs[0].add_run("Kha Khung Hiệp")

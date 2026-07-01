@@ -14,7 +14,7 @@ USAGE:
 import re
 import os
 from gems_styles import (
-    Document, setup_a4_page, set_default_style,
+    Document, setup_page_margins, set_default_style,
     GEMSColors, GEMSFonts,
     add_heading, add_body, add_dot_line, add_separator,
     add_student_info_block, make_navy_table, add_image,
@@ -65,7 +65,7 @@ def _process_dvkt_section(doc, md_lines, start_idx, md_path):
 
         # --- ĐVKT heading (##) ---
         if line.startswith('## '):
-            add_heading(doc, line[3:].strip(), level=2)
+            add_heading(doc, smart_typography(clean_latex(line[3:].strip())), level=2)
             i += 1
             continue
 
@@ -75,7 +75,7 @@ def _process_dvkt_section(doc, md_lines, start_idx, md_path):
             p = doc.add_paragraph()
             p.paragraph_format.space_before = Pt(8)
             p.paragraph_format.space_after = Pt(4)
-            run = p.add_run(line[4:].strip())
+            run = p.add_run(smart_typography(clean_latex(line[4:].strip())))
             run.bold = True
             run.font.name = GEMSFonts.BODY
             run.font.size = GEMSFonts.SIZE_H3
@@ -87,7 +87,7 @@ def _process_dvkt_section(doc, md_lines, start_idx, md_path):
             p = doc.add_paragraph()
             p.paragraph_format.space_before = Pt(6)
             p.paragraph_format.space_after = Pt(3)
-            run = p.add_run(line[5:].strip())
+            run = p.add_run(smart_typography(clean_latex(line[5:].strip())))
             run.bold = True
             run.font.name = GEMSFonts.BODY
             run.font.size = GEMSFonts.SIZE_BODY
@@ -283,7 +283,7 @@ def export_pht(md_path, output_path, lesson_label=None):
         lesson_label = lesson_label or "Phiếu Học Tập Vật Lý 12"
 
     doc = Document()
-    setup_a4_page(doc)
+    setup_page_margins(doc, doc_type="pht")
     set_default_style(doc)
 
     # --- Student info block ---

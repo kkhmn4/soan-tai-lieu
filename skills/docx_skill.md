@@ -691,8 +691,12 @@ def smart_quotes(text):
 1. **Luôn set kích thước trang rõ ràng** — python-docx mặc định A4, nhưng cần set margins theo chuẩn GEMS (Left 3cm, Right 1.5cm, Top/Bottom 2cm).
 2. **Không dùng `\n` trong text run** — mỗi đoạn là một `add_paragraph()` riêng.
 3. **Không dùng ký tự bullet unicode thô (`•`)** — dùng list style hoặc gạch đầu dòng `-` được parse thành list paragraph có indent.
-4. **Bảng cần dual widths** — set cả `table width` lẫn từng `cell.width`.
+4. **Bảng cần dual widths** — set cả `table width` lẫn từng `cell.width` rõ ràng.
 5. **Shading dùng `w:val='clear'`** — không dùng `solid` để tránh nền đen.
-6. **Footer số trang dùng XML field codes** — không hard-code số.
-7. **Alt text cho ảnh** — luôn set `pic.alt_text` khi nhúng ảnh.
-8. **Cell margins** — top/bottom 4pt, left/right 8pt cho dễ đọc.
+6. **Footer số trang dùng XML field codes** — không hard-code số trang, sử dụng dynamic fields `PAGE` và `NUMPAGES`.
+7. **Alt text cho ảnh** — luôn set `pic.alt_text` (hoặc `wp:docPr` name/descr) khi nhúng ảnh để tuân thủ XML.
+8. **Cell margins** — cell padding: top/bottom 4pt (hoặc 50 dxa), left/right 8pt (hoặc 100 dxa) cho dễ đọc.
+9. **Administrative Header KHBD** — KHBD sử dụng single-column header (left-aligned) cho Sở GD và Trường THPT, không kèm Quốc hiệu/Tiêu ngữ.
+10. **Tự động chèn dòng chấm rút kinh nghiệm** — tự động thêm 2 dòng chấm viết tay sau các từ khóa "Ưu điểm:", "Hạn chế:", "Hướng điều chỉnh:".
+11. **Tự động quét và nhúng ảnh** — phát hiện link ảnh local (`ready/hinh_anh/...`) trong text paragraph để tự động nhúng ảnh căn giữa ngay phía dưới.
+12. **Blockquote handling** — dòng bắt đầu bằng `>` được thụt lề 1.0cm và chuyển toàn bộ text run sang in nghiêng.

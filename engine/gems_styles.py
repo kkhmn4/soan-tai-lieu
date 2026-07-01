@@ -65,27 +65,49 @@ class GEMSFonts:
 # ============================================================
 #  PAGE SETUP
 # ============================================================
-def setup_a4_page(doc):
-    """A4 page with margins for Vietnamese administrative documents (Left 3cm for binding, Right 1.5cm, Top/Bottom 2cm)."""
+def setup_page_margins(doc, doc_type="general"):
+    """Setup page dimensions (A4) and margins based on document type (Rule 1)."""
     for section in doc.sections:
-        section.top_margin = Cm(2)
-        section.bottom_margin = Cm(2)
-        section.left_margin = Cm(3)
-        section.right_margin = Cm(1.5)
         section.page_width = Cm(21.0)
         section.page_height = Cm(29.7)
+        if doc_type == "pht":
+            section.top_margin = Cm(2)
+            section.bottom_margin = Cm(2)
+            section.left_margin = Cm(2)
+            section.right_margin = Cm(2)
+        elif doc_type in ("khbd", "gact"):
+            section.top_margin = Cm(2)
+            section.bottom_margin = Cm(2)
+            section.left_margin = Cm(3)
+            section.right_margin = Cm(2)
+        elif doc_type == "dethi":
+            section.top_margin = Cm(1.5)
+            section.bottom_margin = Cm(1.5)
+            section.left_margin = Cm(2)
+            section.right_margin = Cm(2)
+        else:  # general
+            section.top_margin = Cm(2)
+            section.bottom_margin = Cm(2)
+            section.left_margin = Cm(3)
+            section.right_margin = Cm(1.5)
+
+
+def setup_a4_page(doc):
+    """Fallback function for backward compatibility."""
+    setup_page_margins(doc, doc_type="general")
 
 
 def set_default_style(doc):
-    """Default font: Times New Roman 13 pt, 1.15 spacing, Justify alignment."""
+    """Default font: Times New Roman 13 pt, 1.3 spacing, Justify alignment, space 6pt before/after."""
     style = doc.styles['Normal']
     font = style.font
     font.name = GEMSFonts.BODY
     font.size = GEMSFonts.SIZE_BODY
     font.color.rgb = GEMSColors.DARK
     pf = style.paragraph_format
-    pf.space_after = Pt(4)
-    pf.line_spacing = 1.15
+    pf.space_before = Pt(6)
+    pf.space_after = Pt(6)
+    pf.line_spacing = 1.3
     pf.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY   # CV5512: căn đều hai bên
 
 
@@ -201,50 +223,96 @@ def split_cell_into_blocks(text):
     return blocks
 
 
-def add_formatted_text_to_cell(cell, text):
+# ============================================================
+#  TEXT & TABLE HELPERS (Dọn dẹp code trùng lặp và nâng cấp)
+# ============================================================
+
+def _fill_cell_markdown(cell, val):
+    """
+    Điền văn bản có định dạng Markdown và LaTeX vào ô bảng.
+    Hỗ trợ in đậm, in nghiêng, công thức latex, bullet list, blockquote.
+    Áp dụng smart_typography và tránh dùng bullet thô (•).
+    """
     cell.text = ""
-    paragraphs_text = text.split('\n')
-    for idx, p_text in enumerate(paragraphs_text):
-        if idx == 0:
+    val_str = str(val)
+    val_str = val_str.replace("<br>", "\n").replace("<br/>", "\n").replace("</br>", "\n")
+    lines = val_str.split("\n")
+    
+    first_p = True
+    for line in lines:
+        line_text = line.strip()
+        if not line_text:
+            continue
+            
+        if first_p:
             p = cell.paragraphs[0]
+            first_p = False
         else:
             p = cell.add_paragraph()
             
         p.alignment = WD_ALIGN_PARAGRAPH.LEFT
-        p.paragraph_format.space_after = Pt(2)
         p.paragraph_format.space_before = Pt(2)
+        p.paragraph_format.space_after = Pt(2)
+        p.paragraph_format.line_spacing = 1.15
         
+        # Check blockquote (dấu >)
+        is_blockquote = False
+        if line_text.startswith('> '):
+            line_text = line_text[2:]
+            is_blockquote = True
+        elif line_text.startswith('>'):
+            line_text = line_text[1:]
+            is_blockquote = True
+            
+        if is_blockquote:
+            p.paragraph_format.left_indent = Cm(0.5)
+            
+        # Check bullet
         bullet = ""
-        if p_text.startswith('- ') or p_text.startswith('* '):
-            bullet = "• "
-            p_text = p_text[2:]
+        if line_text.startswith('- ') or line_text.startswith('* '):
+            bullet = "- "
+            line_text = line_text[2:]
             p.paragraph_format.left_indent = Cm(0.3)
             p.paragraph_format.first_line_indent = Cm(-0.2)
-        elif p_text.startswith('+ '):
-            bullet = "  - "
-            p_text = p_text[2:]
-            p.paragraph_format.left_indent = Cm(0.6)
+        elif line_text.startswith('+ '):
+            bullet = "+ "
+            line_text = line_text[2:]
+            p.paragraph_format.left_indent = Cm(0.5)
             p.paragraph_format.first_line_indent = Cm(-0.2)
             
-        if bullet:
-            r_bullet = p.add_run(bullet)
-            r_bullet.font.name = GEMSFonts.BODY
-            r_bullet.font.size = GEMSFonts.SIZE_TABLE
-            r_bullet.font.color.rgb = GEMSColors.DARK
-            
-        parts = re.split(r'(\*\*.*?\*\*|\$.*?\$)', p_text)
+        # Parse **bold** và $latex$
+        parts = re.split(r'(\*\*.*?\*\*|\$.*?\$)', line_text)
+        first_run = True
         for part in parts:
             if not part:
                 continue
             if part.startswith('**') and part.endswith('**'):
-                run = p.add_run(part[2:-2])
+                run_text = smart_typography(part[2:-2])
+                run = p.add_run(run_text)
                 run.bold = True
+                # CV5512: Auto-bold Navy color for activity keywords inside table
+                _BOLD_KEYWORDS = [
+                    "Chuyển giao nhiệm vụ:", "Thực hiện nhiệm vụ:", "Báo cáo, thảo luận:", 
+                    "Kết luận:", "Kết luận, nhận định:", "Sản phẩm:", "Hỗ trợ:", 
+                    "Mục tiêu:", "Nội dung:"
+                ]
+                if any(kw in run_text for kw in _BOLD_KEYWORDS):
+                    run.font.color.rgb = GEMSColors.NAVY
             elif part.startswith('$') and part.endswith('$'):
                 formula = clean_latex(part[1:-1])
                 run = p.add_run(formula)
                 run.italic = True
             else:
-                run = p.add_run(part)
+                run_text = smart_typography(part)
+                if bullet and first_run:
+                    r_bullet = p.add_run(bullet)
+                    r_bullet.font.name = GEMSFonts.BODY
+                    r_bullet.font.size = GEMSFonts.SIZE_TABLE
+                    r_bullet.font.color.rgb = GEMSColors.DARK
+                    first_run = False
+                run = p.add_run(run_text)
+                if is_blockquote:
+                    run.italic = True
             run.font.name = GEMSFonts.BODY
             run.font.size = GEMSFonts.SIZE_TABLE
             run.font.color.rgb = GEMSColors.DARK
@@ -252,10 +320,14 @@ def add_formatted_text_to_cell(cell, text):
 
 def make_navy_table(doc, headers, rows, col_widths=None):
     """
-    Create a table with:
-      - Navy (#1E3A5F) header row, white bold text
-      - Alternating white / mint (#E8F5E9) data rows
-      - Light-gray borders
+    Tạo bảng phong cách GEMS:
+      - Dòng tiêu đề: Nền Navy (#1E3A5F), chữ trắng in đậm, căn giữa.
+      - Các dòng dữ liệu: Màu trắng và Mint (#E8F5E9) xen kẽ.
+      - Viền xám nhạt, cell padding chuẩn.
+      - Tự động split block GV/HS cho bảng 2 cột Hoạt động dạy học.
+      - Set explicit table width và cell width (Dual Widths Rule 11).
+      - Ngăn dòng bị cắt đôi khi sang trang (cantSplit).
+      - Lặp lại dòng tiêu đề khi sang trang mới (tblHeader).
     """
     is_gv_hs_table = False
     if len(headers) == 2:
@@ -280,187 +352,17 @@ def make_navy_table(doc, headers, rows, col_widths=None):
         processed_rows = rows
 
     table = doc.add_table(rows=1, cols=len(headers))
-    table.autofit = True
+    table.autofit = False  # Bắt buộc phải là False để áp dụng width cụ thể
     table.alignment = WD_TABLE_ALIGNMENT.CENTER
-
-    # -- header row --
-    hdr = table.rows[0].cells
-    for i, text in enumerate(headers):
-        cell = hdr[i]
-        add_formatted_text_to_cell(cell, str(text))
-        for p in cell.paragraphs:
-            p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-            for run in p.runs:
-                run.bold = True
-                run.font.color.rgb = GEMSColors.WHITE
-        set_cell_shading(cell, GEMSColors.NAVY_HEX)
-        set_cell_margins(cell)
-        set_cell_border(cell)
-
-    # -- data rows --
-    for r_idx, row_data in enumerate(processed_rows):
-        row = table.add_row()
-        while len(row_data) < len(headers):
-            row_data.append("")
-        for c_idx, val in enumerate(row_data):
-            cell = row.cells[c_idx]
-            add_formatted_text_to_cell(cell, str(val))
-            set_cell_margins(cell)
-            set_cell_border(cell)
-            if r_idx % 2 == 1:
-                set_cell_shading(cell, GEMSColors.MINT_HEX)
-
-    doc.add_paragraph()  # spacer
-    return table
-
-
-
-# ============================================================
-#  TEXT HELPERS
-# ============================================================
-def add_formatted_text_to_cell(cell, text):
-    cell.text = ""
-    paragraphs_text = text.split('\n')
-    for idx, p_text in enumerate(paragraphs_text):
-        if idx == 0:
-            p = cell.paragraphs[0]
-        else:
-            p = cell.add_paragraph()
-            
-        p.alignment = WD_ALIGN_PARAGRAPH.LEFT
-        p.paragraph_format.space_after = Pt(2)
-        p.paragraph_format.space_before = Pt(2)
-        
-        bullet = ""
-        if p_text.startswith('- ') or p_text.startswith('* '):
-            bullet = "• "
-            p_text = p_text[2:]
-            p.paragraph_format.left_indent = Cm(0.3)
-            p.paragraph_format.first_line_indent = Cm(-0.2)
-        elif p_text.startswith('+ '):
-            bullet = "  - "
-            p_text = p_text[2:]
-            p.paragraph_format.left_indent = Cm(0.6)
-            p.paragraph_format.first_line_indent = Cm(-0.2)
-            
-        if bullet:
-            r_bullet = p.add_run(bullet)
-            r_bullet.font.name = GEMSFonts.BODY
-            r_bullet.font.size = GEMSFonts.SIZE_TABLE
-            r_bullet.font.color.rgb = GEMSColors.DARK
-            
-        parts = re.split(r'(\*\*.*?\*\*|\$.*?\$)', p_text)
-        for part in parts:
-            if not part:
-                continue
-            if part.startswith('**') and part.endswith('**'):
-                run = p.add_run(part[2:-2])
-                run.bold = True
-            elif part.startswith('$') and part.endswith('$'):
-                formula = clean_latex(part[1:-1])
-                run = p.add_run(formula)
-                run.italic = True
-            else:
-                run = p.add_run(part)
-            run.font.name = GEMSFonts.BODY
-            run.font.size = GEMSFonts.SIZE_TABLE
-            run.font.color.rgb = GEMSColors.DARK
-
-
-def _fill_cell_markdown(cell, val):
-    cell.text = ""
-    # Standardize breaks
-    val_str = str(val)
-    val_str = val_str.replace("<br>", "\n").replace("<br/>", "\n").replace("</br>", "\n")
-    lines = val_str.split("\n")
     
-    first_p = True
-    for line in lines:
-        line_text = line.strip()
-        if not line_text:
-            continue
-            
-        if first_p:
-            p = cell.paragraphs[0]
-            first_p = False
-        else:
-            p = cell.add_paragraph()
-            
-        p.alignment = WD_ALIGN_PARAGRAPH.LEFT
-        p.paragraph_format.space_before = Pt(2)
-        p.paragraph_format.space_after = Pt(2)
-        p.paragraph_format.line_spacing = 1.15
-        
-        # Check if line is blockquote (dấu >)
-        is_blockquote = False
-        if line_text.startswith('> '):
-            line_text = line_text[2:]
-            is_blockquote = True
-        elif line_text.startswith('>'):
-            line_text = line_text[1:]
-            is_blockquote = True
-            
-        if is_blockquote:
-            p.paragraph_format.left_indent = Cm(0.5)
-            
-        # Check if line is bullet
-        bullet = ""
-        if line_text.startswith('- ') or line_text.startswith('* '):
-            bullet = "- "
-            line_text = line_text[2:]
-            p.paragraph_format.left_indent = Cm(0.3)
-            p.paragraph_format.first_line_indent = Cm(-0.2)
-        elif line_text.startswith('+ '):
-            bullet = "+ "
-            line_text = line_text[2:]
-            p.paragraph_format.left_indent = Cm(0.5)
-            p.paragraph_format.first_line_indent = Cm(-0.2)
-            
-        # Parse **bold** and $latex$ in line_text
-        parts = re.split(r'(\*\*.*?\*\*|\$.*?\$)', line_text)
-        first_run = True
-        for part in parts:
-            if not part:
-                continue
-            if part.startswith('**') and part.endswith('**'):
-                run_text = part[2:-2]
-                run = p.add_run(run_text)
-                run.bold = True
-                # CV5512: Auto-bold Navy color for activity keywords inside table
-                if any(kw in run_text for kw in ["Chuyển giao nhiệm vụ:", "Thực hiện nhiệm vụ:", "Báo cáo, thảo luận:", "Kết luận:", "Kết luận, nhận định:", "Sản phẩm:", "Hỗ trợ:"]):
-                    run.font.color.rgb = GEMSColors.NAVY
-            elif part.startswith('$') and part.endswith('$'):
-                formula = clean_latex(part[1:-1])
-                run = p.add_run(formula)
-                run.italic = True
-            else:
-                if bullet and first_run:
-                    r_bullet = p.add_run(bullet)
-                    r_bullet.font.name = GEMSFonts.BODY
-                    r_bullet.font.size = GEMSFonts.SIZE_TABLE
-                    r_bullet.font.color.rgb = GEMSColors.DARK
-                    first_run = False
-                run = p.add_run(part)
-                if is_blockquote:
-                    run.italic = True
-            run.font.name = GEMSFonts.BODY
-            run.font.size = GEMSFonts.SIZE_TABLE
-            run.font.color.rgb = GEMSColors.DARK
-
-
-def make_navy_table(doc, headers, rows, col_widths=None):
-    """
-    Create a table with:
-      - Navy (#1E3A5F) header row, white bold text
-      - Alternating white / mint (#E8F5E9) data rows
-      - Light-gray borders
-    Per docx skill: always set explicit table width (DXA), never autofit/percentage.
-    """
-    table = doc.add_table(rows=1, cols=len(headers))
-    table.autofit = False  # CRITICAL: must be False to honour explicit widths
-    table.alignment = WD_TABLE_ALIGNMENT.CENTER
-    # Set explicit full-content-width table (A4: 21cm - 3cm left - 1.5cm right = 16.5cm)
+    # Thiết lập độ rộng bảng (A4 nội dung: 16.5cm)
     set_table_width(table, 16.5)
+
+    # Tính toán độ rộng từng cột (cm)
+    if col_widths:
+        widths_in_cm = [col_widths[i] if i < len(col_widths) else 16.5 / len(headers) for i in range(len(headers))]
+    else:
+        widths_in_cm = [16.5 / len(headers)] * len(headers)
 
     # -- header row --
     hdr = table.rows[0].cells
@@ -469,22 +371,38 @@ def make_navy_table(doc, headers, rows, col_widths=None):
         cell.text = ""
         p = cell.paragraphs[0]
         p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-        run = p.add_run(str(text))
+        run = p.add_run(smart_typography(str(text)))
         run.bold = True
         run.font.name = GEMSFonts.BODY
         run.font.size = GEMSFonts.SIZE_TABLE
         run.font.color.rgb = GEMSColors.WHITE
+        
+        # Dual width: set cell.width
+        cell.width = Cm(widths_in_cm[i])
+        
         set_cell_shading(cell, GEMSColors.NAVY_HEX)
         set_cell_margins(cell)
         set_cell_border(cell)
 
+    # Set tblHeader to repeat header on new page (Rule 6)
+    trPr_hdr = table.rows[0]._tr.get_or_add_trPr()
+    trPr_hdr.append(OxmlElement('w:tblHeader'))
+
     # -- data rows --
-    for r_idx, row_data in enumerate(rows):
+    for r_idx, row_data in enumerate(processed_rows):
         row = table.add_row()
+        # Set cantSplit to prevent row breaking across pages (Rule 6)
+        trPr = row._tr.get_or_add_trPr()
+        trPr.append(OxmlElement('w:cantSplit'))
+        
         while len(row_data) < len(headers):
             row_data.append("")
         for c_idx, val in enumerate(row_data):
             cell = row.cells[c_idx]
+            
+            # Dual width: set cell.width
+            cell.width = Cm(widths_in_cm[c_idx])
+            
             _fill_cell_markdown(cell, val)
             set_cell_margins(cell)
             set_cell_border(cell)
@@ -531,10 +449,13 @@ def add_heading(doc, text, level=1):
 
 
 def add_body(doc, text, bold=False, italic=False, size=None):
-    """Standard body paragraph, Times New Roman, Justify."""
+    """Standard body paragraph, Times New Roman, Justify, first line indent 1cm."""
     p = doc.add_paragraph()
     p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY   # CV5512: căn đều hai bên
-    p.paragraph_format.space_after = Pt(4)
+    p.paragraph_format.space_before = Pt(6)
+    p.paragraph_format.space_after = Pt(6)
+    p.paragraph_format.line_spacing = 1.3
+    p.paragraph_format.first_line_indent = Cm(1.0)
     run = p.add_run(text)
     run.font.name = GEMSFonts.BODY
     run.font.size = size or GEMSFonts.SIZE_BODY
@@ -618,19 +539,31 @@ def add_student_info_block(doc, lesson_label):
 # ============================================================
 def smart_typography(text):
     """
-    Convert straight quotes to smart/curly quotes for professional typography.
-    Per docx skill: use smart quotes for new content - Unicode entities for apostrophes and quotes.
+    Convert straight quotes to smart/curly quotes for professional typography
+    and normalize Vietnamese punctuation spaces and physical units.
     """
     import re
-    # Replace double quotes: opening before word, closing after word
+    # Convert straight quotes to smart quotes
     text = re.sub(r'"(\S)', '\u201c\\1', text)  # Left double quote
     text = re.sub(r'(\S)"', '\\1\u201d', text)  # Right double quote
     text = re.sub(r'"', '\u201d', text)           # Remaining double quotes
-    # Replace apostrophes (right single quote)
     text = text.replace("'", '\u2019')
-    # Replace straight single left/right quotes
     text = re.sub(r"'(\S)", '\u2018\\1', text)
     text = re.sub(r"(\S)'", '\\1\u2019', text)
+    
+    # 1. Chuẩn hóa khoảng trắng sau dấu câu: .,;:!? (nếu đứng sát chữ cái)
+    # Tránh làm hỏng số thập phân (như 0,5 hoặc 1.2)
+    # Dấu phẩy sát chữ: ví dụ "đó,và" -> "đó, và"
+    text = re.sub(r'([,;:!?])([A-Za-zĂăÂâĐđÊêÔôƠơƯưÁáÀàẢảÃãẠạẤấẦầẨẩẪẫẬậẮắẰằẲẳẴẵẶặÉéÈèẺẻẼẽẸẹẾếỀềỂểỄễỆệÍíÌìỈỉĨĩỊịÓóÒòỎỏÕõỌọỐốỒồỔổỖỗỘộỚớỜờỞởỠỡỢợÚúÙùỦủŨũỤụỨứỪừỬửỮữỰựÝýỲỳỶỷỸỹỴỵ])', r'\1 \2', text)
+    # Dấu chấm sát chữ (nhưng không phải số thập phân, ví dụ "vật.Thế" -> "vật. Thế")
+    text = re.sub(r'(\.[^\d\s\)])([A-Za-zĂăÂâĐđÊêÔôƠơƯưÁáÀàẢảÃãẠạẤấẦầẨẩẪẫẬậẮắẰằẲẳẴẵẶặÉéÈèẺẻẼẽẸẹẾếỀềỂểỄễỆệÍíÌìỈỉĨĩỊịÓóÒòỎỏÕõỌọỐốỒồỔổỖỗỘộỚớỜờỞởỠỡỢợÚúÙùỦủŨũỤụỨứỪừỬửỮữỰựÝýỲỳỶỷỸỹỴỵ])', r'\1 \2', text)
+    
+    # 2. Xóa khoảng trắng thừa trước dấu câu (như "động ." -> "động.")
+    text = re.sub(r'\s+([,.;:!?])', r'\1', text)
+
+    # 3. Định dạng khoảng trắng giữa số và đơn vị vật lý (ví dụ: "5cm" -> "5 cm")
+    text = re.sub(r'(\d)\s*(cm|dm|mm|kg|Hz|Pa|rad/s|rad|m/s²|m/s|m|s|kg|g|kJ|J|W|kW|V|A|N|°C|K)\b', r'\1 \2', text)
+    
     return text
 
 
@@ -805,6 +738,9 @@ def preprocess_markdown_lines(lines):
                                                     curr_strip.startswith('|') or 
                                                     curr_strip in ['---', '___'])
                                                     
+                        is_next_q = re.match(r'^\*?\*?(?:Câu\s+)?\d+(?:[\.\)]|(?:\s*\([A-Z]+\))?:?\*?\*?)', nline)
+                        is_next_opt = re.match(r'^\*?\*?[A-Da-d][\.\)]', nline)
+
                         is_next_special_all = (nline.startswith('#') or 
                                                nline.startswith('- ') or 
                                                nline.startswith('+ ') or 
@@ -812,11 +748,14 @@ def preprocess_markdown_lines(lines):
                                                nline.startswith('|') or
                                                nline.startswith('![') or
                                                nline in ['---', '___'] or
+                                               is_next_q or is_next_opt or
                                                (nline[0].isdigit() and '. ' in nline[:5]))
                         
                         is_curr_list = (curr_strip.startswith('- ') or 
                                         curr_strip.startswith('+ ') or 
                                         curr_strip.startswith('* ') or 
+                                        re.match(r'^\*?\*?(?:Câu\s+)?\d+(?:[\.\)]|(?:\s*\([A-Z]+\))?:?\*?\*?)', curr_strip) or
+                                        re.match(r'^\*?\*?[A-Da-d][\.\)]', curr_strip) or
                                         (curr_strip[0].isdigit() and '. ' in curr_strip[:5]))
                         
                         # 3. Merging logic

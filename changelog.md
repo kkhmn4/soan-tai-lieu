@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2026-06-30]
+### Added
+- **Tách biệt Prompt NotebookLM**:
+  - Hỗ trợ parser tự động trích xuất ĐVKT và từ khóa gợi ý điền khuyết của Phiếu học tập.
+  - Hỗ trợ parser tự động bóc tách các đặc tính thiết kế (giáo viên, phông chữ, trường phái, quy tắc bổ sung) từ Hướng dẫn slide.
+  - Tự động sinh ra 2 tệp prompt Slide bài giảng (`_slide_prompt.md`) và Infographic đục lỗ (`_info_prompt.md`) riêng biệt cho mỗi bài học để tăng cường độ chính xác khi tạo học liệu trên NotebookLM.
+- **Biên dịch Word DOCX Nâng cao**:
+  - Thiết lập lề trang động theo loại tài liệu (pht, khbd, dethi).
+  - Tự động giãn dòng 1.3 lines, spacing 6pt before/after, thụt dòng đầu 1cm cho văn bản thường.
+  - Bảng biểu tự động chống ngắt đôi dòng (`cantSplit`) và lặp lại header (`tblHeader`).
+  - Đề thi tự động chống ngắt trang mồ côi và xếp phương án lựa chọn ABCD vào bảng không viền (1, 2, 4 cột) linh hoạt theo độ dài phương án.
+
+### Fixed
+- Sửa lỗi gộp dòng (paragraph folding) đối với câu hỏi trắc nghiệm in đậm và phương án trắc nghiệm.
+- Sửa lỗi Regex trượt khớp các câu hỏi trắc nghiệm in đậm.
+- Chuẩn hóa khoảng trắng viết chính tả tiếng Việt và khoảng trắng giữa số - đơn vị vật lý.
+
 ## [2026-06-28]
 ### Added
 - **Bài 7: Nhiệt hóa hơi riêng**:

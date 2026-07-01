@@ -1,0 +1,84 @@
+{
+  "lesson_name": "Bai 1 cau truc chat",
+  "slug": "bai1_cau_truc_chat",
+  "updated_at": "2026-07-01T08:55:59.502833",
+  "files": [
+    {
+      "original_name": "bai1_cau_truc_chat_bai_tap_ve_nha.md",
+      "name": "bai1_cau_truc_chat_bai_tap_ve_nha.md",
+      "type": "HW_MD",
+      "format": "md",
+      "path": "md/bai1_cau_truc_chat_bai_tap_ve_nha.md"
+    },
+    {
+      "original_name": "bai1_cau_truc_chat_dac_ta_gems.md",
+      "name": "bai1_cau_truc_chat_dac_ta_gems.md",
+      "type": "Spec_MD",
+      "format": "md",
+      "path": "md/bai1_cau_truc_chat_dac_ta_gems.md"
+    },
+    {
+      "original_name": "bai1_cau_truc_chat_huong_dan_slide.md",
+      "name": "bai1_cau_truc_chat_huong_dan_slide.md",
+      "type": "Slide_Guide_MD",
+      "format": "md",
+      "path": "md/bai1_cau_truc_chat_huong_dan_slide.md"
+    },
+    {
+      "original_name": "bai1_cau_truc_chat_ke_hoach_bai_day.md",
+      "name": "bai1_cau_truc_chat_ke_hoach_bai_day.md",
+      "type": "KHBD_MD",
+      "format": "md",
+      "path": "md/bai1_cau_truc_chat_ke_hoach_bai_day.md"
+    },
+    {
+      "original_name": "bai1_cau_truc_chat_phieu_hoc_tap.md",
+      "name": "bai1_cau_truc_chat_phieu_hoc_tap.md",
+      "type": "PHT_MD",
+      "format": "md",
+      "path": "md/bai1_cau_truc_chat_phieu_hoc_tap.md"
+    },
+    {
+      "original_name": "bai1_cau_truc_chat_bai_tap_ve_nha.docx",
+      "name": "bai1_cau_truc_chat_bai_tap_ve_nha.docx",
+      "type": "HW",
+      "format": "docx",
+      "path": "ready/bai1_cau_truc_chat_bai_tap_ve_nha.docx"
+    },
+    {
+      "original_name": "bai1_cau_truc_chat_infographic.png",
+      "name": "bai1_cau_truc_chat_infographic.png",
+      "type": "Infographic",
+      "format": "png",
+      "path": "ready/bai1_cau_truc_chat_infographic.png"
+    },
+    {
+      "original_name": "bai1_cau_truc_chat_ke_hoach_bai_day.docx",
+      "name": "bai1_cau_truc_chat_ke_hoach_bai_day.docx",
+      "type": "KHBD",
+      "format": "docx",
+      "path": "ready/bai1_cau_truc_chat_ke_hoach_bai_day.docx"
+    },
+    {
+      "original_name": "bai1_cau_truc_chat_phieu_hoc_tap.docx",
+      "name": "bai1_cau_truc_chat_phieu_hoc_tap.docx",
+      "type": "PHT",
+      "format": "docx",
+      "path": "ready/bai1_cau_truc_chat_phieu_hoc_tap.docx"
+    },
+    {
+      "original_name": "bai1_cau_truc_chat_slide_deck.pdf",
+      "name": "bai1_cau_truc_chat_slide_deck.pdf",
+      "type": "Slides_PDF",
+      "format": "pdf",
+      "path": "ready/bai1_cau_truc_chat_slide_deck.pdf"
+    },
+    {
+      "original_name": "bai1_cau_truc_chat_slide_deck.pptx",
+      "name": "bai1_cau_truc_chat_slide_deck.pptx",
+      "type": "Slides",
+      "format": "pptx",
+      "path": "ready/bai1_cau_truc_chat_slide_deck.pptx"
+    }
+  ]
+}

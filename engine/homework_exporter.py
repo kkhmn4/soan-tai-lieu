@@ -13,15 +13,17 @@ USAGE:
 import re
 import os
 from gems_styles import (
-    Document, setup_a4_page, set_default_style,
+    Document, setup_page_margins, set_default_style,
     GEMSColors, GEMSFonts,
     add_heading, add_body, add_separator, add_dot_line,
     add_student_info_block, make_navy_table, add_image,
     save_doc, set_cell_shading, set_cell_margins, set_cell_border,
     Cm, Pt, Inches, RGBColor, WD_ALIGN_PARAGRAPH,
     clean_latex, preprocess_markdown_lines, add_page_number_footer,
-    smart_typography
+    smart_typography, set_table_width
 )
+from docx.oxml import OxmlElement
+from docx.oxml.ns import qn
 
 
 # ============================================================
@@ -29,12 +31,14 @@ from gems_styles import (
 # ============================================================
 
 def _add_question(doc, number, text, indent=True):
-    """Add a numbered question."""
+    """Add a numbered question with pagination constraints (keepNext, keepLines)."""
     text = smart_typography(clean_latex(text))  # Rule 6: LaTeX cleanup + Smart Typography on full text
     p = doc.add_paragraph()
     p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
     p.paragraph_format.space_before = Pt(4)
     p.paragraph_format.space_after = Pt(4)
+    p.paragraph_format.keep_with_next = True   # Bắt buộc đi liền với phần dưới (không ngắt trang mồ côi)
+    p.paragraph_format.keep_together = True    # Bắt buộc dòng câu hỏi đi liền nhau
     if indent:
         p.paragraph_format.left_indent = Cm(0.5)
 
@@ -98,18 +102,118 @@ def _add_option(doc, label, text):
     return p
 
 
-def _add_mcq_block(doc, question_number, question_text, options):
-    """Question block: stem + 4 options."""
-    _add_question(doc, question_number, question_text)
+def _add_mcq_options_table(doc, options):
+    """
+    Chèn 4 phương án trắc nghiệm A, B, C, D vào bảng không viền.
+    Tự động quyết định layout 4 cột, 2 cột, hoặc 1 cột dựa trên độ dài của phương án.
+    """
+    # Tính tổng độ dài ký tự và độ dài lớn nhất
+    total_len = sum(len(opt) for opt in options)
+    max_len = max(len(opt) for opt in options) if options else 0
+    
     option_labels = ['A', 'B', 'C', 'D']
-    for i, opt in enumerate(options):
-        if i < len(option_labels):
-            _add_option(doc, option_labels[i], opt)
+    
+    # Định dạng văn bản cho từng ô
+    def format_cell_opt(cell, label, text):
+        cell.text = ""
+        p = cell.paragraphs[0]
+        p.alignment = WD_ALIGN_PARAGRAPH.LEFT
+        p.paragraph_format.space_before = Pt(2)
+        p.paragraph_format.space_after = Pt(2)
+        p.paragraph_format.line_spacing = 1.15
+        
+        # Label
+        r_lbl = p.add_run(f"{label}. ")
+        r_lbl.bold = True
+        r_lbl.font.name = GEMSFonts.BODY
+        r_lbl.font.size = GEMSFonts.SIZE_SMALL
+        r_lbl.font.color.rgb = GEMSColors.DARK
+        
+        # Text
+        stmt_text = smart_typography(clean_latex(text))
+        parts = re.split(r'(\*\*.*?\*\*|\$.*?\$)', stmt_text)
+        for part in parts:
+            if not part:
+                continue
+            if part.startswith('**') and part.endswith('**'):
+                r = p.add_run(part[2:-2])
+                r.bold = True
+            elif part.startswith('$') and part.endswith('$'):
+                formula = clean_latex(part[1:-1])
+                r = p.add_run(formula)
+                r.italic = True
+            else:
+                r = p.add_run(part)
+            r.font.name = GEMSFonts.BODY
+            r.font.size = GEMSFonts.SIZE_SMALL
+            r.font.color.rgb = GEMSColors.DARK
+
+        # Gán borderless cho cell
+        tcPr = cell._tc.get_or_add_tcPr()
+        tcBorders = OxmlElement('w:tcBorders')
+        for side in ['w:top', 'w:left', 'w:bottom', 'w:right']:
+            el = OxmlElement(side)
+            el.set(qn('w:val'), 'none')
+            tcBorders.append(el)
+        tcPr.append(tcBorders)
+
+    # Quyết định số cột
+    if max_len < 15 and total_len < 60:
+        # Layout 4 cột, 1 dòng
+        table = doc.add_table(rows=1, cols=4)
+        table.autofit = False
+        set_table_width(table, 16.5)
+        col_widths = [Cm(4.125)] * 4
+        
+        for idx, cell in enumerate(table.rows[0].cells):
+            cell.width = col_widths[idx]
+            opt_text = options[idx] if idx < len(options) else ""
+            format_cell_opt(cell, option_labels[idx], opt_text)
+            
+    elif max_len < 35 and total_len < 120:
+        # Layout 2 cột, 2 dòng (A - B / C - D)
+        table = doc.add_table(rows=2, cols=2)
+        table.autofit = False
+        set_table_width(table, 16.5)
+        col_widths = [Cm(8.25)] * 2
+        
+        layout_map = [(0, 0, 0), (0, 1, 1), (1, 0, 2), (1, 1, 3)]
+        for r_idx, c_idx, opt_idx in layout_map:
+            cell = table.rows[r_idx].cells[c_idx]
+            cell.width = col_widths[c_idx]
+            opt_text = options[opt_idx] if opt_idx < len(options) else ""
+            format_cell_opt(cell, option_labels[opt_idx], opt_text)
+    else:
+        # Layout 1 cột, 4 dòng
+        table = doc.add_table(rows=4, cols=1)
+        table.autofit = False
+        set_table_width(table, 16.5)
+        
+        for idx, row in enumerate(table.rows):
+            cell = row.cells[0]
+            cell.width = Cm(16.5)
+            opt_text = options[idx] if idx < len(options) else ""
+            format_cell_opt(cell, option_labels[idx], opt_text)
+            
+    # Thêm một chút khoảng cách sau bảng
+    p_spacer = doc.add_paragraph()
+    p_spacer.paragraph_format.space_before = Pt(0)
+    p_spacer.paragraph_format.space_after = Pt(2)
 
 
-def _add_tf_block(doc, question_number, stem, statements):
-    """True/False question: stem + 4 statements a, b, c, d."""
+def _add_mcq_block(doc, question_number, question_text, options, image_path=None):
+    """Question block: stem + optional image + 4 options (in table)."""
+    _add_question(doc, question_number, question_text)
+    if image_path:
+        add_image(doc, image_path, "")
+    _add_mcq_options_table(doc, options)
+
+
+def _add_tf_block(doc, question_number, stem, statements, image_path=None):
+    """True/False question: stem + optional image + 4 statements a, b, c, d."""
     _add_question(doc, question_number, stem)  # clean_latex applied inside
+    if image_path:
+        add_image(doc, image_path, "")
     for stmt_label in ['a', 'b', 'c', 'd']:
         if stmt_label in statements:
             stmt_text = smart_typography(clean_latex(statements[stmt_label]))  # Rule 6: LaTeX cleanup + Smart Typography
@@ -149,9 +253,11 @@ def _add_tf_block(doc, question_number, stem, statements):
             r2.font.color.rgb = GEMSColors.LIGHT_GRAY
 
 
-def _add_short_answer_block(doc, question_number, text, answer_space=True):
-    """Short-answer question with space for working."""
+def _add_short_answer_block(doc, question_number, text, answer_space=True, image_path=None):
+    """Short-answer question with optional image and space for working."""
     _add_question(doc, question_number, text)
+    if image_path:
+        add_image(doc, image_path, "")
     # Rule 9: Three lines of dot answer space to align with PHT
     if answer_space:
         for _ in range(3):
@@ -204,7 +310,7 @@ def export_homework(md_path, output_path):
             break
 
     doc = Document()
-    setup_a4_page(doc)
+    setup_page_margins(doc, doc_type="dethi")
     set_default_style(doc)
 
     # -- Title + Student info block --
@@ -242,27 +348,31 @@ def export_homework(md_path, output_path):
     # Buffer for an MCQ question
     buffered_stem = None
     buffered_options = []
+    buffered_image = None
 
     def flush_mcq():
         """Emit the buffered MCQ if present."""
-        nonlocal buffered_stem, buffered_options, mcq_count
+        nonlocal buffered_stem, buffered_options, buffered_image, mcq_count
         if buffered_stem is not None:
             mcq_count += 1
-            _add_mcq_block(doc, mcq_count, buffered_stem, buffered_options)
+            _add_mcq_block(doc, mcq_count, buffered_stem, buffered_options, buffered_image)
         buffered_stem = None
         buffered_options = []
+        buffered_image = None
 
     # Buffer for TF question
     tf_stem = None
     tf_statements = {}
+    tf_image = None
 
     def flush_tf():
-        nonlocal tf_stem, tf_statements, tf_count
+        nonlocal tf_stem, tf_statements, tf_image, tf_count
         if tf_stem is not None:
             tf_count += 1
-            _add_tf_block(doc, tf_count, tf_stem, tf_statements)
+            _add_tf_block(doc, tf_count, tf_stem, tf_statements, tf_image)
         tf_stem = None
         tf_statements = {}
+        tf_image = None
 
     i = 0
     while i < len(lines):
@@ -337,7 +447,27 @@ def export_homework(md_path, output_path):
             stripped = stripped[1:]
             is_blockquote = True
 
-        # Process image run
+        # Rule 7: Auto-detect and embed raw image paths in paragraph text
+        img_match = re.search(r'([\(\s]*)(ready[^\(\s]+\.(?:png|jpg|jpeg))([\s\)]*)', stripped)
+        embedded_img_path = None
+        if img_match:
+            entire_match = img_match.group(0)
+            img_path = img_match.group(2)
+            
+            resolved = img_path
+            if not os.path.exists(resolved):
+                lesson_root = os.path.dirname(os.path.dirname(md_path))
+                resolved = os.path.join(lesson_root, img_path)
+            if not os.path.exists(resolved):
+                lesson_root = os.path.dirname(os.path.dirname(md_path))
+                resolved = os.path.join(lesson_root, "ready", "hinh_anh", os.path.basename(img_path))
+            
+            if os.path.exists(resolved):
+                embedded_img_path = resolved
+                stripped = stripped.replace(entire_match, " ")
+                stripped = re.sub(r'\s+', ' ', stripped).strip()
+
+        # Process image run (standalone markdown image)
         if stripped.startswith('![') and stripped.endswith(')'):
             m = re.match(r'^!\[(.*?)\]\((.*?)\)$', stripped)
             if m:
@@ -357,10 +487,10 @@ def export_homework(md_path, output_path):
                 continue
 
         # ---- Detect MCQ question pattern: "Câu N." or "N." followed by 4 options ----
-        mcq_qmatch = re.match(r'(?:Câu\s+)?(\d+)[\.\)]\s+(.*)', stripped)
+        mcq_qmatch = re.match(r'^(?:\*?\*?)?(?:Câu\s+)?(\d+)(?:[\.\)]|(?:\s*\([A-Z]+\))?:?\*?\*?)\s+(.*)', stripped)
 
         # ---- Detect True/False question ----
-        tf_qmatch = re.match(r'(?:Câu\s+)?(\d+)[\.\)]\s+(.*)', stripped) if not mcq_qmatch else None
+        tf_qmatch = re.match(r'^(?:\*?\*?)?(?:Câu\s+)?(\d+)(?:[\.\)]|(?:\s*\([A-Z]+\))?:?\*?\*?)\s+(.*)', stripped) if not mcq_qmatch else None
 
         # ---- If we're in Part I (MCQ) ----
         if current_part == 'I' or (current_part is None and mcq_count < 18):
@@ -369,7 +499,7 @@ def export_homework(md_path, output_path):
                 opts_found = []
                 j = i + 1
                 while j < min(i + 5, len(lines)):
-                    optm = re.match(r'([A-Da-d])[\.\)]\s+(.*)', lines[j].strip())
+                    optm = re.match(r'^(?:\*?\*?)?([A-Da-d])[\.\)]\s*(?:\*?\*?)?\s*(.*)', lines[j].strip())
                     if optm:
                         opts_found.append(optm.group(2).strip())
                     else:
@@ -381,23 +511,31 @@ def export_homework(md_path, output_path):
                     flush_mcq()
                     buffered_stem = mcq_qmatch.group(2).strip()
                     buffered_options = opts_found[:4]
+                    buffered_image = embedded_img_path
                     i = j
                     continue
 
             # Not an MCQ line — emit as body text (instructions etc.)
             if current_part == 'I':
-                add_body(doc, stripped, size=GEMSFonts.SIZE_SMALL)
+                p_body = add_body(doc, smart_typography(clean_latex(stripped)), size=GEMSFonts.SIZE_SMALL)
+                if is_blockquote:
+                    p_body.paragraph_format.left_indent = Cm(1.0)
+                    for run in p_body.runs:
+                        run.italic = True
+                if embedded_img_path:
+                    add_image(doc, embedded_img_path, "")
 
         # ---- If we're in Part II (True/False) ----
         if current_part == 'II' or (current_part is None and 18 <= mcq_count < 22):
             if tf_qmatch:
                 flush_tf()
                 tf_stem = tf_qmatch.group(2).strip()
+                tf_image = embedded_img_path
                 # Parse substatements
                 j = i + 1
                 while j < len(lines):
                     sub = lines[j].strip()
-                    subm = re.match(r'([a-d])[\)\.]\s+(.*)', sub)
+                    subm = re.match(r'^(?:\*?\*?)?([a-d])[\)\.]\s*(?:\*?\*?)?\s*(.*)', sub)
                     if subm:
                         tf_statements[subm.group(1)] = subm.group(2).strip()
                     else:
@@ -411,7 +549,7 @@ def export_homework(md_path, output_path):
         if current_part == 'III' or (current_part is None and short_count < 6):
             if mcq_qmatch:
                 short_count += 1
-                _add_short_answer_block(doc, short_count, mcq_qmatch.group(2).strip())
+                _add_short_answer_block(doc, short_count, mcq_qmatch.group(2).strip(), image_path=embedded_img_path)
                 i += 1
                 continue
 
@@ -436,12 +574,16 @@ def export_homework(md_path, output_path):
             r_text.font.color.rgb = GEMSColors.DARK
             if is_blockquote:
                 r_text.italic = True
+            if embedded_img_path:
+                add_image(doc, embedded_img_path, "")
         else:
             p_body = add_body(doc, smart_typography(clean_latex(stripped)), size=GEMSFonts.SIZE_SMALL)
             if is_blockquote:
                 p_body.paragraph_format.left_indent = Cm(1.0)
                 for run in p_body.runs:
                     run.italic = True
+            if embedded_img_path:
+                add_image(doc, embedded_img_path, "")
 
         i += 1
 
