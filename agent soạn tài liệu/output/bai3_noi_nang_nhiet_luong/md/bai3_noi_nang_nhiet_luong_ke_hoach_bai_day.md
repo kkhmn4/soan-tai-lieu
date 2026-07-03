@@ -54,8 +54,10 @@ TRƯỜNG THPT: ................................................
 
 | Hoạt động của Giáo viên | Hoạt động của Học sinh |
 | :--- | :--- |
-| **Chuyển giao nhiệm vụ:**<br>- GV yêu cầu cả lớp thực hiện hành động: *"Xoa hai lòng bàn tay vào nhau thật mạnh trong 10 giây. Hãy mô tả cảm nhận của em ở lòng bàn tay và giải thích tại sao bàn tay lại ấm lên?"* | **Thực hiện nhiệm vụ:**<br>- HS thực hiện động tác xoa tay.<br>- Suy nghĩ câu trả lời cá nhân dựa trên sự chuyển hóa từ cơ năng sang nhiệt năng. |
-| **Kết luận:**<br>- GV chốt: *"Cơ năng cọ xát đã biến đổi thành nhiệt năng làm tay ấm lên. Quá trình này được mô tả thế nào qua khái niệm nội năng? Bài học hôm nay sẽ giúp chúng ta trả lời."* | **Báo cáo, thảo luận:**<br>- 2 HS đứng tại chỗ phát biểu ý kiến.<br>- Cả lớp lắng nghe, ghi nhận bài học mới. |
+| **Chuyển giao nhiệm vụ:**<br>- GV yêu cầu cả lớp thực hiện hành động: *"Xoa hai lòng bàn tay vào nhau thật mạnh trong 10 giây. Hãy mô tả cảm nhận của em ở lòng bàn tay và giải thích tại sao bàn tay lại ấm lên?"* | **Tiếp nhận nhiệm vụ:** Học sinh tiếp nhận nhiệm vụ học tập từ giáo viên. |
+| **Theo dõi, hỗ trợ:** Giáo viên theo dõi, quan sát và hỗ trợ gợi ý các nhóm khi cần thiết. | **Thực hiện nhiệm vụ:**<br>- HS thực hiện động tác xoa tay.<br>- Suy nghĩ câu trả lời cá nhân dựa trên sự chuyển hóa từ cơ năng sang nhiệt năng. |
+| **Tổ chức báo cáo:** Giáo viên điều hành, gọi đại diện báo cáo kết quả, tổ chức nhận xét phản biện chéo giữa các học sinh. | **Báo cáo, thảo luận:**<br>- 2 HS đứng tại chỗ phát biểu ý kiến.<br>- Cả lớp lắng nghe, ghi nhận bài học mới. |
+| **Kết luận, nhận định:**<br>- GV chốt: *"Cơ năng cọ xát đã biến đổi thành nhiệt năng làm tay ấm lên. Quá trình này được mô tả thế nào qua khái niệm nội năng? Bài học hôm nay sẽ giúp chúng ta trả lời."* | **Ghi nhận kiến thức:** Học sinh đối chiếu, sửa đổi kết quả bài làm và ghi nhận kiến thức cốt lõi vào vở. |
 
 ---
 
@@ -65,8 +67,10 @@ TRƯỜNG THPT: ................................................
 
 | Hoạt động của Giáo viên | Hoạt động của Học sinh |
 | :--- | :--- |
-| **Nội dung 1: Nội năng & Nguyên lí I (ĐVKT 1)**<br>**Chuyển giao nhiệm vụ:**<br>- GV yêu cầu thảo luận cặp đôi hoàn thành Nhiệm vụ 1 trong PHT (ete trong ống nghiệm bật nút).<br>- Yêu cầu nghiên cứu SGK để hoàn thành phần điền khuyết lý thuyết ĐVKT 1. | **Thực hiện nhiệm vụ:**<br>- HS quan sát mô phỏng/thí nghiệm ống ete đậy nút cao su của GV.<br>- Trao đổi cặp đôi giải thích hiện tượng và điền khuyết lý thuyết vào PHT. |
-| **Kết luận:**<br>- GV chuẩn hóa định nghĩa nội năng: $U = E_đ + E_t$.<br>- Chốt Nguyên lí I: $\Delta U = A + Q$ và vẽ bảng quy ước dấu lên bảng. | **Báo cáo, thảo luận:**<br>- Đại diện HS đứng lên đọc từ khóa điền khuyết.<br>- HS khác nhận xét chéo. |
+| **Chuyển giao nhiệm vụ:**<br>**Nội dung 1: Nội năng & Nguyên lí I (ĐVKT 1)**<br>**Chuyển giao nhiệm vụ:**<br>- GV yêu cầu thảo luận cặp đôi hoàn thành Nhiệm vụ 1 trong PHT (ete trong ống nghiệm bật nút).<br>- Yêu cầu nghiên cứu SGK để hoàn thành phần điền khuyết lý thuyết ĐVKT 1. | **Tiếp nhận nhiệm vụ:** Học sinh tiếp nhận nhiệm vụ học tập từ giáo viên. |
+| **Theo dõi, hỗ trợ:** Giáo viên theo dõi, quan sát và hỗ trợ gợi ý các nhóm khi cần thiết. | **Thực hiện nhiệm vụ:**<br>- HS quan sát mô phỏng/thí nghiệm ống ete đậy nút cao su của GV.<br>- Trao đổi cặp đôi giải thích hiện tượng và điền khuyết lý thuyết vào PHT. |
+| **Tổ chức báo cáo:** Giáo viên điều hành, gọi đại diện báo cáo kết quả, tổ chức nhận xét phản biện chéo giữa các học sinh. | **Báo cáo, thảo luận:**<br>- Đại diện HS đứng lên đọc từ khóa điền khuyết.<br>- HS khác nhận xét chéo. |
+| **Kết luận, nhận định:**<br>- GV chuẩn hóa định nghĩa nội năng: $U = E_đ + E_t$.<br>- Chốt Nguyên lí I: $\Delta U = A + Q$ và vẽ bảng quy ước dấu lên bảng. | **Ghi nhận kiến thức:** Học sinh đối chiếu, sửa đổi kết quả bài làm và ghi nhận kiến thức cốt lõi vào vở. |
 | **Nội dung 2: Nhiệt lượng & Công thức tính (ĐVKT 2)**<br>**Chuyển giao nhiệm vụ:**<br>- GV giới thiệu thực nghiệm đun nóng nước và rượu trên slide.<br>- Yêu cầu HS hoàn thành phần điền khuyết công thức tính nhiệt lượng ĐVKT 2. | **Thực hiện nhiệm vụ:**<br>- HS quan sát bảng số liệu so sánh nước/rượu.<br>- Suy nghĩ giải thích vai trò đặc trưng của đại lượng Nhiệt dung riêng ($c$).<br>- Điền khuyết công thức $Q = mc\Delta t$ vào PHT. |
 | **Kết luận:**<br>- GV chốt công thức tính nhiệt lượng và ý nghĩa đơn vị của nhiệt dung riêng ($J/kg.K$). | **Báo cáo, thảo luận:**<br>- HS phát biểu phần điền khuyết công thức.<br>- Cả lớp đối chiếu vở ghi. |
 
@@ -78,8 +82,10 @@ TRƯỜNG THPT: ................................................
 
 | Hoạt động của Giáo viên | Hoạt động của Học sinh |
 | :--- | :--- |
-| **Chuyển giao nhiệm vụ:**<br>- GV giao nhiệm vụ làm bài tập Vận dụng ĐVKT 1 (tính $\Delta U$ khí trong xilanh nhận nhiệt $200\text{ J}$ và sinh công $120\text{ J}$). | **Thực hiện nhiệm vụ:**<br>- HS áp dụng quy ước dấu: khí nhận nhiệt $Q = 200\text{ J} > 0$; khí thực hiện công $A = -120\text{ J} < 0$.<br>- Tính toán $\Delta U = A + Q$. |
-| **Kết luận:**<br>- GV chuẩn hóa đáp án: $\Delta U = 200 - 120 = 80\text{ J}$. Nội năng khí tăng $80\text{ J}$. | **Báo cáo, thảo luận:**<br>- 1 HS lên bảng trình bày bài giải.<br>- HS dưới lớp nhận xét dấu của $A$ và $Q$. |
+| **Chuyển giao nhiệm vụ:**<br>- GV giao nhiệm vụ làm bài tập Vận dụng ĐVKT 1 (tính $\Delta U$ khí trong xilanh nhận nhiệt $200\text{ J}$ và sinh công $120\text{ J}$). | **Tiếp nhận nhiệm vụ:** Học sinh tiếp nhận nhiệm vụ học tập từ giáo viên. |
+| **Theo dõi, hỗ trợ:** Giáo viên theo dõi, quan sát và hỗ trợ gợi ý các nhóm khi cần thiết. | **Thực hiện nhiệm vụ:**<br>- HS áp dụng quy ước dấu: khí nhận nhiệt $Q = 200\text{ J} > 0$; khí thực hiện công $A = -120\text{ J} < 0$.<br>- Tính toán $\Delta U = A + Q$. |
+| **Tổ chức báo cáo:** Giáo viên điều hành, gọi đại diện báo cáo kết quả, tổ chức nhận xét phản biện chéo giữa các học sinh. | **Báo cáo, thảo luận:**<br>- 1 HS lên bảng trình bày bài giải.<br>- HS dưới lớp nhận xét dấu của $A$ và $Q$. |
+| **Kết luận, nhận định:**<br>- GV chuẩn hóa đáp án: $\Delta U = 200 - 120 = 80\text{ J}$. Nội năng khí tăng $80\text{ J}$. | **Ghi nhận kiến thức:** Học sinh đối chiếu, sửa đổi kết quả bài làm và ghi nhận kiến thức cốt lõi vào vở. |
 
 ---
 
@@ -89,8 +95,10 @@ TRƯỜNG THPT: ................................................
 
 | Hoạt động của Giáo viên | Hoạt động của Học sinh |
 | :--- | :--- |
-| **Chuyển giao nhiệm vụ:**<br>- GV yêu cầu HS giải nhanh bài toán đun ấm nhôm chứa nước sôi ở Nhiệm vụ 4.<br>- Hướng dẫn đọc phần đọc thêm về James Watt và khí hậu ven biển. | **Thực hiện nhiệm vụ:**<br>- HS tính toán nhiệt lượng thu vào của ấm nhôm $Q_1 = m_1c_1\Delta t$ và nước $Q_2 = m_2c_2\Delta t$.<br>- Tổng nhiệt lượng $Q = Q_1 + Q_2$. |
-| **Kết luận:**<br>- GV chốt đáp án chuẩn và thu PHT để đánh giá. | **Báo cáo:**<br>- HS nộp lại PHT trước khi ra về. |
+| **Chuyển giao nhiệm vụ:**<br>- GV yêu cầu HS giải nhanh bài toán đun ấm nhôm chứa nước sôi ở Nhiệm vụ 4.<br>- Hướng dẫn đọc phần đọc thêm về James Watt và khí hậu ven biển. | **Tiếp nhận nhiệm vụ:** Học sinh tiếp nhận nhiệm vụ học tập từ giáo viên. |
+| **Theo dõi, hỗ trợ:** Giáo viên theo dõi, quan sát và hỗ trợ gợi ý các nhóm khi cần thiết. | **Thực hiện nhiệm vụ:**<br>- HS tính toán nhiệt lượng thu vào của ấm nhôm $Q_1 = m_1c_1\Delta t$ và nước $Q_2 = m_2c_2\Delta t$.<br>- Tổng nhiệt lượng $Q = Q_1 + Q_2$. |
+| **Tổ chức báo cáo:** Giáo viên điều hành, gọi đại diện báo cáo kết quả, tổ chức nhận xét phản biện chéo giữa các học sinh. | **Báo cáo, thảo luận:**<br>**Báo cáo:**<br>- HS nộp lại PHT trước khi ra về. |
+| **Kết luận, nhận định:**<br>- GV chốt đáp án chuẩn và thu PHT để đánh giá. | **Ghi nhận kiến thức:** Học sinh đối chiếu, sửa đổi kết quả bài làm và ghi nhận kiến thức cốt lõi vào vở. |
 
 ---
 

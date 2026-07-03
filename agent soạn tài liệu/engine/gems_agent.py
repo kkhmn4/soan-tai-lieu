@@ -573,8 +573,10 @@ class GEMSAgent:
                     # Trình bày bảng hoạt động Giáo viên - Học sinh bằng markdown table
                     f.write("| Hoạt động của Giáo viên | Hoạt động của Học sinh |\n")
                     f.write("| :--- | :--- |\n")
-                    f.write(f"| **Chuyển giao nhiệm vụ:**<br>{act.steps.step1_transfer.replace(chr(10), '<br>')} | **Thực hiện nhiệm vụ:**<br>{act.steps.step2_execution.replace(chr(10), '<br>')} |\n")
-                    f.write(f"| **Kết luận:**<br>{act.steps.step4_conclusion.replace(chr(10), '<br>')} | **Báo cáo, thảo luận:**<br>{act.steps.step3_report.replace(chr(10), '<br>')} |\n\n")
+                    f.write(f"| **Chuyển giao nhiệm vụ:**<br>{act.steps.step1_transfer.replace(chr(10), '<br>')} | **Tiếp nhận nhiệm vụ:** Học sinh tiếp nhận nhiệm vụ học tập từ giáo viên. |\n")
+                    f.write(f"| **Theo dõi, hỗ trợ:** Giáo viên theo dõi, quan sát và hỗ trợ gợi ý các nhóm khi cần thiết. | **Thực hiện nhiệm vụ:**<br>{act.steps.step2_execution.replace(chr(10), '<br>')} |\n")
+                    f.write(f"| **Tổ chức báo cáo:** Giáo viên điều hành, gọi đại diện báo cáo kết quả, tổ chức nhận xét phản biện chéo giữa các học sinh. | **Báo cáo, thảo luận:**<br>{act.steps.step3_report.replace(chr(10), '<br>')} |\n")
+                    f.write(f"| **Kết luận, nhận định:**<br>{act.steps.step4_conclusion.replace(chr(10), '<br>')} | **Ghi nhận kiến thức:** Học sinh đối chiếu, sửa đổi kết quả bài làm và ghi nhận kiến thức cốt lõi vào vở. |\n\n")
                     f.write("---\n\n")
                 
                 f.write("## IV. ĐIỀU CHỈNH BÀI DẠY\n")

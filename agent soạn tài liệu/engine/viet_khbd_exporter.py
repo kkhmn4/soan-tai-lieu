@@ -230,8 +230,14 @@ def split_cell_into_blocks(text):
     
     new_block_triggers = [
         r'^\*\*chuyển giao nhiệm vụ',
+        r'^\*\*tiếp nhận nhiệm vụ',
         r'^\*\*thực hiện nhiệm vụ',
+        r'^\*\*theo dõi,\s*hỗ trợ',
+        r'^\*\*tổ chức báo cáo',
+        r'^\*\*báo cáo,\s*thảo luận',
+        r'^\*\*kết luận,\s*nhận định',
         r'^\*\*kết luận',
+        r'^\*\*ghi nhận kiến thức',
         r'^\*\*báo cáo',
         r'^\*\*hướng dẫn',
         r'^\*\*đánh giá',
@@ -373,9 +379,10 @@ def make_viet_gv_hs_table(doc, headers, rows):
                         
                         # Auto bold primary keywords inside KHBD tables (e.g. Chuyển giao nhiệm vụ:)
                         _BOLD_KWS = [
-                            "Chuyển giao nhiệm vụ:", "Thực hiện nhiệm vụ:", "Báo cáo, thảo luận:", 
-                            "Kết luận:", "Kết luận, nhận định:", "Sản phẩm:", "Hỗ trợ:", 
-                            "Mục tiêu:", "Nội dung:"
+                            "Chuyển giao nhiệm vụ:", "Tiếp nhận nhiệm vụ:", "Thực hiện nhiệm vụ:", 
+                            "Theo dõi, hỗ trợ:", "Tổ chức báo cáo:", "Báo cáo, thảo luận:", 
+                            "Kết luận:", "Kết luận, nhận định:", "Ghi nhận kiến thức:", 
+                            "Sản phẩm:", "Hỗ trợ:", "Mục tiêu:", "Nội dung:"
                         ]
                         if any(kw in r_text for kw in _BOLD_KWS):
                             run.font.color.rgb = VietColors.PRIMARY
