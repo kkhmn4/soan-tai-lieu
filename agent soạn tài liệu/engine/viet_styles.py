@@ -191,6 +191,11 @@ def clean_latex(text):
     text = re.sub(r'\^\{([^}]+)\}', repl_super, text)
     text = re.sub(r'\^([0-9a-zA-Z\-\+\=]+)', repl_super, text)
     
+    # Chuyển đổi dấu nhân * thô giữa các số thành dấu ×
+    text = re.sub(r'(\d)\s*\*\s*(\d)', r'\1 × \2', text)
+    # Chuyển đổi dấu nhân * thô giữa chữ và số thành dấu ·
+    text = re.sub(r'([a-zA-Z0-9\)])\s*\*\s*([a-zA-Z\(\Delta])', r'\1·\2', text)
+    
     # Xóa sạch các dấu $ còn lại
     text = text.replace('$', '')
     return text
@@ -212,34 +217,47 @@ def smart_typography(text):
 # ============================================================
 def add_formatted_runs(paragraph, text, force_italic=False, font_size=None, is_bold_all=False):
     """
-    Parse **bold** and $latex$ chunks in text and append runs to the paragraph.
+    Parse **bold**, *italic*, and $latex$ chunks in text and append runs to the paragraph.
     Clean LaTeX symbols and straight quotes on individual chunks.
     """
-    parts = re.split(r'(\*\*.*?\*\*|\$.*?\$)', text)
-    for part in parts:
-        if not part:
-            continue
-        if part.startswith('**') and part.endswith('**'):
-            run_text = smart_typography(clean_latex(part[2:-2]))
-            run = paragraph.add_run(run_text)
-            run.bold = True
-            run.italic = force_italic
-        elif part.startswith('$') and part.endswith('$'):
-            formula = clean_latex(part[1:-1])
-            run = paragraph.add_run(formula)
-            run.italic = True
-        else:
-            run_text = smart_typography(clean_latex(part))
-            run = paragraph.add_run(run_text)
-            run.bold = is_bold_all
-            run.italic = force_italic
-            
+    def set_run_font_properties(run, font_size, is_bold, is_italic):
         run.font.name = VietFonts.BODY
         if font_size:
             run.font.size = font_size
         else:
             run.font.size = VietFonts.SIZE_BODY
         run.font.color.rgb = VietColors.DARK
+        run.bold = is_bold
+        run.italic = is_italic
+
+    # B1: Tách bold và latex trước
+    parts = re.split(r'(\*\*.*?\*\*|\$.*?\$)', text)
+    for part in parts:
+        if not part:
+            continue
+            
+        if part.startswith('**') and part.endswith('**'):
+            run_text = smart_typography(clean_latex(part[2:-2]))
+            run = paragraph.add_run(run_text)
+            set_run_font_properties(run, font_size, is_bold=True, is_italic=force_italic)
+        elif part.startswith('$') and part.endswith('$'):
+            formula = clean_latex(part[1:-1])
+            run = paragraph.add_run(formula)
+            set_run_font_properties(run, font_size, is_bold=is_bold_all, is_italic=True)
+        else:
+            # B2: Trong mảnh thường, kiểm tra xem có *italic*
+            sub_parts = re.split(r'(\*.*?\*)', part)
+            for sub_part in sub_parts:
+                if not sub_part:
+                    continue
+                if sub_part.startswith('*') and sub_part.endswith('*'):
+                    run_text = smart_typography(clean_latex(sub_part[1:-1]))
+                    run = paragraph.add_run(run_text)
+                    set_run_font_properties(run, font_size, is_bold=is_bold_all, is_italic=True)
+                else:
+                    run_text = smart_typography(clean_latex(sub_part))
+                    run = paragraph.add_run(run_text)
+                    set_run_font_properties(run, font_size, is_bold=is_bold_all, is_italic=force_italic)
 
 # ============================================================
 #  STANDARDIZED PARAGRAPH CREATORS
