@@ -1,32 +1,23 @@
-# ĐẶC TẢ SƯ PHẠM GEMS: BÀI 3 - NỘI NĂNG, NHIỆT LƯỢNG
-*Khung chương trình GDPT 2018 - Môn Vật lí 12*
+# ĐẶC TẢ MA TRẬN GEMS: BÀI 3 - NỘI NĂNG, NHIỆT LƯỢNG
+
+## 1. Phân tích sư phạm
+- **Kiến thức cốt lõi:** Nội năng ($U$), Động năng phân tử, Thế năng phân tử, Thực hiện công, Truyền nhiệt, Nguyên lí I Nhiệt động lực học, Nhiệt lượng ($Q$), Nhiệt dung riêng ($c$).
+- **Bẫy sai lầm phổ biến:**
+    - Nhầm lẫn giữa khái niệm Nhiệt năng và Nội năng.
+    - Nhầm lẫn về quy ước dấu của Nguyên lí I (đặc biệt là công $A$ hệ thực hiện vs công nhận vào).
+    - Nghĩ rằng nhiệt dung riêng của một chất phụ thuộc vào khối lượng của chất đó.
+- **Phương pháp dạy học chủ đạo:** Thảo luận nhóm nhỏ phân tích thực nghiệm kết hợp với PHT điền khuyết tương tác.
 
 ---
 
-## 1. YÊU CẦU CẦN ĐẠT (YCCĐ)
-- Phát biểu được định nghĩa nội năng dưới góc độ động học phân tử.
-- Phát biểu và viết được công thức của Nguyên lí I Nhiệt động lực học ($\Delta U = A + Q$), quy ước dấu của các đại lượng.
-- Định nghĩa được nhiệt lượng, viết được công thức tính nhiệt lượng ($Q = mc\Delta t$), nêu được đơn vị và ý nghĩa các đại lượng.
-
-## 2. PHÂN TÍCH ĐƠN VỊ KIẾN THỨC (ĐVKT)
-
-### ĐVKT 1: Nội năng và Nguyên lí I Nhiệt động lực học
-- **Khái niệm cốt lõi:** 
-  - Nội năng ($U$) là tổng động năng của chuyển động nhiệt phân tử và thế năng tương tác giữa các phân tử cấu tạo nên vật.
-  - Nội năng phụ thuộc vào nhiệt độ ($T$) và thể tích ($V$) của vật: $U = f(T, V)$. Đối với khí lí tưởng, nội năng chỉ phụ thuộc vào nhiệt độ.
-  - Các cách làm thay đổi nội năng: Thực hiện công ($A$) và Truyền nhiệt ($Q$).
-  - Nguyên lí I Nhiệt động lực học: Độ biến thiên nội năng của vật bằng tổng công và nhiệt lượng mà vật nhận được: $\Delta U = A + Q$.
-- **Quy ước dấu:**
-  - $Q > 0$: Vật nhận nhiệt lượng; $Q < 0$: Vật truyền nhiệt lượng.
-  - $A > 0$: Vật nhận công; $A < 0$: Vật thực hiện công.
-  - $\Delta U > 0$: Nội năng tăng; $\Delta U < 0$: Nội năng giảm.
-- **Ứng dụng & Hiện tượng:** Pít-tông trong xilanh bị nén nhanh làm khí nóng lên (nhận công $A > 0$, nội năng tăng $\Delta U > 0$).
-
-### ĐVKT 2: Nhiệt lượng và Sự truyền nhiệt
-- **Khái niệm cốt lõi:** 
-  - Nhiệt lượng ($Q$) là số đo phần nội năng tăng thêm hoặc giảm đi trong quá trình truyền nhiệt.
-  - Công thức tính nhiệt lượng thu vào hoặc tỏa ra khi nhiệt độ thay đổi: $Q = mc\Delta t$.
-    - $m$: Khối lượng của chất ($kg$).
-    - $c$: Nhiệt dung riêng của chất ($J/kg.K$).
-    - $\Delta t = t_2 - t_1$: Độ biến thiên nhiệt độ ($^\circ C$ hoặc $K$).
-- **Hiện tượng thực tế:** Đun nước bằng ấm nhôm, tính toán năng lượng hao phí truyền ra môi trường xung quanh.
+## 2. Phân bố ma trận GEMS
+- **ĐVKT 1: Khái niệm nội năng**
+    - Nhiệm vụ: Khám phá các thành phần vi mô cấu thành nội năng của chất.
+- **ĐVKT 2: Các cách làm biến đổi nội năng**
+    - Nhiệm vụ: Nhận diện và phân tích hiện tượng cọ xát/đun nóng làm tăng nội năng.
+- **ĐVKT 3: Nguyên lí I Nhiệt động lực học**
+    - Nhiệm vụ: Rèn luyện kỹ năng xác định dấu của $Q$ và $A$ theo Nguyên lí I.
+- **ĐVKT 4: Nhiệt lượng và Công thức tính nhiệt lượng**
+    - Nhiệm vụ: Sử dụng công thức $Q = mc\Delta t$ để tính toán sự thay đổi nhiệt lượng.
+- **ĐVKT 5: Khái niệm nhiệt dung riêng của chất**
+    - Nhiệm vụ: So sánh nhiệt dung riêng của các chất để giải thích sự biến đổi nhiệt lượng đặc trưng.
