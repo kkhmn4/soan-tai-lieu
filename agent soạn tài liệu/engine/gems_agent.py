@@ -34,9 +34,9 @@ from rich.live import Live
 
 # Thêm engine vào path để import exporter
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-from pht_exporter import export_pht
-from khbd_exporter import export_khbd
-from homework_exporter import export_homework
+from viet_pht_exporter import export_pht
+from viet_khbd_exporter import export_khbd
+from viet_homework_exporter import export_homework
 from notebooklm_executor import generate_notebooklm_prompt
 
 # Setup Rich console
