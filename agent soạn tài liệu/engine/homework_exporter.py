@@ -579,7 +579,7 @@ def export_homework(md_path, output_path):
 
     # ---- Answer key section (separate page) ----
     add_separator(doc)
-    add_heading(doc, "ĐÁP ÁN CHO GIÁO VIÊN", level=1)
+    add_heading(doc, "ĐÁP ÁN CHO GIÁO VIÊN", level=2)
 
     # Try to find answer key block (## Đáp án or --- ĐÁP ÁN ---)
     answer_mode = False
