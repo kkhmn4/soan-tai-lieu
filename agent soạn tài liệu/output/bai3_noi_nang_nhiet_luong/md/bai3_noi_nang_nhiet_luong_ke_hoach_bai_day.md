@@ -62,19 +62,68 @@ TRƯỜNG THPT: ................................................
 ---
 
 ### 2. Hoạt động 2: Hình thành kiến thức mới (45 phút)
-- **Mục tiêu:** HS định nghĩa được nội năng, hiểu rõ Nguyên lí I và quy ước dấu, biết công thức tính nhiệt lượng.
-- **Sản phẩm:** Điền đầy đủ kiến thức trọng tâm ĐVKT 1 và ĐVKT 2 trên PHT.
+- **Mục tiêu:** HS định nghĩa được khái niệm nội năng, phân tích được các cách làm biến đổi nội năng, phát biểu và vận dụng được Nguyên lí I Nhiệt động lực học, hiểu được công thức tính nhiệt lượng và ý nghĩa vật lý của nhiệt dung riêng.
+- **Sản phẩm:** Lời giải các nhiệm vụ học tập từ ĐVKT 2.1 đến ĐVKT 2.5 đầy đủ trên Phiếu học tập.
+
+#### 2.1. Đơn vị kiến thức 1: Khái niệm nội năng của vật
+*   **Mục tiêu:** HS định nghĩa được nội năng dưới góc độ động học phân tử là tổng động năng và thế năng của các phân tử cấu tạo nên vật: $U = E_đ + E_t$.
+*   **Nội dung:** Tìm hiểu khái niệm nội năng và các đại lượng ảnh hưởng.
+*   **Sản phẩm:** Định nghĩa nội năng được hoàn thiện trên PHT.
 
 | Hoạt động của Giáo viên | Hoạt động của Học sinh |
 | :--- | :--- |
-| **Chuyển giao nhiệm vụ:**<br>**Nội dung 1: Nội năng & Nguyên lí I (ĐVKT 1)**<br>**Chuyển giao nhiệm vụ:**<br>- GV yêu cầu thảo luận cặp đôi hoàn thành Nhiệm vụ 1 trong PHT (ete trong ống nghiệm bật nút).<br>- Yêu cầu nghiên cứu SGK để hoàn thành phần điền khuyết lý thuyết ĐVKT 1. | **Tiếp nhận nhiệm vụ:** Học sinh tiếp nhận nhiệm vụ học tập từ giáo viên. |
-| **Theo dõi, hỗ trợ:** Giáo viên theo dõi, quan sát và hỗ trợ gợi ý các nhóm khi cần thiết. | **Thực hiện nhiệm vụ:**<br>- HS quan sát mô phỏng/thí nghiệm ống ete đậy nút cao su của GV.<br>- Trao đổi cặp đôi giải thích hiện tượng và điền khuyết lý thuyết vào PHT. |
-| **Tổ chức báo cáo:** Giáo viên điều hành, gọi đại diện báo cáo kết quả, tổ chức nhận xét phản biện chéo giữa các học sinh. | **Báo cáo, thảo luận:**<br>- Đại diện HS đứng lên đọc từ khóa điền khuyết.<br>- HS khác nhận xét chéo. |
-| **Kết luận, nhận định:**<br>- GV chuẩn hóa định nghĩa nội năng: $U = E_đ + E_t$.<br>- Chốt Nguyên lí I: $\Delta U = A + Q$ và vẽ bảng quy ước dấu lên bảng. | **Ghi nhận kiến thức:** Học sinh đối chiếu, sửa đổi kết quả bài làm và ghi nhận kiến thức cốt lõi vào vở. |
-| **Nội dung 2: Nhiệt lượng & Công thức tính (ĐVKT 2)**<br>**Chuyển giao nhiệm vụ:**<br>- GV giới thiệu thực nghiệm đun nóng nước và rượu trên slide.<br>- Yêu cầu HS hoàn thành phần điền khuyết công thức tính nhiệt lượng ĐVKT 2. | **Thực hiện nhiệm vụ:**<br>- HS quan sát bảng số liệu so sánh nước/rượu.<br>- Suy nghĩ giải thích vai trò đặc trưng của đại lượng Nhiệt dung riêng ($c$).<br>- Điền khuyết công thức $Q = mc\Delta t$ vào PHT. |
-| **Kết luận:**<br>- GV chốt công thức tính nhiệt lượng và ý nghĩa đơn vị của nhiệt dung riêng ($J/kg.K$). | **Báo cáo, thảo luận:**<br>- HS phát biểu phần điền khuyết công thức.<br>- Cả lớp đối chiếu vở ghi. |
+| **Chuyển giao nhiệm vụ:**<br>- GV yêu cầu HS nghiên cứu cá nhân mục I SGK và trả lời câu hỏi: *"Các phân tử cấu tạo nên vật chuyển động không ngừng và có lực liên kết phân tử. Vậy chúng sở hữu những dạng năng lượng nào ở cấp độ vi mô? Tổng các năng lượng này gọi là gì?"* | **Tiếp nhận nhiệm vụ:** Học sinh tiếp nhận nhiệm vụ học tập từ giáo viên. |
+| **Theo dõi, hỗ trợ:** Giáo viên theo dõi, hướng dẫn HS liên hệ giữa chuyển động nhiệt với động năng phân tử, lực liên kết phân tử với thế năng phân tử. | **Thực hiện nhiệm vụ:** HS nghiên cứu cá nhân mục I SGK, thảo luận cặp đôi để chỉ ra động năng và thế năng phân tử cấu tạo nên nội năng. |
+| **Tổ chức báo cáo:** GV gọi đại diện HS phát biểu giải thích nội năng của vật. | **Báo cáo, thảo luận:** HS trình bày định nghĩa nội năng: $U = E_đ + E_t$. |
+| **Kết luận, nhận định:**<br>- GV chốt kiến thức: Nội năng $U$ phụ thuộc vào nhiệt độ $T$ và thể tích $V$ của vật: $U = f(T, V)$. | **Ghi nhận kiến thức:** Học sinh lắng nghe nhận xét, đối chiếu lời giải và ghi chép kiến thức cốt lõi. |
 
----
+#### 2.2. Đơn vị kiến thức 2: Các cách làm biến đổi nội năng
+*   **Mục tiêu:** Chỉ ra được hai cách làm biến đổi nội năng là thực hiện công và truyền nhiệt thông qua thí nghiệm thực tế cọ xát/đun nóng ống ete.
+*   **Nội dung:** Phân tích thí nghiệm ống nghiệm ete đậy nút cọ xát.
+*   **Sản phẩm:** Sự phân biệt rõ ràng hai cách làm biến đổi nội năng.
+
+| Hoạt động của Giáo viên | Hoạt động của Học sinh |
+| :--- | :--- |
+| **Chuyển giao nhiệm vụ:**<br>- GV yêu cầu HS quan sát thí nghiệm đun nóng ống ete đậy nút cao su/hoặc cọ xát dây cọ xát ống nghiệm và đặt câu hỏi: *"Khi cọ xát hoặc đun nóng ống nghiệm, vì sao nút cao su lại bật ra? Nội năng của ete đã thay đổi bằng những cách nào? Nêu sự khác biệt giữa hai cách đó?"* | **Tiếp nhận nhiệm vụ:** Học sinh tiếp nhận nhiệm vụ học tập từ giáo viên. |
+| **Theo dõi, hỗ trợ:** Giáo viên đôn đốc, gợi ý sự chuyển hóa cơ năng -> nội năng (thực hiện công) và nhiệt năng truyền trực tiếp -> nội năng (truyền nhiệt). | **Thực hiện nhiệm vụ:** HS thảo luận nhóm nhỏ để phân tích hai quá trình vật lý xảy ra trong thí nghiệm ống ete và điền khuyết lý thuyết vào PHT. |
+| **Tổ chức báo cáo:** GV gọi đại diện nhóm phân tích các cách làm biến đổi nội năng của hệ. | **Báo cáo, thảo luận:** Đại diện nhóm trình bày sự khác biệt giữa thực hiện công (có sự chuyển hóa năng lượng) và truyền nhiệt (không có sự chuyển hóa năng lượng, chỉ có sự truyền năng lượng). |
+| **Kết luận, nhận định:**<br>- GV chuẩn hóa kiến thức về hai cách làm biến đổi nội năng (Thực hiện công và Truyền nhiệt). | **Ghi nhận kiến thức:** Học sinh lắng nghe nhận xét, đối chiếu lời giải và ghi chép kiến thức cốt lõi. |
+
+#### 2.3. Đơn vị kiến thức 3: Nguyên lí I Nhiệt động lực học
+*   **Mục tiêu:** Phát biểu được Nguyên lí I Nhiệt động lực học ($\Delta U = A + Q$) và giải thích đúng quy ước dấu của các đại lượng.
+*   **Nội dung:** Tìm hiểu biểu thức toán học và bảng quy ước dấu.
+*   **Sản phẩm:** Ghi nhận biểu thức và bảng quy ước dấu chuẩn xác trên PHT.
+
+| Hoạt động của Giáo viên | Hoạt động của Học sinh |
+| :--- | :--- |
+| **Chuyển giao nhiệm vụ:**<br>- GV yêu cầu HS kết hợp hai quá trình thực hiện công và truyền nhiệt để viết biểu thức liên hệ độ biến thiên nội năng $\Delta U$ với công $A$ và nhiệt lượng $Q$. Yêu cầu nghiên cứu bảng quy ước dấu trong SGK. | **Tiếp nhận nhiệm vụ:** Học sinh tiếp nhận nhiệm vụ học tập từ giáo viên. |
+| **Theo dõi, hỗ trợ:** GV hỗ trợ HS ghi nhớ quy ước dấu: Hệ nhận nhiệt ($Q > 0$)/nhận công ($A > 0$); hệ tỏa nhiệt ($Q < 0$)/thực hiện công ($A < 0$). | **Thực hiện nhiệm vụ:** HS làm việc cá nhân hoàn thành hệ thức $\Delta U = A + Q$ và vẽ bảng quy ước dấu vào PHT. |
+| **Tổ chức báo cáo:** GV gọi HS lên bảng viết biểu thức và vẽ bảng quy ước dấu. | **Báo cáo, thảo luận:** HS lên bảng trình bày, các HS khác nhận xét chéo. |
+| **Kết luận, nhận định:**<br>- GV chuẩn hóa quy ước dấu và đưa ra ví dụ minh họa trực quan. | **Ghi nhận kiến thức:** Học sinh lắng nghe nhận xét, đối chiếu lời giải và ghi chép kiến thức cốt lõi. |
+
+#### 2.4. Đơn vị kiến thức 4: Nhiệt lượng và Công thức tính nhiệt lượng
+*   **Mục tiêu:** Phát biểu được định nghĩa nhiệt lượng và công thức tính nhiệt lượng thu vào/tỏa ra khi thay đổi nhiệt độ: $Q = mc\Delta t$.
+*   **Nội dung:** Tìm hiểu công thức tính nhiệt lượng và các đại lượng trong công thức.
+*   **Sản phẩm:** Công thức $Q = mc\Delta t$ và đơn vị của các đại lượng.
+
+| Hoạt động của Giáo viên | Hoạt động của Học sinh |
+| :--- | :--- |
+| **Chuyển giao nhiệm vụ:**<br>- GV đặt vấn đề: *"Khi truyền nhiệt làm vật tăng nhiệt độ, nhiệt lượng thu vào phụ thuộc những yếu tố nào của vật? Hãy nghiên cứu SGK để tìm ra công thức tính nhiệt lượng."* | **Tiếp nhận nhiệm vụ:** Học sinh tiếp nhận nhiệm vụ học tập từ giáo viên. |
+| **Theo dõi, hỗ trợ:** GV hướng dẫn HS phân tích các đại lượng: khối lượng $m$, độ tăng nhiệt độ $\Delta t$, và chất cấu tạo nên vật. | **Thực hiện nhiệm vụ:** HS thảo luận cặp đôi hoàn thành phần điền khuyết công thức tính nhiệt lượng trong PHT. |
+| **Tổ chức báo cáo:** GV gọi HS đọc công thức tính nhiệt lượng phát hiện được. | **Báo cáo, thảo luận:** HS phát biểu công thức: $Q = mc\Delta t$. Giải thích đơn vị của các đại lượng ($Q$ tính bằng Jun $J$, $m$ tính bằng $kg$, $\Delta t$ tính bằng $K$ hoặc $^\circ C$). |
+| **Kết luận, nhận định:**<br>- GV chốt công thức và lưu ý dấu của $Q$: hệ thu nhiệt $Q > 0$, hệ tỏa nhiệt $Q < 0$. | **Ghi nhận kiến thức:** Học sinh lắng nghe nhận xét, đối chiếu lời giải và ghi chép kiến thức cốt lõi. |
+
+#### 2.5. Đơn vị kiến thức 5: Khái niệm nhiệt dung riêng của chất
+*   **Mục tiêu:** Nêu được ý nghĩa vật lý đặc trưng của nhiệt dung riêng $c$ của các chất khác nhau thông qua bảng số liệu thực nghiệm.
+*   **Nội dung:** Phân tích bảng số liệu so sánh sự tăng nhiệt độ của nước và rượu.
+*   **Sản phẩm:** Giải thích được tại sao các chất khác nhau có tốc độ tăng nhiệt độ khác nhau khi nhận cùng nhiệt lượng.
+
+| Hoạt động của Giáo viên | Hoạt động của Học sinh |
+| :--- | :--- |
+| **Chuyển giao nhiệm vụ:**<br>- GV chiếu bảng số liệu thực nghiệm đun nóng nước và rượu. Đặt câu hỏi: *"Với cùng khối lượng và nhận cùng nhiệt lượng, vì sao rượu nóng lên nhanh hơn nước? Con số nhiệt dung riêng của nước $c_{nước} = 4200	ext{ J/kg.K}$ cho biết điều gì?"* | **Tiếp nhận nhiệm vụ:** Học sinh tiếp nhận nhiệm vụ học tập từ giáo viên. |
+| **Theo dõi, hỗ trợ:** GV định hướng HS phân tích định nghĩa nhiệt dung riêng: lượng nhiệt cần thiết để làm $1	ext{ kg}$ chất tăng thêm $1	ext{ K}$ hoặc $1^\circ	ext{C}$. | **Thực hiện nhiệm vụ:** HS làm việc nhóm nhỏ để phân tích ý nghĩa của nhiệt dung riêng và giải thích hiện tượng thực tế (khí hậu ven biển mát mẻ hơn trong đất liền). |
+| **Tổ chức báo cáo:** GV gọi đại diện nhóm trình bày ý nghĩa vật lý của nhiệt dung riêng. | **Báo cáo, thảo luận:** Đại diện trình bày định nghĩa, đơn vị $J/kg.K$ và vai trò điều hòa khí hậu của nước do có nhiệt dung riêng rất lớn. |
+| **Kết luận, nhận định:**<br>- GV chốt khái niệm nhiệt dung riêng là đại lượng đặc trưng cho chất. | **Ghi nhận kiến thức:** Học sinh lắng nghe nhận xét, đối chiếu lời giải và ghi chép kiến thức cốt lõi. |
 
 ### 3. Hoạt động 3: Luyện tập (25 phút)
 - **Mục tiêu:** Củng cố công thức tính $\Delta U = A + Q$ và $Q = mc\Delta t$ qua các bài tập định lượng.
