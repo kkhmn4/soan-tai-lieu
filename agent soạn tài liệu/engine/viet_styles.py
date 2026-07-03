@@ -151,6 +151,9 @@ def clean_latex(text):
     if not text:
         return ""
         
+    # Khôi phục tab thành \\t và xóa dấu highlight ==
+    text = text.replace('\t', '\\t').replace('==', '')
+    
     replacements = {
         r'\Delta': 'Δ', r'\delta': 'δ',
         r'\omega': 'ω', r'\Omega': 'Ω',
@@ -195,6 +198,9 @@ def clean_latex(text):
     text = re.sub(r'(\d)\s*\*\s*(\d)', r'\1 × \2', text)
     # Chuyển đổi dấu nhân * thô giữa chữ và số thành dấu ·
     text = re.sub(r'([a-zA-Z0-9\)])\s*\*\s*([a-zA-Z\(\Delta])', r'\1·\2', text)
+    
+    # Thay thế toàn bộ \text{...} thành nội dung bên trong nó
+    text = re.sub(r'\\text\{([^}]+)\}', r'\1', text)
     
     # Xóa sạch các dấu $ còn lại
     text = text.replace('$', '')
