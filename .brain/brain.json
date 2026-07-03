@@ -2,7 +2,7 @@
   "meta": {
     "schema_version": "1.1.0",
     "awf_version": "4.0.2",
-    "last_updated": "2026-06-28T09:48:00+07:00"
+    "last_updated": "2026-06-30T22:15:00+07:00"
   },
   "project": {
     "name": "soạn tài liệu",
@@ -35,21 +35,23 @@
   "directory_structure": {
     "engine/": "Các module Python: main.py, gems_analyzer.py, worksheet_generator.py, homework_generator.py, image_renderer.py, quality_checker.py, restructure_output.py",
     "engine/templates/": "Template LaTeX cho bài tập về nhà (homework_template.tex)",
-    "output/hermes/[bai_X]/md/": "Markdown nguồn: dac_ta_gems.md, phieu_hoc_tap.md, dap_an.md, ke_hoach_bai_day.md, huong_dan_slide.md, bai_tap_ve_nha.md",
-    "output/hermes/[bai_X]/ready/": "Tài liệu đầu ra cuối cùng: slide_deck.pptx/pdf, infographic_*.png, phieu_hoc_tap.docx, bai_tap_ve_nha.tex, dap_an.tex",
-    "tai-lieu-goc/": "Tài liệu nguồn: SGK, khung chương trình GDPT 2018, YCCĐ",
+    "output/[bai_X]/md/": "Markdown nguồn: dac_ta_gems.md, phieu_hoc_tap.md, dap_an.md, ke_hoach_bai_day.md, huong_dan_slide.md, bai_tap_ve_nha.md",
+    "output/[bai_X]/ready/": "Tài liệu đầu ra cuối cùng: slide_deck.pptx/pdf, infographic_*.png, phieu_hoc_tap.docx, bai_tap_ve_nha.tex, dap_an.tex",
+    "tai-lieu-goc/": "Tài liệu nguồn: SGK, khung chương trình GDPT 2018, YCCĐ, tệp văn bản thô",
     "skills/": "AWF skills: hermes-gems-automation.md, awf-gems_workflow_skill.md",
     "scratch/generate_notebook_materials.py": "CLI tool tạo học liệu NLM: nhận --phieu-hoc-tap, --dap-an, --title, --profile, --out-dir. Tự động: tạo notebook → upload sources → tạo slide + infographic → poll status → download về out-dir.",
-    "scratch/generate_gems_materials_bai4.py": "Script tạo toàn bộ file .md cho bài 4 (ghi trực tiếp vào output/hermes/bai4_nhiet_dung_rieng/md/)."
+    "scratch/create_and_push.ps1": "Tập lệnh hỗ trợ đăng nhập và đồng bộ GitHub bằng ASCII."
   },
   "current_progress": {
     "completed_lessons": [
       "Bài 3 – Nội năng. Định luật I của nhiệt động lực học (✅ HOÀN TOÀN XONG 28/06/2026: slide_deck.pptx/pdf + infographic PNG + phieu_hoc_tap.docx + ke_hoach_bai_day.docx + bai_tap_ve_nha.docx + dap_an.docx. Notebook ID: 5232f920-2257-46e4-b1cb-24cbf68f0716)",
-      "Bài 4 – Nhiệt dung riêng (✅ HOÀN TOÀN XONG 24/06/2026: slide_deck.pptx (v1, cũ) + slide_deck_v2_viet.pdf (v2, đúng chuẩn mới) + 2 infographic PNG tiếng Việt + phieu_hoc_tap.docx + bai_tap_ve_nha.tex + dap_an.tex. Notebook ID mới (profile default): 469d71aa-3338-4951-b2a4-ecdd7a4571de)",
+      "Bài 4 – Nhiệt dung riêng (✅ HOÀN TOÀN XONG 30/06/2026: slide_deck.pptx + slide_deck.pdf + infographic PNG tiếng Việt + phieu_hoc_tap.docx + ke_hoach_bai_day.docx + bai_tap_ve_nha.docx + LaTeX/TikZ. Notebook ID: efff6698-b9e5-4155-9182-6ec6dfcc5b4b)",
       "Bài 6 – Nhiệt nóng chảy riêng (✅ HOÀN TOÀN XONG 25/06/2026: slide_deck.pptx + 2 infographics PNG + phieu_hoc_tap.docx + ke_hoach_bai_day.docx + bai_tap_ve_nha.docx/tex + dap_an.docx/tex)",
       "Bài 7 – Nhiệt hóa hơi riêng (✅ HOÀN TOÀN XONG 28/06/2026: slide_deck.pptx + 2 infographics PNG + phieu_hoc_tap.docx + ke_hoach_bai_day.docx + bai_tap_ve_nha.docx/tex + dap_an.tex)"
     ],
-    "in_progress_lessons": [],
+    "in_progress_lessons": [
+      "Bài 2 – Sự chuyển thể (Đang tiến hành: Biên dịch thành công 3/3 DOCX, đang sinh Slide và Infographic trên NotebookLM. ID Notebook: 5ebb5a3a-e7de-40ee-9068-7e2932ea1284)"
+    ],
     "next_step": "Chạy pipeline cho Bài 5 – Nhiệt độ nhiệt kế để hoàn tất toàn chương Nhiệt học."
   },
   "slide_design_rules": {
@@ -108,8 +110,8 @@
         "description": "Bắt buộc dài đúng 90 ký tự. Placeholder: [DOT_LINE_90]."
       },
       {
-        "pattern": "Cấu trúc thư mục Hermes mỗi bài",
-        "description": "output/hermes/[slug]/md/ (6 file .md nguồn) + ready/ (slide.pptx/pdf, infographic*.png, phieu_hoc_tap.docx, bai_tap_ve_nha.tex, dap_an.tex)."
+        "pattern": "Cấu trúc thư mục GEMS mỗi bài",
+        "description": "output/[slug]/md/ (6 file .md nguồn) + ready/ (slide.pptx/pdf, infographic*.png, phieu_hoc_tap.docx, bai_tap_ve_nha.tex, dap_an.tex)."
       },
       {
         "pattern": "Slide guide chuẩn GEMS v7.1",
@@ -121,7 +123,7 @@
       },
       {
         "pattern": "Script pipeline generate_notebook_materials.py",
-        "description": "Env: $env:PYTHONUTF8='1'. Tham số: --phieu-hoc-tap [file.md] --dap-an [file.md] --title [title] --profile [default|account2|account3] --out-dir [output/hermes/baiX]. Script tự upload thêm file huong_dan_slide.md nếu có."
+        "description": "Env: $env:PYTHONUTF8='1'. Tham số: --phieu-hoc-tap [file.md] --dap-an [file.md] --title [title] --profile [default|account2|account3] --out-dir [output/baiX]. Script tự upload thêm file huong_dan_slide.md nếu có."
       }
     ],
     "gotchas": [

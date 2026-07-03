@@ -1,89 +1,68 @@
 {
-  "updated_at": "2026-06-28T18:44:00+07:00",
+  "updated_at": "2026-06-30T22:15:00+07:00",
   "working_on": {
-    "feature": "GEMS Bài 3 – Nội năng. Định luật I",
-    "task": "Tạo học liệu đầy đủ và chạy nlm CLI để tạo slide + infographic",
+    "feature": "GEMS Bài 2 – Sự chuyển thể",
+    "task": "Tạo học liệu đầy đủ (DOCX, Slide, Infographic) dưới cấu trúc thư mục mới",
     "status": "completed",
     "files": [
-      "output/hermes/bai3_noi_nang/md/bai3_noi_nang_dac_ta_gems.md",
-      "output/hermes/bai3_noi_nang/md/bai3_noi_nang_ke_hoach_bai_day.md",
-      "output/hermes/bai3_noi_nang/md/bai3_noi_nang_phieu_hoc_tap.md",
-      "output/hermes/bai3_noi_nang/md/bai3_noi_nang_huong_dan_slide.md",
-      "output/hermes/bai3_noi_nang/notebooklm/bai3_noi_nang_notebooklm_prompt.md",
-      "output/hermes/bai3_noi_nang/md/bai3_noi_nang_bai_tap_ve_nha.md",
-      "output/hermes/bai3_noi_nang/md/bai3_noi_nang_dap_an.md",
-      "output/hermes/bai3_noi_nang/ready/bai3_noi_nang_ke_hoach_bai_day.docx",
-      "output/hermes/bai3_noi_nang/ready/bai3_noi_nang_phieu_hoc_tap.docx",
-      "output/hermes/bai3_noi_nang/ready/bai3_noi_nang_bai_tap_ve_nha.docx",
-      "output/hermes/bai3_noi_nang/ready/bai3_noi_nang_dap_an.docx",
-      "output/hermes/bai3_noi_nang/ready/bai3_noi_nang_slide_deck.pptx",
-      "output/hermes/bai3_noi_nang/ready/bai3_noi_nang_slide_deck.pdf",
-      "output/hermes/bai3_noi_nang/ready/bai3_noi_nang_infographic.png"
+      "output/bai2_su_chuyen_the/md/bai2_su_chuyen_the_dac_ta_gems.md",
+      "output/bai2_su_chuyen_the/md/bai2_su_chuyen_the_ke_hoach_bai_day.md",
+      "output/bai2_su_chuyen_the/md/bai2_su_chuyen_the_phieu_hoc_tap.md",
+      "output/bai2_su_chuyen_the/md/bai2_su_chuyen_the_huong_dan_slide.md",
+      "output/bai2_su_chuyen_the/ready/bai2_su_chuyen_the_phieu_hoc_tap.docx",
+      "output/bai2_su_chuyen_the/ready/bai2_su_chuyen_the_ke_hoach_bai_day.docx",
+      "output/bai2_su_chuyen_the/ready/bai2_su_chuyen_the_bai_tap_ve_nha.docx"
     ],
     "blockers": [],
-    "notes": "Đã hoàn thành 100% gói học liệu Bài 3, tự động hóa upload và tải slide/infographic qua nlm CLI."
+    "notes": "Đã biên dịch thành công 3/3 tệp Word cục bộ, đang tự động chạy quy trình nlm CLI trên Cloud sinh Slide và Infographic tiếng Việt với polling 5 phút."
   },
   "pending_tasks": [
     {
-      "task": "Tạo NLM materials cho Bài 5 – Nhiệt độ nhiệt kế",
+      "task": "Tải về hoàn tất Slide (PPTX/PDF) và Infographic (PNG) cho Bài 2 và kiểm tra QA.",
       "priority": "high",
-      "notes": "Chạy nlm CLI để tải lên và sinh slide/infographic cho Bài 5 để hoàn tất chương."
+      "notes": "Đợi Smart Polling của generate_notebook_materials.py hoàn thành và kiểm tra chất lượng tệp."
+    },
+    {
+      "task": "Chạy pipeline cho Bài 5 – Nhiệt độ nhiệt kế để hoàn tất toàn chương Nhiệt học.",
+      "priority": "medium",
+      "notes": "Tạo học liệu và sinh Slide/Infographic cho Bài 5."
     }
   ],
   "recent_changes": [
     {
-      "timestamp": "2026-06-28T09:40:00+07:00",
+      "timestamp": "2026-06-30T18:52:00+07:00",
       "type": "completed",
-      "description": "Hoàn thành Bài 7: Nhiệt hóa hơi riêng (PPTX, infographics, DOCX, LaTeX)",
+      "description": "Tái cấu trúc thư mục toàn dự án (loại bỏ hermes, đưa các bài ra output gốc), dọn dẹp 100+ file rác trong scratch, và đồng bộ đẩy thành công dự án lên GitHub kkhmn4/soan-tai-lieu.",
       "files": [
-        "output/hermes/bai7_nhiet_hoa_hoi_rieng/ready/bai7_nhiet_hoa_hoi_rieng_slide_deck.pptx",
-        "output/hermes/bai7_nhiet_hoa_hoi_rieng/ready/bai7_nhiet_hoa_hoi_rieng_infographic_khai_niem_nhiet_hoa_hoi_rieng.png",
-        "output/hermes/bai7_nhiet_hoa_hoi_rieng/ready/bai7_nhiet_hoa_hoi_rieng_infographic_thuc_hanh_do_nhiet_hoa_hoi_rieng.png",
-        "output/hermes/bai7_nhiet_hoa_hoi_rieng/ready/bai7_nhiet_hoa_hoi_rieng_phieu_hoc_tap.docx",
-        "output/hermes/bai7_nhiet_hoa_hoi_rieng/ready/bai7_nhiet_hoa_hoi_rieng_ke_hoach_bai_day.docx",
-        "output/hermes/bai7_nhiet_hoa_hoi_rieng/ready/bai7_nhiet_hoa_hoi_rieng_bai_tap_ve_nha.docx",
-        "output/hermes/bai7_nhiet_hoa_hoi_rieng/ready/bai7_nhiet_hoa_hoi_rieng_bai_tap_ve_nha.tex",
-        "output/hermes/bai7_nhiet_hoa_hoi_rieng/ready/bai7_nhiet_hoa_hoi_rieng_dap_an.tex"
-      ]
-    },
-    {
-      "timestamp": "2026-06-25T19:17:00+07:00",
-      "type": "completed",
-      "description": "Hoàn thành Bài 6: Nhiệt nóng chảy riêng (PPTX, infographics, DOCX, LaTeX)",
-      "files": [
-        "output/hermes/bai6_nhiet_nong_chay_rieng/ready/bai6_nhiet_nong_chay_rieng_slide_deck.pptx",
-        "output/hermes/bai6_nhiet_nong_chay_rieng/ready/bai6_nhiet_nong_chay_rieng_infographic_khai_niem_nhiet_nong_chay_rieng.png",
-        "output/hermes/bai6_nhiet_nong_chay_rieng/ready/bai6_nhiet_nong_chay_rieng_infographic_thuc_hanh_do_nhiet_nong_chay_rieng.png",
-        "output/hermes/bai6_nhiet_nong_chay_rieng/ready/bai6_nhiet_nong_chay_rieng_phieu_hoc_tap.docx",
-        "output/hermes/bai6_nhiet_nong_chay_rieng/ready/bai6_nhiet_nong_chay_rieng_ke_hoach_bai_day.docx",
-        "output/hermes/bai6_nhiet_nong_chay_rieng/ready/bai6_nhiet_nong_chay_rieng_bai_tap_ve_nha.docx",
-        "output/hermes/bai6_nhiet_nong_chay_rieng/ready/bai6_nhiet_nong_chay_rieng_bai_tap_ve_nha.tex",
-        "output/hermes/bai6_nhiet_nong_chay_rieng/ready/bai6_nhiet_nong_chay_rieng_dap_an.tex"
+        "output/bai2_su_chuyen_the",
+        "output/bai3_noi_nang",
+        "output/bai4_nhiet_dung_rieng",
+        "output/bai5_nhiet_do_nhiet_ke",
+        "output/bai6_nhiet_nong_chay_rieng",
+        "output/bai7_nhiet_hoa_hoi_rieng",
+        "scratch/generate_notebook_materials.py",
+        "scratch/create_and_push.ps1",
+        "readme.md"
       ]
     }
   ],
   "errors_encountered": [
     {
-      "error": "SyntaxError: unterminated string literal in engine/main.py",
-      "solution": "Khôi phục tệp mã nguồn engine/main.py bị hỏng bằng cách tái tạo từ nhật ký lịch sử IDE.",
-      "resolved": true
-    },
-    {
-      "error": "Không có Git Remote",
-      "solution": "Khôi phục cục bộ các tệp hệ thống đã được theo dõi bằng lệnh git restore .",
+      "error": "PowerShell try-catch and string formatting parser errors on Windows",
+      "solution": "Viết lại script create_and_push.ps1 hoàn toàn bằng ký tự ASCII không dấu.",
       "resolved": true
     }
   ],
   "decisions_made": [
     {
-      "decision": "Khôi phục mã nguồn hệ thống từ nhật ký lịch sử IDE",
-      "reason": "Mã nguồn trong commit HEAD bị hỏng và không có remote GitHub để kéo mã sạch. Giải pháp phân tích log IDE giúp lấy lại mã chính xác.",
-      "date": "2026-06-28"
+      "decision": "Tái cấu trúc cấu trúc cây thư mục và dọn dẹp sạch sẽ",
+      "reason": "Phản hồi từ người dùng muốn loại bỏ thư mục trung gian hermes để đơn giản hóa cấu trúc học liệu đầu ra.",
+      "date": "2026-06-30"
     },
     {
-      "decision": "Dọn dẹp các tệp chẩn đoán tạm thời",
-      "reason": "Giữ cho không gian làm việc sạch sẽ, tránh nhiễu thông tin.",
-      "date": "2026-06-28"
+      "decision": "Lựa chọn ký tự ASCII cho tập lệnh PowerShell",
+      "reason": "Tránh lỗi định dạng chuỗi do lỗi font tiếng Việt và emoji trên một số phiên bản PowerShell.",
+      "date": "2026-06-30"
     }
   ]
 }

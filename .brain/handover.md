@@ -1,30 +1,35 @@
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# 📋 HANDOVER DOCUMENT – GEMS Hermes Pipeline
-# Lưu lúc: 2026-06-28T09:48:00+07:00
+# 📋 HANDOVER DOCUMENT – GEMS Physics Pipeline
+# Lưu lúc: 2026-06-30T22:15:00+07:00
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ## 📍 Đang làm gì
 
-**Dự án:** GEMS Hermes – Tự động hoá sinh học liệu Vật lý Chương Nhiệt (Bài 4–7)  
-**Bước tiếp theo:** Chạy pipeline sinh học liệu cho Bài 5 (Nhiệt độ. Thang nhiệt độ. Nhiệt kế) trên NotebookLM.
+**Dự án:** GEMS Physics – Hệ thống tự động biên soạn và xuất bản học liệu Vật lý 12  
+**Bước tiếp theo:** 
+1. Đợi hoàn tất quá trình tải Slide (PPTX/PDF) và Infographic (PNG) cho Bài 2 (Sự chuyển thế) từ Google NotebookLM Cloud (quy trình Smart Polling đang chạy ngầm).
+2. Chạy pipeline sinh học liệu và NotebookLM cho Bài 5 (Nhiệt độ. Thang nhiệt độ. Nhiệt kế) để hoàn thành toàn bộ chương Nhiệt học.
 
 ---
 
 ## ✅ Đã hoàn thành
 
-- [x] **Bài 4 (Nhiệt dung riêng)**: Hoàn thành 100% tài liệu Markdown, Word, LaTeX, slide deck và infographics.
-- [x] **Bài 6 (Nhiệt nóng chảy riêng)**: Hoàn thành 100% tài liệu Markdown, Word, LaTeX, slide deck và infographics.
-- [x] **Bài 7 (Nhiệt hóa hơi riêng)**: Hoàn thành 100% tài liệu Markdown, Word, LaTeX, slide deck và infographics (vừa hoàn tất trong session này).
-- [x] **Khôi phục tệp hệ thống bị hỏng**: Phân tích lịch sử hội thoại IDE và khôi phục hoàn chỉnh tệp `engine/main.py` về trạng thái sạch sẽ, khôi phục các tệp theo dõi cục bộ bằng `git restore .`.
-- [x] **Dọn dẹp môi trường**: Xóa sạch toàn bộ các tệp tin chẩn đoán tạm thời (`scratch/*.py`, `scratch/*.txt`) để giữ không gian làm việc gọn gàng.
+- [x] **Tái cấu trúc thư mục toàn dự án:** Loại bỏ thư mục trung gian `hermes`, đưa toàn bộ các thư mục bài học (`bai2` đến `bai7`) ra trực tiếp thư mục `output/` để tối giản hóa đường dẫn.
+- [x] **Dọn dẹp thư mục gốc cực sạch:** Di chuyển tất cả tài liệu rời rạc vào `docs/reference/` và `docs/diagrams/`, chuyển các script thử nghiệm/nháp cũ vào `scratch/`, và di chuyển các file YCCĐ thô vào `tai-lieu-goc/`.
+- [x] **Thiết lập và đẩy dự án lên GitHub:** Tạo repository mới và đẩy toàn bộ mã nguồn sạch của dự án lên GitHub cá nhân của bạn tại [https://github.com/kkhmn4/soan-tai-lieu.git](https://github.com/kkhmn4/soan-tai-lieu.git) thành công.
+- [x] **Dọn dẹp tệp nháp lập trình viên:** Xóa bỏ hơn 100 tệp tin nháp, tệp chẩn đoán và tệp sao lưu thừa trong `scratch/`, chỉ giữ lại 2 tập lệnh tự động hóa cốt lõi. Xóa bỏ thư mục `TEST/` trống và thư mục `brain/` thừa ở thư mục gốc.
+- [x] **Tạo lại Bài 2 (Sự chuyển thế):** Biên dịch thành công 3/3 tệp Word (.docx) chuẩn quy định GEMS v8.0, kích hoạt quy trình upload và tự động sinh Slide + Infographic trên Google NotebookLM Cloud với cơ chế Smart Polling 5 phút.
 
 ---
 
 ## ⏳ Còn lại
 
-1. **Chạy pipeline tạo Slide & Infographic cho Bài 5**:
-   * File nguồn Markdown của Bài 5 đã có đầy đủ trong `output/hermes/bai5_nhiet_do_nhiet_ke/md/`.
-   * Cần tạo notebook trên NotebookLM, tải các file nguồn lên, nhập prompt tạo slide deck/infographics và download về thư mục `ready/` (có thể dùng script tự động hóa tương tự Bài 6/7).
+1. **Kiểm tra và hoàn tất tải về Bài 2:**
+   * Script `generate_notebook_materials.py` đang chạy và kiểm tra trạng thái Slide trên Cloud.
+   * Sau khi hoàn tất, slide và infographic sẽ nằm gọn gàng tại `output/bai2_su_chuyen_the/ready/`.
+2. **Triển khai sinh học liệu cho Bài 5 (Nhiệt độ. Thang nhiệt độ. Nhiệt kế):**
+   * Các tệp tin markdown nguồn của bài 5 đã có sẵn trong `output/bai5_nhiet_do_nhiet_ke/md/`.
+   * Cần chạy biên dịch DOCX và sau đó chạy `python scratch/generate_notebook_materials.py --lesson "Bài 5"`.
 
 ---
 
@@ -32,16 +37,8 @@
 
 | Quyết định | Lý do |
 |---|---|
-| Phục hồi mã nguồn qua phân tích log IDE | Đảm bảo lấy lại mã nguồn gốc chính xác 100% khi HEAD commit bị ghi đè phiên bản hỏng và không có remote GitHub để kéo về. |
-| Giữ lại Bài 6 và Bài 7 ở dạng untracked | Khi khôi phục tệp hệ thống bằng `git restore .`, các thư mục bài học mới chưa theo dõi vẫn được bảo toàn nguyên vẹn trên đĩa. |
-
----
-
-## ⚠️ Lưu ý cho session sau
-
-- **Mã nguồn sạch**: Mọi tệp tin hệ thống hiện tại trong thư mục `engine/` và `skills/` đã được khôi phục về trạng thái chuẩn, hoạt động tốt.
-- **Biên dịch Word**: Tool `scratch/compile_docx.py` hoạt động bình thường, biên dịch trực tiếp từ Markdown sang DOCX bằng font *UVN bai sau*.
-- **Cách tiếp tục Bài 5**: Khi bắt đầu session mới, chỉ cần gõ `/recap` để khôi phục ngữ cảnh và triển khai pipeline cho Bài 5.
+| Loại bỏ thư mục `hermes/` | Cải tiến cấu trúc thư mục theo yêu cầu trực tiếp của người dùng để tài nguyên học liệu nằm gọn gàng hơn ngay dưới `output/`. |
+| Script PowerShell định dạng ASCII | Khắc phục lỗi định dạng chuỗi (`FormatError`) do lỗi font chữ tiếng Việt/emoji của PowerShell trên Windows khi chạy lệnh đồng bộ GitHub. |
 
 ---
 
@@ -49,10 +46,11 @@
 
 | File | Vai trò |
 |---|---|
-| `.brain/brain.json` | Bộ nhớ dự án (kiến trúc, stack công nghệ, quy tắc, tiến độ cập nhật đến Bài 7) |
-| `.brain/session.json` | Nhật ký tiến độ phiên làm việc hiện tại |
-| `engine/main.py` | Entry point chính của GEMS Engine (đã khôi phục sạch sẽ) |
-| `output/hermes/bai7_nhiet_hoa_hoi_rieng/` | Tài liệu đầu ra hoàn chỉnh Bài 7 |
+| `readme.md` | Tài liệu hướng dẫn chính toàn dự án (đã viết lại hoàn chỉnh theo GEMS v8.0) |
+| `docs/diagrams/gems_agent_pipeline.mmd` | Sơ đồ luồng hoạt động chi tiết của GEMS Agent |
+| `scratch/generate_notebook_materials.py` | Kịch bản điều phối trung tâm tự động hóa NotebookLM |
+| `scratch/create_and_push.ps1` | Tập lệnh hỗ trợ đăng nhập và đồng bộ GitHub (bằng ASCII) |
+| `.brain/brain.json` & `session.json` | Bộ nhớ tĩnh và nhật ký hoạt động động của Agent |
 
 ---
 
