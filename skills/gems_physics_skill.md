@@ -1,14 +1,18 @@
 ---
 name: gems_physics_skill
 description: |
-  Bộ Tiêu chuẩn GEMS Vật lý v7.0 (Single Source of Truth) định nghĩa các nguyên tắc sư phạm, 12 loại hình nhiệm vụ, quy chuẩn thiết kế (LaTeX, TikZ, dòng chấm 90 ký tự, slide, homework) và 15 tiêu chí QA.
-  Kích hoạt khi AI thiết kế, biên soạn hoặc kiểm định tài liệu Vật lý GEMS.
-version: 7.0.0
+  Bộ Tiêu chuẩn Sư phạm GEMS Vật lý (Single Source of Truth về NỘI DUNG) định nghĩa
+  7 nguyên tắc sư phạm cốt lõi, 12 loại hình nhiệm vụ học tập, và 15 tiêu chí QA.
+  Quy chuẩn ĐỊNH DẠNG KỸ THUẬT (lề, font, màu, cấu trúc Markdown) nằm ở
+  `.agents/agents.md` — tài liệu này KHÔNG lặp lại số liệu định dạng để tránh
+  2 nguồn lệch nhau theo thời gian (bài học đã xảy ra với bản trước 7/2026).
+  Kích hoạt khi AI thiết kế, biên soạn hoặc kiểm định NỘI DUNG tài liệu Vật lý GEMS.
+version: 9.5.0
 ---
-
-# TIÊU CHUẨN GEMS VẬT LÝ V7.0 (MÃ: GEMS_VAT_LY_V7)
+# TIÊU CHUẨN SƯ PHẠM GEMS VẬT LÝ (MÃ: GEMS_VAT_LY)
 
 ## 1. VAI TRÒ & PHONG CÁCH
+
 * **Vai trò:** Chuyển hóa kiến thức khoa học trừu tượng thành bộ học liệu đồng bộ bám sát SGK Kết nối tri thức theo chương trình GDPT 2018.
 * **Phong cách thiết kế:** Infographic hiện đại, tinh gọn, tối ưu hóa không gian in ấn, tối đa hóa trải nghiệm thị giác.
 * **Quy tắc in ấn:** Chừa tối thiểu 35-40% không gian trống cho học sinh viết và vẽ.
@@ -16,17 +20,19 @@ version: 7.0.0
 ---
 
 ## 2. 7 NGUYÊN TẮC SƯ PHẠM CỐT LÕI
+
 1. **Chính xác tuyệt đối:** Bám sát SGK gốc Kết nối tri thức, chi tiết, không làm chung chung, không tự ý thêm chú thích ngoài luồng.
-2. **Thuần Việt sư phạm:** Không dùng tiếng Anh hoặc chú thích tiếng Anh trong tài liệu (trừ phần ẩn Image Prompt cho AI vẽ hình). Tên riêng khoa học (Newton, Joule, Pascal...) phải kèm chú thích tiếng Việt ở lần đầu xuất hiện.
+2. **Thuần Việt sư phạm:** Không dùng tiếng Anh hoặc chú thích tiếng Anh trong tài liệu. Tên riêng khoa học (Newton, Joule, Pascal...) phải kèm chú thích tiếng Việt ở lần đầu xuất hiện.
 3. **Tiến trình tuyến tính mạch lạc:** Lộ trình từ dễ đến khó, từ khám phá đến chốt lý thuyết và vận dụng.
 4. **Bản chất khoa học & Trực quan thực tế:** Mọi nhiệm vụ, hình ảnh minh họa phải gắn liền với bản chất hiện tượng thực tế và chuẩn xác về mặt vật lý.
-5. **Tiêu chuẩn hình ảnh thực tế:** Chỉ dùng ảnh chụp thực tế hoặc tư liệu khoa học chất lượng cao. Không dùng hoạt hình, ảnh đồ họa 3D ảo, hoặc ảnh sai vật lý. Phông nền đơn giản, rõ ràng.
-6. **Tinh giản tối đa (Thanh lọc):** Loại bỏ các chú thích rườm rà, lời dẫn giải kỹ thuật dài dòng. Chỉ giữ lại hệ thống nhãn (Phần 1, Phần 2...) và số thứ tự logic (Nhiệm vụ 1, 2, 3...).
-7. **Đa dạng hóa nhiệm vụ học tập (Task Chain):** Thiết kế các nhiệm vụ dưới dạng chuỗi liên kết logic, liền mạch, luân phiên đa dạng từ 12 loại hình nhiệm vụ mới.
+5. **Tiêu chuẩn hình ảnh thực tế:** Chỉ dùng ảnh chụp thực tế hoặc tư liệu khoa học chất lượng cao. Không dùng hoạt hình, ảnh đồ họa 3D ảo, hoặc ảnh sai vật lý.
+6. **Tinh giản tối đa (Thanh lọc):** Loại bỏ các chú thích rườm rà, lời dẫn giải kỹ thuật dài dòng. Chỉ giữ lại hệ thống nhãn và số thứ tự logic (Nhiệm vụ 1, 2, 3...).
+7. **Đa dạng hóa nhiệm vụ học tập (Task Chain):** Thiết kế các nhiệm vụ dưới dạng chuỗi liên kết logic, liền mạch, luân phiên đa dạng từ 12 loại hình nhiệm vụ bên dưới.
 
 ---
 
 ## 3. HỆ THỐNG 12 LOẠI HÌNH NHIỆM VỤ HỌC TẬP
+
 1. **Ghép nối đa biến (Matching Matrix):** Kết nối các đại lượng, đơn vị, hiện tượng hoặc đồ thị tương thích.
 2. **Sắp xếp tiến trình (Algorithmic Ordering):** Thiết lập trật tự logic của các bước thí nghiệm hoặc giai đoạn hiện tượng.
 3. **Tìm và sửa lỗi Vật lý (Bug Buster):** Phát hiện và đính chính các điểm sai bản chất trong phát biểu, hình vẽ hoặc bài giải.
@@ -42,127 +48,193 @@ version: 7.0.0
 
 ---
 
-## 4. QUY CHUẨN THIẾT KẾ & ĐỊNH DẠNG HỌC LIỆU
- 
-### 4.1 Phiếu học tập (Worksheet)
-* **Khu vực quản lý thông tin:** Họ và tên học sinh, Lớp, Ngày... tháng... năm...
-* **Đồng bộ tiêu đề:** Tiêu đề của từng Đơn vị Kiến thức (ĐVKT) và tiêu đề của từng nhiệm vụ trong Phiếu học tập phải đồng bộ hoàn toàn (khớp 1-1) với tiêu đề hiển thị trên Slide bài giảng.
-* **Cấu trúc tuyến tính 4 phần cho mỗi ĐVKT:** Khám phá -> Trọng tâm -> Vận dụng -> Mở rộng.
-* **Phần Mở rộng Kiến thức:** Nằm ngay sau phần Vận dụng. Tập trung giới thiệu ứng dụng thực tế trong máy móc, thiết bị kỹ thuật, công nghệ hoặc giải thích các hiện tượng tự nhiên liên quan đến bài học. Nội dung mở rộng bắt buộc phải tham khảo và trích dẫn rõ ràng từ các nguồn tài liệu uy tín (như sách chuyên khảo, bài báo khoa học hoặc tạp chí khoa học uy tín).
-* **Khoảng trống viết bài:** Bắt buộc sử dụng thẻ placeholder `[DOT_LINE_90]` (chừa từ 3-5 dòng) đại diện cho dòng dấu chấm ghi câu trả lời. Script hậu kỳ sẽ tự động thay thế bằng dòng chấm thật dài 90 ký tự.
-* **Lý thuyết Trọng tâm:** Đục lỗ điền khuyết bằng ký hiệu `(1)`, `(2)`...
- 
-### 4.2 Slide bài giảng đồng bộ
-* **Slide mở đầu:** Tên bài học + Giáo viên giảng dạy mặc định: `Kha Khung Hiệp`.
-* **Cấu trúc 7 slide cho mỗi ĐVKT:**
-  1. *Tên đề mục* (kèm hình ảnh thực tế - khớp 1-1 với tiêu đề ĐVKT trong PHT)
-  2. *Nhiệm vụ Khám phá* (mỗi nhiệm vụ 1 slide riêng - khớp tiêu đề nhiệm vụ với PHT)
-  3. *Đáp án Khám phá* (giải mã hiện tượng và công bố đáp án)
-  4. *Kiến thức Trọng tâm* (lý thuyết chốt, highlight từ khóa quan trọng bằng màu vàng `<span style="background-color: yellow">từ khóa</span>`)
-  5. *Thử thách Vận dụng* (tình huống đời sống mới)
-  6. *Đáp án Vận dụng* (lời giải chi tiết + tư duy giải nhanh)
-  7. *Mở rộng Kiến thức* (Giới thiệu ứng dụng thực tế trong máy móc, thiết bị, hiện tượng tự nhiên,... tham khảo nguồn uy tín từ sách, bài báo khoa học - khớp 1-1 với phần Mở rộng trong PHT và KHBD)
-* **Slide kết bài:** Sơ đồ tư duy (Mindmap) tổng hợp bài học.
-* **Thiết kế:** Font chữ `"UVN bai sau"`. Cỡ chữ: tiêu đề 28-32pt, nội dung 24-28pt. Tối đa 6-8 dòng mỗi slide.
+## 4. YÊU CẦU NỘI DUNG THEO LOẠI TÀI LIỆU
 
-### 4.3 Kế hoạch bài dạy (KHBD / Giáo án)
-* **Quy chuẩn cấu trúc bám sát PDF mẫu (BẮT BUỘC):**
-  * Tiêu đề đầu giáo án:
-    ```markdown
-    GIÁO ÁN VẬT LÝ LỚP [X]
-    Tên bài học: [Tên bài]
-    Thời gian thực hiện: [Số tiết] tiết ([Số phút] phút)
-    Bộ sách giáo khoa: Kết nối tri thức với cuộc sống
-    ```
-  * Không được tích hợp 5E, IDB hay bất kỳ khung hoạt động nước ngoài nào khác. Tiến trình dạy học gồm 4 hoạt động cơ bản:
-    1. Hoạt động 1: Khởi động
-    2. Hoạt động 2: Khám phá (Tích hợp năng lực số)
-    3. Hoạt động 3: Luyện tập
-    4. Hoạt động 4: Vận dụng – Mở rộng
-* **Quy chuẩn định dạng các mục và gạch đầu dòng:**
-  * Mục I. YÊU CẦU CẦN ĐẠT: Sử dụng định dạng gạch đầu dòng dùng dấu `-` cho các năng lực và phẩm chất con:
-    * `- Nhận thức vật lí: ...`
-    * `- Tìm hiểu thế giới tự nhiên dưới góc độ vật lí: ...`
-    * `- Vận dụng kiến thức: ...`
-    * `- Tự chủ và tự học: ...`
-    * `- Giao tiếp và hợp tác: ...`
-    * `- Miền 1 - Khai thác dữ liệu và thông tin: Mã chỉ báo 6.3.TC2b:- Thực hiện phân tích, diễn giải và đánh giá được dữ liệu, thông tin và nội dung số (Cụ thể: ...)`
-    * `- Miền 5 - Giải quyết vấn đề: Mã chỉ báo 6.3.TC2a:- Phân biệt được các công cụ và công nghệ số có thể được sử dụng để tạo ra kiến thức và đổi mới quy trình (Cụ thể: ...)`
-    * `- Chăm chỉ: ...`
-    * `- Trung thực: ...`
-  * Mục II. THIẾT BỊ DẠY HỌC VÀ HỌC LIỆU: Chia làm `1. Giáo viên:` và `2. Học sinh:` với các gạch đầu dòng `-`.
-  * Mục IV. ĐIỀU CHỈNH SAU BÀI DẠY: Bắt buộc có 3 dòng chấm mẫu:
-    * `- **Ưu điểm:** .....................................................................................................................................................................`
-    * `- **Hạn chế:** .....................................................................................................................................................................`
-    * `- **Hướng điều chỉnh:** .....................................................................................................................................................................`
-* **Quy chuẩn định dạng Bảng biểu Hoạt động dạy học:**
-  * Bảng tiến trình dạy học phải chia làm 2 cột: `Hoạt động của Giáo viên` và `Hoạt động của Học sinh`.
-  * Ở cột Giáo viên, sử dụng các nhãn in đậm: `**Chuyển giao nhiệm vụ:**`, `**Kết luận:**` (hoặc `**Thực hiện & Báo cáo:**`, `**Bước 1: Chuẩn bị công cụ**`, `**Bước 2: Giao nhiệm vụ (Phiếu học tập)**`, `**Bước 3: Hỗ trợ & Đánh giá**` đối với hoạt động khám phá/NLS).
-  * Ở cột Học sinh, sử dụng các nhãn in đậm: `**Thực hiện nhiệm vụ:**`, `**Báo cáo, thảo luận:**`, `**Sản phẩm:**`, `**Báo cáo:**`, `**Thảo luận cặp đôi (Bài tập 2):**`.
-  * Các nội dung hành động dưới nhãn phải thụt dòng dùng dấu `-`.
+Đây là yêu cầu **nội dung sư phạm** — quy chuẩn định dạng kỹ thuật (lề, font, màu,
+cú pháp Markdown nhận diện được) nằm ở [`.agents/agents.md`](../.agents/agents.md).
 
+### 4.1 Phiếu học tập (PHT)
+* **Bám THẲNG tiến trình dạy thật trong KHBD** — 1 trình tự phẳng duy nhất, KHÔNG dùng khung riêng
+  của GEMS lặp lại 4 phần/ĐVKT (bản trước v9.4.0). Đúng 3 mục lớn, đánh số `1/2/3`:
+  - **1. HÌNH THÀNH KIẾN THỨC MỚI** — mỗi ĐVKT 1 mục con (`### 📍 ĐVKT {i}: ...`), gồm nhiệm vụ
+    khám phá + lý thuyết trọng tâm đục lỗ điền khuyết (ký hiệu `(1)`, `(2)`...). **Độ dài đường chấm
+    của mỗi chỗ trống phải ước lượng theo độ dài đáp án cần điền, không dùng 1 độ dài cố định cho mọi
+    chỗ** — ký hiệu/số liệu ngắn (vd. `$L$`, đơn vị) dùng đường chấm ngắn (~4-7 ký tự `.`), cụm từ
+    dài hơn (vd. "nhiệt độ", "ngưng tụ") dùng đường chấm dài hơn tương ứng (~10-12 ký tự `.`). Áp
+    dụng cho cả `summary_cloze` (PHT bản Word) lẫn văn bản đục lỗ trên Infographic (đọc lại đúng nội
+    dung PHT, không tự bịa độ dài khác — xem `gems/notebooklm/prompt_builder.py::_BLANK_LENGTH_RULE`).
+  - **2. LUYỆN TẬP** — mỗi ĐVKT 1 bài toán/tình huống, gộp chung 1 mục (không lặp theo từng ĐVKT).
+  - **3. VẬN DỤNG** — nhiệm vụ vận dụng nâng cao (nếu có, ví dụ Engineering Debugger) + đoạn đọc
+    mở rộng mỗi ĐVKT (trích nguồn uy tín khi giới thiệu ứng dụng thực tế).
+  - **KHÔNG có mục cho hoạt động Khởi động** — hoạt động này chỉ diễn ra trên lớp, không cần PHT giấy.
+* Đồng bộ tiêu đề: tên ĐVKT và tên nhiệm vụ phải khớp 1-1 với Slide bài giảng và KHBD.
+* Mỗi nhiệm vụ (kể cả nhiệm vụ vận dụng ở mục 3) bắt buộc có dòng **Hướng dẫn thực hiện** nêu đủ 3
+  ý: (1) hình thức tổ chức (cá nhân/cặp đôi/nhóm N học sinh), (2) thời gian cụ thể (phút), (3) tài
+  liệu/công cụ phải dùng (đọc SGK trang mấy, quan sát thí nghiệm/video nào, hay tự suy luận) —
+  không bỏ trống.
+* Mục 2 (Luyện tập) phải **diễn đạt bằng đúng 1 trong 3 dạng câu hỏi của đề thi tốt nghiệp THPT**
+  (trắc nghiệm 4 phương án A/B/C/D, hoặc Đúng/Sai 4 ý a-d, hoặc trả lời ngắn dạng số có nêu rõ quy
+  tắc làm tròn) — xem chuẩn chi tiết ở mục 4.4. Mục đích: học sinh làm quen "cảm giác đề thi thật"
+  ngay trong giờ học, không phải đợi đến Bài tập về nhà mới gặp lần đầu.
+* Khoảng trống viết bài dùng placeholder `[DOT_LINE_90]` — engine tự thay bằng dòng chấm 90 ký tự.
 
-### 4.4 Bài tập về nhà (Homework)
-* **Cấu trúc 2025:** Phần I (18 MCQ) -> Phần II (4 câu Đúng/Sai, mỗi câu 4 ý a, b, c, d) -> Phần III (6 câu trả lời ngắn tính ra số cụ thể).
-* **Bối cảnh thực tế:** 50% câu hỏi bối cảnh thực tế, cung cấp đầy đủ hằng số vật lý và quy tắc làm tròn rõ ràng.
-* **LaTeX:** Tất cả biểu thức toán lý dạng `$công_thức$`. Ký hiệu động năng là `$W_đ$`, thế năng là `$W_t$`.
-* **Hình vẽ TikZ:** Sử dụng mã TikZ chính xác về mặt vật lý chèn trực tiếp dưới dạng khối mã Markdown (không tạo file `.tex` độc lập). Chú thích bằng Tiếng Việt.
+### 4.2 Slide bài giảng — 2 BỘ tách biệt (qua NotebookLM, xem `gems/notebooklm/`)
 
-### 4.4 Quy Chuẩn Slide & Infographic Từ Google NotebookLM (Học Sinh)
-* **Quy trình tự động hóa tích hợp NotebookLM:**
-  1. **Sinh File Prompt trung tâm:** Hệ thống tự động tạo tệp `output/hermes/[slug_bai]/notebooklm/[slug]_notebooklm_prompt.md` chứa cấu trúc bài học, nội dung slide guide và các chỉ dẫn thiết kế infographic đục lỗ.
-  2. **Nạp nguồn vào NotebookLM:** Tải tệp tài liệu đặc tả GEMS và giáo án đã duyệt lên Google NotebookLM làm tài liệu nguồn (sources).
-  3. **Thực thi sinh Slide & Infographic:** **Bắt buộc sao chép toàn bộ nội dung của tệp `[slug]_notebooklm_prompt.md` và nhập trực tiếp lên Google NotebookLM**. Prompt này hướng dẫn chi tiết cách tạo nội dung slide và infographic đồng bộ 1-1 với cấu trúc nhiệm vụ của `phieu_hoc_tap.docx` và `ke_hoach_bai_day.docx`.
-  4. **Đồng bộ Theme và Thiết kế (Theme & Design Sync):** Các tệp Slide PPTX và Infographic tải xuống phải tuân thủ đồng bộ bảng màu và phong cách thiết kế GEMS v8.0:
-     - Sử dụng gam màu Navy `#1E3A5F` làm màu chủ đạo cho tiêu đề, khung viền chính.
-     - Sử dụng gam màu Mint `#E8F5E9` cho các nền vùng phụ trợ, hộp ghi nhớ.
-     - Đồng nhất sử dụng font chữ Times New Roman xuyên suốt.
-  5. **Xuất bản & Tải về:** Xuất slide thành tệp PowerPoint (`[slug]_slide_deck.pptx` hoặc `.pdf`) và tải các hình ảnh infographic đục lỗ về, lưu trực tiếp vào thư mục `output/hermes/[slug_bai]/ready/` của bài học để hoàn thiện học liệu xuất bản.
-* **Prompt tạo Slide:** Thiết kế định hướng sinh slide bám sát cấu trúc GEMS v7.0 (Kha Khung Hiệp, font "Times New Roman" đồng bộ, nền sáng, 7 slide cho mỗi ĐVKT).
-* **Mô tả Infographic học sinh (Bắt buộc):**
-  - Thiết kế infographic phục vụ cho Phiếu học tập của học sinh phải **không có sẵn đáp án/chữ viết cố định** và phải chứa các **khoảng trống/hộp điền khuyết** để học sinh tự hoàn thành nhiệm vụ học tập.
-  - 🚫 KHÔNG nhúng văn bản (Tiếng Việt/Tiếng Anh) trực tiếp lên ảnh của AI vẽ (sử dụng prompt tiếng Anh sinh ảnh trống không văn bản để tránh sai chính tả).
-  - ⚠️ Thiết lập các bong bóng thoại trống, bệ đỡ, hoặc ô chứa nhãn đi kèm ký hiệu đục lỗ `?` hoặc `(1)`, `(2)`, `(3)` trực tiếp trên ảnh.
-  - Đối với sơ đồ thiết bị thí nghiệm, phải vẽ rõ ràng các đường chỉ dẫn (leader lines) trỏ đến bộ phận thiết bị và kết thúc bằng một vòng tròn/ô vuông trống để học sinh tự điền tên dụng cụ.
+**Quyết định chuẩn hóa (áp dụng cho MỌI bài học, không riêng bài nào):** thay vì 1 bộ Slide + N+2
+Infographic rời (mục 4.5 cũ — nay đã loại bỏ, xem cuối mục này), quy trình sinh **2 bộ Slide tách
+biệt hoàn toàn qua NotebookLM**, đúc kết từ đợt thiết kế lại Bài 28 - Động lượng:
 
-### 4.5 Quy chuẩn thiết kế và biên dịch Word (.docx) chuyên nghiệp
-Mọi tài liệu Word (`.docx`) xuất bản (bao gồm Giáo án và Phiếu học tập) phải tuân thủ nghiêm ngặt các thông số định dạng hành chính và kỹ thuật sau:
-* **Typography & Font chữ:**
-  - Phông chữ mặc định bắt buộc: **Times New Roman** cho toàn bộ tài liệu.
-  - Cỡ chữ: **13 pt** cho nội dung thân bài, **18 pt** cho H1 (Tiêu đề chính), **15 pt** cho H2 (Mục lớn), **13 pt** cho H3 (Mục con), **13 pt** cho H4 (Đề mục nhiệm vụ/tiến trình).
-  - Khoảng cách giãn dòng: **1.15 lines**, khoảng cách đoạn dưới (space after): **4 pt**.
-* **Căn lề trang (Page Margins):**
-  - Lề trang chuẩn in ấn đóng gáy: Lề trái **3.0 cm** (chừa đóng gáy), lề phải **1.5 cm**, lề trên/dưới **2.0 cm**.
-* **Bảng màu thiết kế (Design Tokens):**
-  - Màu Navy chủ đạo (`#1E3A5F`): cho các tiêu đề chính, đề mục lớn, nền của header hàng đầu trong bảng.
-  - Màu Mint nhạt (`#E8F5E9`): cho màu nền các hàng xen kẽ trong bảng.
-  - Màu xám tối (`#212121`): cho nội dung văn bản thường (body text).
-  - Màu xám nhạt (`#BFBFBF`): cho đường viền mỏng của bảng, các dòng kẻ chấm đục lỗ và thanh phân cách.
-* **Tiêu đề hành chính Giáo án (KHBD Header):**
-  - Đầu giáo án bắt buộc sử dụng bảng 2 cột không viền (borderless) để căn chỉnh song song:
-    * Cột trái: Tên Sở GD&ĐT và Trường THPT (cỡ 11 pt).
-    * Cột phải: Quốc hiệu - Tiêu ngữ in đậm (cỡ 12 pt, căn giữa) kèm đường kẻ liền mảnh ở dưới bằng 1/3 tiêu ngữ.
-  - Nội dung giáo án bắt đầu trực tiếp từ mục **I. YÊU CẦU CẦN ĐẠT** (lọc sạch các tiêu đề thừa/lặp ở file nguồn).
-* **Thông tin học sinh Phiếu học tập (PHT Header):**
-  - Bảng thông tin học sinh (Họ và tên, Lớp, Ngày) phải dùng cột có độ rộng cố định (`widths = [Cm(8.5), Cm(3.2), Cm(4.8)]`) và khống chế độ dài ký tự chấm chấm để đảm bảo nằm gọn gàng trên **1 dòng duy nhất**, tránh bị đẩy rớt dòng.
-* **Chân trang động (Footer):**
-  - Chân trang của mọi tài liệu phải có số trang tự động dạng `Trang X / Y` (Trang hiện tại / Tổng số trang) căn giữa, sử dụng các mã trường XML động `PAGE` và `NUMPAGES` của Word.
-* **Bảng biểu hoạt động học tập (Tables):**
-  - Cột Giáo viên (trái) và cột Học sinh (phải) cho hoạt động dạy học. Header hàng đầu tô nền màu Navy, chữ trắng bold. Các hàng dữ liệu xen kẽ nền màu Mint nhạt và trắng, viền mảnh màu xám nhạt `#BFBFBF`.
-  - Các nhãn in đậm như `**Chuyển giao nhiệm vụ:**`, `**Kết luận:**` ở cột GV, và `**Thực hiện nhiệm vụ:**`, `**Báo cáo, thảo luận:**`, `**Sản phẩm:**` ở cột HS phải được viết hoa in đậm bắt đầu khối văn bản.
-* **Tiền xử lý dòng & Gộp paragraph (Paragraph Folding):**
-  - Trước khi parse, bắt buộc chạy tiền xử lý gộp các dòng văn bản liền mạch (không bị cách bởi dòng trống) thành 1 paragraph duy nhất.
-  - Kể cả khi có dòng trống, vẫn phải gộp cưỡng bức nếu dòng sau bắt đầu bằng chữ thường, connective symbol (như `)`, `,`, `.`), hoặc công thức toán học ngắn (như `U = ...`), trừ khi dòng tiếp theo là tiêu đề hoặc danh sách mới.
-* **Lọc thẻ HTML & Dịch LaTeX:**
-  - Quét sạch toàn bộ các thẻ HTML nhiễu như `<br>`, `<br/>` trước khi chèn vào Word.
-  - Chạy hàm `clean_latex` trên toàn bộ dòng văn bản để chuyển đổi các ký hiệu LaTeX viết thô không có dấu `$` (như `\Delta`, `\omega`, `\varphi`, `\pi`) sang ký tự Unicode tương ứng (`Δ`, `ω`, `φ`, `π`) in nghiêng.
-* **Tự động nhúng ảnh cục bộ:**
-  - Phát hiện các đường dẫn ảnh thô trong text (ví dụ: `(ready/hinh_anh/...)`).
-  - Tự động nhúng bức ảnh đó vào ngay dưới paragraph (căn giữa), xóa đường dẫn thô khỏi văn bản và chèn khoảng trắng thay thế để tránh lỗi dính chữ.
-* **Hỗ trợ Heading level 4 (####):**
-  - Tự động phát hiện và định dạng dòng bắt đầu bằng `#### ` thành tiêu đề in đậm cỡ chữ 13pt màu xanh Navy, loại bỏ hoàn toàn các ký tự dấu thăng thô.
-* **Bố cục Không gian trống (White Space):**
-  - Đảm bảo PHT luôn chừa tối thiểu **35-40% không gian trống** để học sinh tự ghi câu trả lời, vẽ đồ thị hoặc làm bài tập (tự động chèn 3 dòng kẻ chấm khi phát hiện các động từ hành động học tập như `vẽ`, `mô tả`, `giải thích`...).
+1. **Slide Giáo viên** — trình chiếu dẫn dắt cả lớp, màu sắc/đồ họa đẹp, có đầy đủ đáp án.
+2. **Slide Phiếu học tập** — bản chiếu số hóa của PHT giấy, dùng bởi học sinh, KHÔNG có đáp án nào.
+
+Cả 2 bộ dùng chung 1 nội dung/nhiệm vụ/đánh số, chỉ khác vai trò hiển thị và bảng màu — xem "Master
+slide" bên dưới.
+
+**A. Cấu trúc & phân vai nội dung (áp dụng cho MỌI nhiệm vụ, không có ngoại lệ — kể cả Luyện tập,
+Vận dụng, không chỉ Hình thành kiến thức mới):**
+* Slide Giáo viên: mỗi nhiệm vụ tách thành đúng 2 slide liên tiếp — 1 slide **"Nhiệm vụ"** (CHỈ tên
+  nhiệm vụ + 3 ý "Hình thức: ...; Thời gian: ...; Tài liệu: ..." lấy **nguyên văn** từ bước Chuyển
+  giao trong KHBD, KHÔNG in đề bài/câu hỏi) và 1 slide **"Đáp án"** (CHỈ đáp án/kết luận + ảnh minh
+  họa, KHÔNG lặp lại hướng dẫn). TUYỆT ĐỐI không gộp 2 loại này vào chung 1 slide, dù đặt cạnh nhau
+  hay trên-dưới.
+* Slide Phiếu học tập: mỗi nhiệm vụ là 1 slide DUY NHẤT gồm tên nhiệm vụ + 3 ý Hình thức/Thời
+  gian/Tài liệu + TOÀN BỘ câu hỏi/đề bài nguyên văn từ PHT + khoảng trống kẻ ngang (độ dài tỉ lệ câu
+  trả lời kỳ vọng) để học sinh viết trực tiếp. **TUYỆT ĐỐI KHÔNG có slide đáp án nào trong toàn bộ
+  deck này**, kể cả ở mục "Kiến thức trọng tâm" (chỉ dạng điền khuyết, không có bản đáp án đầy đủ đi
+  kèm) hay slide kết bài (chỉ khung sơ đồ tư duy trống).
+* Bám đúng 1 trục số X.Y duy nhất — X lấy trực tiếp từ số mục PHT (`1`/`2.1`/`2.2`/`3.1`/`3.2`/...),
+  KHÔNG dùng thuật ngữ viết tắt "ĐVKT" ở bất kỳ đâu trên slide (xem mục 4.1).
+* Slide Giáo viên bắt buộc có thêm: 1 slide **Mục lục** ngay sau slide bìa, liệt kê đủ các mục lớn;
+  và **1 slide "phân đoạn" riêng biệt** trước mỗi phần lớn mới (chỉ tiêu đề in hoa của phần đó + 1
+  ảnh minh họa tiêu biểu, KHÔNG có nội dung nào khác) — giúp nhận biết ngay khi chuyển phần.
+* Slide kết bài: sơ đồ tư duy tổng hợp — Giáo viên điền đầy đủ, Phiếu học tập chỉ có khung trống.
+
+**B. Thiết kế & Master slide (dùng chung khuôn mẫu, chỉ khác bảng màu):**
+* 2 bộ được dựng như 2 bản phối màu khác nhau của CÙNG 1 khuôn mẫu (master): cùng hệ thống phân cấp
+  tiêu đề, cùng bố cục cho từng LOẠI slide (Nhiệm vụ/Đáp án/Kiến thức trọng tâm/Đọc thêm/Mục
+  lục/Phân đoạn — mỗi loại đúng 1 kiểu khung/màu/vị trí cố định, không đổi kiểu giữa chừng deck),
+  cùng vị trí số trang, cùng kiểu khung ảnh minh họa.
+* **Slide Giáo viên:** màu sắc tươi mới, hài hòa, giàu năng lượng, đồ họa thu hút (bảng màu Anthropic
+  — xem chi tiết bên dưới). Cỡ chữ CỐ ĐỊNH (không phải khoảng/range): tiêu đề **32pt**, nội
+  dung/thân bài **28pt** — không tự thu nhỏ chữ để nhồi nội dung dài, thà viết súc tích hơn.
+* **Slide Phiếu học tập:** nền TRẮNG tuyệt đối mọi slide, ảnh minh họa CHỈ tông trắng/đen/xám (không
+  màu). Cỡ chữ CỐ ĐỊNH: tiêu đề **24pt**, nội dung **20pt**.
+* **Ảnh minh họa giữa 2 bộ phải giống hệt nhau về bố cục/chi tiết/nhãn chữ, chỉ khác màu sắc** (màu
+  vs. grayscale) — soạn 1 bộ mô tả ảnh chi tiết dùng chung cho cả 2 prompt để đảm bảo đồng bộ, không
+  để 2 AI vẽ độc lập ra 2 kết quả khác nhau.
+* **Theme màu/font thương hiệu Anthropic** (khác Primary `#1F4E79`/Times New Roman của PHT/KHBD/Bài
+  tập — có chủ đích, không cần khớp màu nhau): Dark `#141413`/Light `#FAF9F5` nền/chữ chính, nhấn
+  luân phiên Orange `#D97757`/Blue `#6A9BCC`/Green `#788C5D`, font tiêu đề **Poppins** + thân bài
+  **Lora**. Chi tiết đầy đủ xem mục 4.6 và `gems/notebooklm/prompt_builder.py::_ANTHROPIC_THEME_RULE`.
+* Mỗi slide (không trừ slide nào, kể cả Đáp án/Kiến thức trọng tâm/Mục lục) phải có ≥1 ảnh minh họa
+  khoa học chính xác liên quan trực tiếp nội dung slide đó — ưu tiên tuyệt đối ảnh minh họa kiến
+  thức, không dùng ảnh trang trí chung chung.
+* Số trang **"Trang X/Y"** ở góc dưới bên phải, cỡ chữ cố định 16pt, mọi slide của CẢ 2 bộ, kể cả
+  slide bìa — không bị logo/watermark của công cụ che khuất.
+
+**C. Nội dung & ngôn ngữ:**
+* Slide Nhiệm vụ phải hiển thị nguyên văn dòng "Hướng dẫn thực hiện" (hình thức/thời gian/tài liệu)
+  lấy từ KHBD nguồn (**KHBD là nguồn tham chiếu duy nhất**, sinh ra ĐẦU TIÊN — xem mục 4.3) — không
+  tự diễn đạt lại khác.
+* Cấm tuyệt đối chữ tiếng Anh ở bất kỳ đâu, kể cả nhãn/tên khung hộp nội dung (ví dụ: dùng "ĐÁP ÁN"/
+  "NHIỆM VỤ", không dùng "Answer Frame"/"Task Box").
+* Slide Phiếu học tập: chú thích trên ảnh minh họa ở các slide điền khuyết KHÔNG được viết ra câu
+  kết luận/công thức hoàn chỉnh trùng với đáp án của chỗ trống trên cùng slide đó (chỉ vẽ hình + nhãn
+  đại lượng cơ bản).
+* Nhiệm vụ đa dạng đúng 12 loại hình học tập (mục 3), tránh lặp loại hình gây nhàm chán.
+* Không dùng dấu ngoặc vuông `[...]` hay bất kỳ ký hiệu placeholder nào trong nội dung hiển thị thật
+  trên slide (ngoại lệ: `[ ? ]` dùng làm ô trống điền khuyết THẬT SỰ là nội dung cố ý, không phải
+  placeholder cho AI tự thay — xem thêm bài học vận hành NotebookLM ở
+  `docs/reference/quy_trinh_tao_tai_lieu_chi_tiet.md`).
+
+**D. Infographic học sinh — ĐÃ LOẠI BỎ khỏi quy trình chuẩn (mục 4.5 cũ):** thay thế hoàn toàn bằng
+bộ "Slide Phiếu học tập" ở trên, vì N+2 ảnh AI độc lập dễ thiếu đồng bộ về tên bài/tên học sinh/hình
+ảnh giữa các ảnh với nhau, trong khi slide đảm bảo đồng bộ tuyệt đối và cho phép viết trực tiếp lên
+slide khi dùng bảng tương tác.
+
+### 4.3 Kế hoạch bài dạy (KHBD)
+* Bám cấu trúc hoạt động trong Phụ lục IV: Mở đầu → Hình thành kiến thức mới → Luyện tập → Vận dụng.
+  Nếu bài có từ 2 ĐVKT trở lên, **tách hoạt động Hình thành kiến thức thành nhiều hoạt động riêng
+  theo từng ĐVKT** (không gộp chung) để cấu trúc KHBD bám sát cấu trúc tuần tự theo ĐVKT của PHT;
+  trong nội dung mỗi hoạt động ghi rõ "(tương ứng PHT mục 1 — ĐVKT {i})"/"(tương ứng PHT mục 2)"/
+  "(tương ứng PHT mục 3)" để đối chiếu 1-1 với đúng mục PHT (xem cấu trúc phẳng 3 mục ở 4.1). Riêng
+  Khởi động không cần đối chiếu — mục này không có PHT tương ứng.
+* Mỗi hoạt động phải hiện đủ `a) Mục tiêu`, `b) Nội dung`, `c) Sản phẩm`, `d) Tổ chức thực hiện`; phần d gồm 4 bước CV5512 (Chuyển giao → Thực hiện → Báo cáo → Kết luận).
+* Bước 1 (Chuyển giao nhiệm vụ) của MỌI hoạt động phải nêu đủ 3 ý như PHT: (1) hình thức tổ chức
+  (cá nhân/cặp đôi/nhóm N học sinh), (2) thời gian cụ thể (phút), (3) tài liệu/công cụ học sinh
+  phải dùng (SGK trang mấy, quan sát thí nghiệm/video nào, hay Phiếu học tập nhiệm vụ nào).
+* Hoạt động Luyện tập bắt buộc có ít nhất 1 câu hỏi soạn theo đúng 1 trong 3 dạng của đề thi tốt
+  nghiệp THPT (mục 4.4) — cùng nguyên tắc "luyện đề ngay khi học" với phần Vận dụng của PHT, không
+  để học sinh lần đầu gặp cấu trúc đề thi thật là lúc làm Bài tập về nhà.
+* Chọn 1-2 kĩ thuật dạy học tích cực phù hợp cho mỗi hoạt động từ tài liệu `tai-lieu-goc/mẫu/17_KY_THUAT_DAY_HOC_TICH_CUC.md`. Cơ chế của kĩ thuật phải xuất hiện trong tiến trình, không chỉ ghi tên.
+* Tích hợp năng lực số theo `tai-lieu-goc/mẫu/Cong-van-3456-Khung-Nang-luc-so.md`: lớp 10-12 dùng mức **Nâng cao 1**, mỗi mục tiêu có mã năng lực thành phần, biểu hiện và minh chứng/sản phẩm số đánh giá được.
+* Không tích hợp công nghệ gượng ép. Chỉ gắn mã NLS khi hoạt động có công cụ hoặc thao tác số và sản phẩm tạo ra minh chứng tương ứng; chú ý an toàn, bản quyền và trích nguồn khi liên quan.
+* Không tích hợp khung 5E/IDB hay mô hình nước ngoài khác.
+
+### 4.4 Bài tập về nhà
+* Cấu trúc: Phần I (18 câu MCQ) → Phần II (4 câu Đúng/Sai, mỗi câu 4 ý) → Phần III (6 câu trả lời ngắn).
+  Chuẩn dưới đây được đối chiếu trực tiếp với đề thi chính thức Bộ GD&ĐT (mã đề 0227 năm 2025,
+  mã đề 0214 năm 2026 — lưu tại `tai-lieu-goc/mẫu/`): không chỉ đúng **số lượng** câu mà còn đúng
+  **phong cách ra đề** của từng phần, để bài tập tự luyện có "cảm giác đề thi thật" ngay từ đầu.
+* **Phần I — đúng 3 mức nhận thức, 6 câu mỗi mức (không xáo trộn tỉ lệ):**
+  - *Nhận biết* (6 câu): hỏi thẳng định nghĩa, đơn vị đo, phát biểu định luật/nội dung SGK —
+    không cần tính toán hay suy luận qua bước trung gian.
+  - *Thông hiểu* (6 câu): diễn giải cơ chế, đọc đồ thị/hình vẽ/mô hình, so sánh hai quá trình,
+    hoặc suy ra hệ quả trực tiếp của một định luật — không có phép tính số.
+  - *Vận dụng* (6 câu): có ít nhất 1 phép tính (1-2 bước) áp dụng công thức vào số liệu cụ thể,
+    ưu tiên bối cảnh kĩ thuật/đời sống thay vì số liệu trừu tượng.
+  - Toàn bộ phương án nhiễu (sai) của 18 câu phải bắt nguồn từ đúng các quan niệm sai lầm đã xác
+    định ở bước phân tích sư phạm (Bước 1) — không bịa phương án nhiễu ngẫu nhiên, vô căn cứ.
+* **Phần II — mỗi câu là một bối cảnh duy nhất, 4 ý là một chuỗi suy luận:** đoạn dẫn mô tả ĐÚNG
+  MỘT thí nghiệm/thiết bị/tình huống cụ thể (có thể kèm hình vẽ mô tả); 4 ý a)-d) phải liên kết
+  chặt với nhau quanh cùng bối cảnh đó — không phải 4 mệnh đề độc lập ghép ngẫu nhiên. Bắt buộc có
+  tối thiểu 1 ý định tính thuần suy luận vật lý, có thể có 1 ý yêu cầu tính toán ngắn, và cài ít
+  nhất 1 bẫy quan niệm sai lầm diễn đạt tự nhiên như một nhận định hợp lý nhìn thoáng qua.
+* **Phần III — ghép cặp dùng chung dữ kiện:** 6 câu chia thành 3 cặp, mỗi cặp dùng chung một đoạn
+  bối cảnh kĩ thuật/khoa học/đời sống thật (không dùng số liệu trừu tượng vô nghĩa) theo đúng mẫu
+  "Dùng thông tin sau cho câu X và câu Y: ..." của đề thi thật. Mỗi câu là một phép tính nhiều
+  bước độc lập trên cùng dữ kiện, và PHẢI nêu rõ quy tắc làm tròn ngay trong đề bài (ví dụ: "làm
+  tròn kết quả đến chữ số hàng phần trăm/phần mười/hàng đơn vị") — đề thi thật luôn quy định làm
+  tròn riêng cho từng câu, không để mặc định.
+* Tối thiểu 50% tổng số câu hỏi trên **cả 3 phần** gắn bối cảnh thực tế, cung cấp đầy đủ hằng số
+  vật lý dùng chung (mục "+ Cho biết: ...") và quy tắc làm tròn; khi Phần III cần tính nhiều bước,
+  cân nhắc thêm dòng "Không làm tròn kết quả các phép tính trung gian" như đề thi thật.
+* LaTeX viết dạng `$công_thức$` (vd. `$W_đ$`, `$W_t$`) — engine tự dịch sang Unicode khi xuất Word.
+* **Không in đáp án Đúng/Sai ngay trong đề** — đáp án chỉ được phép xuất hiện ở mục hướng dẫn giải cuối file.
+* **Hình thức trình bày KHÔNG đóng giả đề thi thật** (khác bản trước v9.4.0): header đơn giản như
+  PHT/KHBD (tiêu đề bài + Họ tên học sinh/Lớp), không còn Sở GD&ĐT/Trường THPT/"Đề có N trang"/Mã đề
+  thi/Số báo danh/"Thời gian làm bài" — chỉ CÂU HỎI mới bám phong cách đề tốt nghiệp, không phải vỏ
+  hình thức. Hướng dẫn từng phần viết liền sau nhãn PHẦN như cũ.
+* Phần II trình bày các ý `a)`–`d)` dạng đoạn văn, không dùng bảng/checkbox Đúng–Sai. Phần III không thêm hộp “Đáp số của học sinh”.
+* Footer căn giữa `Trang x/y` (dùng chung `styles.add_page_number_footer()` với PHT/KHBD, không còn
+  mã đề); phần đáp án bắt đầu ở trang mới, trước đó có dòng phân cách "----- HẾT -----" đơn giản
+  (không còn 2 dòng thông báo kiểu đóng vai coi thi).
+
+### 4.5 (đã loại bỏ — nội dung gộp vào 4.2.D)
+Mục này trước đây mô tả "N+2 Infographic". Đã được thay thế hoàn toàn bằng bộ "Slide Phiếu học tập"
+— xem mục 4.2 (phần D) để biết lý do và mục 4.2 (phần A-C) để biết chuẩn thay thế đầy đủ. Giữ lại số
+mục này (không xoá hẳn) để các tham chiếu cũ trỏ đúng chỗ giải thích, tránh gây khó hiểu khi đọc lại
+lịch sử `changelog.md`.
+
+### 4.6 Minh họa khoa học (PHT, KHBD, Bài tập về nhà, 2 bộ Slide)
+* **Nguyên tắc chọn công cụ vẽ — theo bản chất nội dung cần minh họa, không tùy tiện:**
+  - **Vector tự vẽ (matplotlib, xem `gems/illustrations/`)** cho: sơ đồ thí nghiệm/dụng cụ, đồ thị
+    số liệu (nhiệt độ-thời gian, áp suất-thể tích...), sơ đồ nguyên lý/chu trình kỹ thuật — bất cứ
+    thứ gì cần chính xác nhãn, mũi tên, tỉ lệ, số liệu. Ưu tiên tuyệt đối vì không có rủi ro AI vẽ
+    sai chi tiết khoa học.
+  - **Ảnh AI (do người dùng tự tạo trên nền tảng Antigravity, không có sẵn trong phiên agent)** chỉ
+    dùng khi cần minh họa trực quan hiện thực mà vector không lột tả được (ví dụ: hiện tượng đời
+    sống thật, kết cấu vật liệu, sản phẩm chưa có sẵn ảnh chụp) — Claude Code soạn sẵn mô tả ảnh
+    chi tiết, khoa học, chú thích tiếng Việt, cấm phong cách hoạt hình, để người dùng tự tạo rồi
+    cung cấp file chèn vào đúng vị trí `ready/hinh_anh/`.
+  - Nếu đã có ảnh chụp thực tế/tư liệu khoa học đáng tin cậy (nguyên tắc 5, mục 2) thì luôn ưu tiên
+    dùng ảnh thật thay vì vẽ lại.
+* **Cấm tuyệt đối** phong cách hoạt hình/cartoon, 3D ảo, phóng đại phi thực tế ở MỌI hình thức minh
+  họa (vector lẫn ảnh AI) — khớp nguyên tắc 5. Mọi chú thích/nhãn trên ảnh phải bằng tiếng Việt.
+* Ảnh minh họa nhúng vào PHT/KHBD/Bài tập về nhà theo đúng cú pháp `.agents/agents.md` §4 (dòng
+  text chứa `ready/hinh_anh/<tên file>.png`) — không cần sửa exporter, engine tự tách và chèn ảnh.
+* Ảnh minh họa dùng trong 2 bộ Slide (mục 4.2) phải giống hệt nhau về bố cục giữa bản màu (Giáo
+  viên) và bản trắng/đen/xám (Phiếu học tập) — soạn 1 bộ mô tả dùng chung cho cả 2 prompt.
 
 ---
 
@@ -171,25 +243,36 @@ Mọi tài liệu Word (`.docx`) xuất bản (bao gồm Giáo án và Phiếu h
 ### 5.1 Phiếu học tập (PHT)
 * **TC-PHT-01 (Không gian):** Chừa tối thiểu 35-40% không gian trống cho học sinh viết/vẽ.
 * **TC-PHT-02 (Hình ảnh):** Chỉ mô tả ảnh chụp thực tế hoặc tư liệu khoa học chuẩn vật lý.
-* **TC-PHT-03 (Tuyến tính):** Tiến trình Khám phá -> Trọng tâm -> Vận dụng -> Mở rộng đi một chiều.
-* **TC-PHT-04 (Ngôn ngữ):** Thuần Việt 100%, nghiêm túc, không từ lóng, không từ tiếng Anh (trừ Image Prompt ẩn).
-* **TC-PHT-05 (Khoảng trống):** Vùng trả lời khống chế bằng thẻ placeholder `[DOT_LINE_90]` (3-5 dòng) và không được sinh dòng chấm thô.
-* **TC-PHT-06 (Nhiệm vụ):** Đủ số nhiệm vụ cho các ĐVKT, liên kết chuỗi logic và đa dạng loại hình.
+* **TC-PHT-03 (Tuyến tính):** Đúng 3 mục phẳng "1. Hình thành kiến thức mới → 2. Luyện tập →
+  3. Vận dụng" đi một chiều, không có mục cho Khởi động, không quay lại khung 4 phần/ĐVKT cũ.
+* **TC-PHT-04 (Ngôn ngữ):** Thuần Việt 100%, nghiêm túc, không từ lóng, không từ tiếng Anh.
+* **TC-PHT-05 (Khoảng trống):** Vùng trả lời khống chế bằng placeholder `[DOT_LINE_90]`, không sinh dòng chấm thô thủ công.
+* **TC-PHT-06 (Nhiệm vụ):** Đủ số nhiệm vụ cho các ĐVKT, liên kết chuỗi logic và đa dạng loại hình;
+  mục Luyện tập bám đúng 1 trong 3 dạng câu hỏi đề tốt nghiệp (mục 4.4); mọi nhiệm vụ có đủ dòng
+  Hướng dẫn thực hiện 3 ý.
 
-### 5.2 Slide bài giảng (SLD)
-* **TC-SLD-01 (Đồng bộ):** Khớp 1-1 hoàn toàn về nội dung và thứ tự giữa Slide và PHT.
-* **TC-SLD-02 (Trực quan):** Có ít nhất 1 hình ảnh minh họa thực tế khoa học chất lượng trên mỗi Slide.
-* **TC-SLD-03 (Thiết kế):** Font `"UVN bai sau"`, cỡ chữ chuẩn (28-32pt tiêu đề, 24-28pt nội dung), highlight vàng.
-* **TC-SLD-04 (Cấu trúc):** Đầy đủ cấu trúc 7 slide cho mỗi ĐVKT, có slide mở đầu (Kha Khung Hiệp) và kết bài (Mindmap).
-* **TC-SLD-05 (Ngôn ngữ Slide):** Thuần Việt 100%, tiêu đề bám sát SGK, không giải thích ngoài luồng.
+### 5.2 Slide bài giảng — 2 bộ (SLD)
+* **TC-SLD-01 (Đồng bộ):** Khớp 1-1 hoàn toàn về nội dung/thứ tự/đánh số giữa CẢ 2 bộ Slide, PHT và
+  KHBD; nhãn "Hình thức/Thời gian/Tài liệu" lấy nguyên văn từ KHBD, không tự diễn đạt lại.
+* **TC-SLD-02 (Trực quan):** Có ít nhất 1 hình ảnh minh họa khoa học chất lượng trên MỌI slide (kể cả
+  Đáp án/Kiến thức trọng tâm/Mục lục); ảnh giống hệt bố cục giữa 2 bộ, chỉ khác màu.
+* **TC-SLD-03 (Thiết kế):** Cỡ chữ CỐ ĐỊNH đúng chuẩn từng bộ (Giáo viên 32/28pt, Phiếu học tập
+  24/20pt — không tự thu nhỏ); master slide nhất quán mỗi loại slide xuyên suốt deck; số trang "Trang
+  X/Y" mọi slide kể cả bìa; highlight `==từ khoá==` hiển thị màu vàng.
+* **TC-SLD-04 (Cấu trúc & phân vai):** Slide Giáo viên có Mục lục + slide phân đoạn mỗi phần lớn +
+  MỌI nhiệm vụ tách đúng 2 slide Nhiệm vụ/Đáp án riêng biệt (không gộp); Slide Phiếu học tập mỗi
+  nhiệm vụ 1 slide (hướng dẫn+câu hỏi+khoảng trống) và **tuyệt đối không có slide đáp án nào**, kể cả
+  qua chú thích ảnh minh họa; đủ slide mở đầu và kết bài (Mindmap, bên Phiếu học tập chỉ khung trống).
+* **TC-SLD-05 (Ngôn ngữ):** Thuần Việt 100% kể cả nhãn khung/hộp, tiêu đề bám sát SGK, không giải
+  thích ngoài luồng, không ký hiệu placeholder `[...]` xuất hiện trong nội dung hiển thị thật.
 
 ### 5.3 Bài tập về nhà (HW)
-* **TC-HW-01 (Chẩn đoán):** Gài bẫy lỗi sai lầm, phần dẫn có bối cảnh chi tiết mở rộng tri thức.
-* **TC-HW-02 (Thực tế):** 50% câu hỏi là bài toán thực tế trích nguồn từ tài liệu/tạp chí uy tín quốc tế.
-* **TC-HW-03 (Cơ cấu):** Đúng số lượng 18 MCQ + 4 Đúng/Sai + 6 trả lời ngắn; có đủ hằng số, quy tắc làm tròn.
-* **TC-HW-04 (Kỹ thuật):** Mã LaTeX chuẩn sạch, hình vẽ TikZ chính xác, file đáp án riêng biệt có giải thuật tư duy.
-
-* **TC-HW-01 (Chẩn đoán):** Gài bẫy lỗi sai lầm, phần dẫn có bối cảnh chi tiết mở rộng tri thức.
-* **TC-HW-02 (Thực tế):** 50% câu hỏi là bài toán thực tế trích nguồn từ tài liệu/tạp chí uy tín quốc tế.
-* **TC-HW-03 (Cơ cấu):** Đúng số lượng 18 MCQ + 4 Đúng/Sai + 6 trả lời ngắn; có đủ hằng số, quy tắc làm tròn.
-* **TC-HW-04 (Kỹ thuật):** Mã LaTeX chuẩn sạch, hình vẽ TikZ chính xác, file đáp án riêng biệt có giải thuật tư duy.
+* **TC-HW-01 (Chẩn đoán):** Phương án nhiễu Phần I và tối thiểu 1 ý mỗi câu Phần II bắt nguồn từ
+  quan niệm sai lầm đã phân tích; mỗi câu Phần II là một bối cảnh duy nhất triển khai thành chuỗi
+  4 ý liên kết (không phải 4 mệnh đề rời rạc).
+* **TC-HW-02 (Thực tế):** Tối thiểu 50% câu hỏi toàn bài (cả 3 phần) là bài toán thực tế/kĩ thuật,
+  trích nguồn uy tín khi có thể.
+* **TC-HW-03 (Cơ cấu & phong cách đề thi):** Đúng 18 MCQ (6 Nhận biết + 6 Thông hiểu + 6 Vận dụng)
+  + 4 Đúng/Sai (mỗi câu 4 ý) + 6 trả lời ngắn (chia 3 cặp dùng chung dữ kiện, mỗi câu nêu rõ quy
+  tắc làm tròn); có đủ hằng số vật lý dùng chung khi cần.
+* **TC-HW-04 (Kỹ thuật):** LaTeX chuẩn sạch, đáp án tách riêng khỏi đề, không lộ đáp án trong phần câu hỏi.

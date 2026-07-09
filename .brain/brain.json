@@ -156,12 +156,12 @@
         "description": "Đôi khi studio status trả về 'completed' nhưng download ngay lập tức thất bại. Nguyên nhân: có thể pipeline NLM nội bộ chưa finalize. Giải pháp: đợi thêm 30-60s rồi thử lại, hoặc thử format khác (pdf thay pptx)."
       },
       {
-        "gotcha": "Rollback không có git",
-        "description": "Workspace không có git. Mọi rollback phải thực hiện thủ công bằng cách đảo ngược thay đổi từ transcript."
+        "gotcha": "Rollback dùng git (đã lỗi thời — repo hiện có git)",
+        "description": "Từ kiến trúc v9.0 (7/2026), workspace ĐÃ có git + remote GitHub (kkhmn4/soan-tai-lieu). Rollback dùng git revert/checkout bình thường, không cần đảo ngược thủ công từ transcript nữa."
       },
       {
-        "gotcha": "Engine offline mode – KHÔNG được thêm vào engine chính",
-        "description": "Chỉ dry_run.py mới có quyền chạy không cần API key. Các module engine phải raise EnvironmentError khi thiếu GEMINI_API_KEY."
+        "gotcha": "Chế độ offline chính thức: python -m gems offline",
+        "description": "gems/generation/gemini_client.py raise EnvironmentError khi thiếu GEMINI_API_KEY cho mọi lệnh gọi Gemini thật. Đường test/demo không cần API key là `python -m gems offline --lesson baiN` (dùng fixture ở gems/offline/fixtures.py), thay cho dry_run.py cũ (đã xoá vì hỏng cú pháp)."
       },
       {
         "gotcha": "Đường dẫn workspace đúng",

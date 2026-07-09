@@ -1,0 +1,86 @@
+{
+  "lesson_name": "Bài 4 - Nhiệt dung riêng",
+  "knowledge_formation": [
+    {
+      "unit_id": "ĐVKT 1",
+      "unit_name": "Đơn vị kiến thức 1 của Bài 4 - Nhiệt dung riêng",
+      "tasks": [
+        {
+          "task_id": "NV1.1",
+          "task_type": "Matching Matrix",
+          "task_name": "Nhiệm vụ ghép nối 1",
+          "content": "Nội dung khám phá mẫu cho Nhiệm vụ ghép nối 1.",
+          "instructions": "Nhóm 4 học sinh, 8 phút. Quan sát hình ảnh và đọc SGK mục liên quan."
+        },
+        {
+          "task_id": "NV1.2",
+          "task_type": "Bug Buster",
+          "task_name": "Nhiệm vụ tìm lỗi 1",
+          "content": "Nội dung khám phá mẫu cho Nhiệm vụ tìm lỗi 1.",
+          "instructions": "Nhóm 4 học sinh, 8 phút. Quan sát hình ảnh và đọc SGK mục liên quan."
+        }
+      ],
+      "core_theory": {
+        "summary_cloze": "Định nghĩa (1) là đại lượng đặc trưng cho (2) của vật.",
+        "key_words": [
+          "đại lượng mẫu",
+          "tính chất mẫu"
+        ]
+      }
+    },
+    {
+      "unit_id": "ĐVKT 2",
+      "unit_name": "Đơn vị kiến thức 2 của Bài 4 - Nhiệt dung riêng",
+      "tasks": [
+        {
+          "task_id": "NV2.1",
+          "task_type": "Matching Matrix",
+          "task_name": "Nhiệm vụ ghép nối 2",
+          "content": "Nội dung khám phá mẫu cho Nhiệm vụ ghép nối 2.",
+          "instructions": "Nhóm 4 học sinh, 8 phút. Quan sát hình ảnh và đọc SGK mục liên quan."
+        },
+        {
+          "task_id": "NV2.2",
+          "task_type": "Bug Buster",
+          "task_name": "Nhiệm vụ tìm lỗi 2",
+          "content": "Nội dung khám phá mẫu cho Nhiệm vụ tìm lỗi 2.",
+          "instructions": "Nhóm 4 học sinh, 8 phút. Quan sát hình ảnh và đọc SGK mục liên quan."
+        }
+      ],
+      "core_theory": {
+        "summary_cloze": "Định nghĩa (1) là đại lượng đặc trưng cho (2) của vật.",
+        "key_words": [
+          "đại lượng mẫu",
+          "tính chất mẫu"
+        ]
+      }
+    }
+  ],
+  "practice_items": [
+    {
+      "unit_id": "ĐVKT 1",
+      "unit_name": "Đơn vị kiến thức 1 của Bài 4 - Nhiệt dung riêng",
+      "scenario": "Tình huống vận dụng thực tế mẫu.",
+      "instructions": "Hoạt động cá nhân, 5 phút, dựa vào công thức đã học và SGK."
+    },
+    {
+      "unit_id": "ĐVKT 2",
+      "unit_name": "Đơn vị kiến thức 2 của Bài 4 - Nhiệt dung riêng",
+      "scenario": "Tình huống vận dụng thực tế mẫu.",
+      "instructions": "Hoạt động cá nhân, 5 phút, dựa vào công thức đã học và SGK."
+    }
+  ],
+  "application_tasks": [],
+  "application_readings": [
+    {
+      "unit_id": "ĐVKT 1",
+      "unit_name": "Đơn vị kiến thức 1 của Bài 4 - Nhiệt dung riêng",
+      "reading_content": "Đoạn đọc hiểu mở rộng STEM mẫu."
+    },
+    {
+      "unit_id": "ĐVKT 2",
+      "unit_name": "Đơn vị kiến thức 2 của Bài 4 - Nhiệt dung riêng",
+      "reading_content": "Đoạn đọc hiểu mở rộng STEM mẫu."
+    }
+  ]
+}

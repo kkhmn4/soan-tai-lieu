@@ -1,105 +1,153 @@
-# KẾ HOẠCH BÀI DẠY — Bài 7: NHIỆT HÓA HƠI RIÊNG
-
-**Mô hình:** 5E + EDP (Engineering Design Process)  
-**Môn:** Vật lý 12 — **Chủ đề 7**  
-**Thời lượng:** 2 tiết (90 phút)  
-**Giáo viên:** Kha Khung Hiệp  
+Trường: ................................................
+Tổ: Tổ Vật lí - Công nghệ
 
 ---
 
-## I. MỤC TIÊU HỌC TẬP (THEO YCCĐ GDPT 2018)
-
-| Mã | Mục tiêu | Năng lực cốt lõi |
-|----|----------|------------------|
-| **MT1** | Nêu được khái niệm nhiệt hóa hơi riêng, kí hiệu $L$, đơn vị $\text{J/kg}$ | **Nhận thức** |
-| **MT2** | Viết được công thức tính nhiệt hóa hơi $Q = Lm$, vận dụng giải bài tập liên quan | **Vận dụng** |
-| **MT3** | Mô tả được phương án thí nghiệm thực hành đo nhiệt hóa hơi riêng của nước | **Tìm hiểu** |
-| **MT4** | Giải thích được các hiện tượng thực tế: nguyên lý hoạt động của máy lạnh, nồi hấp tiệt trùng, ngưng tụ nước ở vung cơm | **Vận dụng** |
+# KẾ HOẠCH BÀI DẠY
+**Họ và tên giáo viên:** Kha Khung Hiệp  
+**Tên bài dạy:** Bài 7 - Nhiệt hóa hơi riêng  
+**Môn học/Hoạt động giáo dục:** Vật lí; **Lớp:** 12  
+**Thời gian thực hiện:** 2 tiết (90 phút)  
 
 ---
 
-## II. CHUẨN BỊ
+## I. YÊU CẦU CẦN ĐẠT
+### 1. Năng lực đặc thù (Vật lí)
+- Nêu được khái niệm nhiệt hóa hơi riêng, kí hiệu L, đơn vị J/kg.
+- Viết được công thức Q = Lm và vận dụng giải bài tập tính nhiệt lượng hóa hơi.
+- Mô tả được phương án thí nghiệm xác định nhiệt hóa hơi riêng của nước.
+- Giải thích được các hiện tượng thực tế liên quan đến hóa hơi/ngưng tụ (máy điều hòa, nồi hấp tiệt trùng, ngưng tụ ở nắp vung).
 
-| Đối tượng | Nội dung |
-|-----------|----------|
-| **Dụng cụ** | Bộ thí nghiệm đo $L$ gồm: biến thế nguồn, oát kế tích hợp đo thời gian, nhiệt lượng kế nhựa có vỏ xốp cách nhiệt kèm dây đun điện trở, nhiệt kế điện tử, cân điện tử, nước nóng đun sẵn. |
-| **Phần mềm** | Slide điện tử, video minh họa máy điều hòa hoạt động, PhET simulation (nếu cần). |
-| **Tài liệu** | Phiếu học tập (PHT) in sẵn, SGK Vật lý 12 Kết nối tri thức, bảng hằng số vật lý. |
+### 2. Năng lực chung
+- Tự chủ và tự học: chủ động đọc phiếu học tập, tra cứu hằng số vật lý.
+- Giao tiếp và hợp tác: làm việc nhóm hiệu quả khi thực hiện Station Learning và thảo luận thí nghiệm.
+- Giải quyết vấn đề và sáng tạo: phát hiện và đề xuất khắc phục lỗi thiết kế thí nghiệm (Engineering Debugger).
+
+### 3. Năng lực số (Công văn 3456/BGDĐT-GDPT)
+- Không tích hợp nếu bài học không có nhiệm vụ và sản phẩm số xác thực.
+
+### 4. Phẩm chất
+- Chăm chỉ: tích cực hoàn thành nhiệm vụ cá nhân và nhóm.
+- Trung thực: ghi nhận đúng số liệu thực nghiệm và kết quả tính toán.
+
+---
+## II. THIẾT BỊ DẠY HỌC VÀ HỌC LIỆU
+### 1. Giáo viên
+- Bộ thí nghiệm đo L: biến thế nguồn, oát kế tích hợp đo thời gian, nhiệt lượng kế nhựa vỏ xốp kèm dây đun điện trở, nhiệt kế điện tử, cân điện tử, nước nóng đun sẵn.
+- Sơ đồ bộ thí nghiệm đo L, đồ thị nhiệt độ-thời gian, sơ đồ chu trình điều hòa (xem hình minh họa trong nội dung Hoạt động 3 và Hoạt động 5).
+- Slide bài giảng, video minh họa nguyên lý máy điều hòa nhiệt độ.
+
+### 2. Học sinh
+- Phiếu học tập
+- SGK Vật lí 12 (Kết nối tri thức)
+- Bảng hằng số nhiệt hóa hơi riêng một số chất
+
+---
+## III. TIẾN TRÌNH DẠY HỌC
+### 1. Hoạt động 1: Khởi động
+a) Mục tiêu: Tạo tình huống có vấn đề, kích thích tò mò về hiện tượng thu nhiệt khi hóa hơi.
+
+b) Nội dung: Đặt câu hỏi: Tại sao đổ cồn lên da rồi đứng trước quạt lại thấy mát buốt?
+
+c) Sản phẩm: Câu trả lời dự đoán ban đầu của học sinh (chưa cần chính xác).
+
+**Kĩ thuật dạy học tích cực:** Kỹ thuật KWL
+
+**Năng lực số:** Không tích hợp
+
+d) Tổ chức thực hiện:
+
+| Hoạt động của giáo viên và học sinh | Sản phẩm |
+| :--- | :--- |
+| **Bước 1: Chuyển giao nhiệm vụ:**<br>GV đặt câu hỏi khởi động về hiện tượng cồn bay hơi làm mát da, yêu cầu HS dự đoán nguyên nhân. Hình thức: cá nhân. Thời gian: 3 phút. Tài liệu: không cần tài liệu, HS tự suy luận dựa trên kinh nghiệm thực tế đã trải qua.<br>**Bước 2: Thực hiện nhiệm vụ:**<br>HS suy nghĩ cá nhân trong 2 phút và ghi dự đoán ra giấy nháp.<br>**Bước 3: Báo cáo, thảo luận:**<br>Gọi 2-3 HS chia sẻ dự đoán trước lớp.<br>**Bước 4: Kết luận, nhận định:**<br>GV chưa chốt đáp án đúng/sai, dẫn dắt vào bài học nhiệt hóa hơi riêng. | Câu trả lời dự đoán ban đầu của học sinh (chưa cần chính xác). |
 
 ---
 
-## III. TIẾN TRÌNH BÀI DẠY (5E + EDP)
+### 2. Hoạt động 2: Hình thành kiến thức mới - ĐVKT 1: Khái niệm và công thức nhiệt hóa hơi riêng
+a) Mục tiêu: HS nêu được định nghĩa, công thức, đơn vị của L và phân biệt được các phát biểu đúng/sai liên quan.
 
-| Giai đoạn | Thời gian | Hoạt động của GV | Hoạt động của HS | Yêu cầu EDP |
-|-----------|-----------|------------------|------------------|-------------|
-| **1. Engage (Khởi động)** | 5' | - Đặt vấn đề: "Tại sao lau cồn hoặc nước lên da rồi đứng trước quạt ta lại thấy lạnh buốt?"<br>- Giới thiệu bối cảnh: Sự hóa hơi thu năng lượng lớn. | - Lắng nghe, liên hệ thực tế.<br>- Điền cột K (Know) và W (Want) của biểu đồ KWL trong PHT. | **Define Problem**<br>Xác định vấn đề: Làm sao đo đạc năng lượng cần để hóa hơi nước? |
-| **2. Explore (Khám phá)** | 20' | - Tổ chức **Station Learning** (3 trạm học tập):<br>+ Trạm 1: Tìm hiểu khái niệm và công thức (NV1).<br>+ Trạm 2: Nhận diện dụng cụ thực hành đo $L$ (NV2).<br>+ Trạm 3: Sắp xếp tiến trình thao tác thực nghiệm (NV3). | - Các nhóm luân phiên qua 3 trạm (6 phút mỗi trạm).<br>- Thảo luận nhóm và ghi kết quả vào PHT. | **Research**<br>Thu thập dữ liệu lý thuyết và thực nghiệm về sự hóa hơi và phép đo $L$. |
-| **3. Explain (Giải thích)** | 25' | - Chốt đáp án NV1-3 trên slide giảng dạy.<br>- Trình bày trực quan công thức $Q = Lm$ và ý nghĩa của $L$.<br>- Phân tích sai lầm: nhiệt hóa hơi riêng phụ thuộc nhiệt độ, phân biệt đơn vị $L$ ($\text{J/kg}$) và $c$ ($\text{J/(kg}\cdot\text{K)}$). | - Theo dõi bài giảng, bổ sung PHT.<br>- Hỏi đáp phản biện thông qua Think-Pair-Share.<br>- Hoàn thiện cột L (Learned) của biểu đồ KWL. | **Develop Solutions**<br>Xử lý thông tin và củng cố kiến thức khoa học cốt lõi. |
-| **4. Elaborate (Mở rộng)** | 25' | - Giao **NV5 (Engineering Debugger)**: Tìm và sửa lỗi phương án thí nghiệm đo $L$.<br>- Giao **NV6**: Giải bài toán tổng hợp truyền nhiệt từ đá sang hơi nước sôi.<br>- Hướng dẫn phương pháp thiết lập phương trình cân bằng nhiệt cho pha biến đổi. | - Làm việc nhóm tìm ra 3 lỗi thiết kế của bạn học sinh và đưa phương án sửa.<br>- Tính toán giải bài toán tổng hợp.<br>- Đại diện nhóm báo cáo. | **Test & Evaluate**<br>Kiểm chứng và tối ưu hóa quy trình kỹ thuật đun đo; thử nghiệm giải bài tập phức tạp. |
-| **5. Evaluate (Đánh giá)** | 10' | - Tổ chức trắc nghiệm nhanh 5 câu củng cố bằng Quiz hoặc giấy.<br>- Thu PHT để đánh giá học tập.<br>- Giao Bài tập về nhà (18 MCQ + 4 T/F + 6 Short). | - Tham gia làm Quiz đánh giá.<br>- Tự đánh giá năng lực của bản thân theo bảng mục tiêu. | **Communicate**<br>Báo cáo tự đánh giá kết quả tiếp thu. |
+b) Nội dung: Trạm học tập 1 (tương ứng PHT mục 1 — ĐVKT 1): NV1 (Visual Cloze Test — điền khuyết định nghĩa và công thức), NV2 (Bug Buster — tìm phát biểu sai).
 
----
+c) Sản phẩm: Phiếu học tập hoàn thành NV1-NV2 (tương ứng PHT mục 1 — ĐVKT 1).
 
-## IV. PHƯƠNG PHÁP DẠY HỌC CHÍNH
+**Kĩ thuật dạy học tích cực:** Station Learning (trạm học tập)
 
-| Phương pháp | Vị trí | Mô tả |
-|-------------|--------|-------|
-| **Station Learning** | Explore | Luân chuyển nhóm qua các góc học tập độc lập để tăng tính chủ động. |
-| **Think-Pair-Share** | Explain | Suy nghĩ cá nhân → Thảo luận cặp đôi → Chia sẻ trước tập thể lớp. |
-| **Engineering Debugger** | Elaborate | Cho học sinh đóng vai người kiểm định thiết kế thực nghiệm bị lỗi, kích thích tư duy phản biện. |
-| **KWL Chart** | Xuyên suốt | Kỹ thuật theo dõi tiến trình nhận thức tự thân của học sinh. |
+**Năng lực số:** Không tích hợp
+
+d) Tổ chức thực hiện:
+
+| Hoạt động của giáo viên và học sinh | Sản phẩm |
+| :--- | :--- |
+| **Bước 1: Chuyển giao nhiệm vụ:**<br>GV phát Phiếu học tập, giao nhiệm vụ NV1 và NV2 cho Trạm 1. Hình thức: nhóm 4 học sinh. Thời gian: 8 phút. Tài liệu: quan sát hình ảnh ấm nước đang sôi trong Phiếu học tập và đọc SGK mục I.<br>**Bước 2: Thực hiện nhiệm vụ:**<br>HS trong nhóm lần lượt hoàn thành NV1 (điền khuyết định nghĩa/công thức) rồi thảo luận NV2 (tìm phát biểu sai) dựa trên kết quả NV1.<br>**Bước 3: Báo cáo, thảo luận:**<br>Đại diện 1-2 nhóm trình bày đáp án NV1-NV2, các nhóm khác nhận xét bổ sung.<br>**Bước 4: Kết luận, nhận định:**<br>GV chốt đáp án trên slide, nhấn mạnh công thức Q = Lm, đơn vị J/kg, và phân biệt L với c. | Phiếu học tập hoàn thành NV1-NV2 (tương ứng PHT mục 1 — ĐVKT 1). |
 
 ---
 
-## V. ĐÁNH GIÁ
+### 3. Hoạt động 3: Hình thành kiến thức mới - ĐVKT 2: Thí nghiệm đo nhiệt hóa hơi riêng và vận dụng cân bằng nhiệt
+a) Mục tiêu: HS mô tả được quy trình thí nghiệm đo L của nước và nêu được vai trò từng dụng cụ.
 
-| Hình thức | Công cụ | Tiêu chí |
-|-----------|---------|----------|
-| **Quá trình** | Quan sát hoạt động nhóm + Kết quả PHT | Sự phối hợp nhóm tốt, hoàn thành đúng hạn các nhiệm vụ NV1-3, có tư duy sáng tạo sửa lỗi thực nghiệm ở NV5. |
-| **Kết quả** | Bài trắc nghiệm củng cố cuối giờ | $\ge 80\%$ câu hỏi đạt đáp án đúng, biết tính toán bài toán $Q = Lm$. |
-| **Tự đánh giá** | Bảng kiểm năng lực cuối PHT | Học sinh tự tin tick "Đạt" ở ít nhất 3 trên 4 mục tiêu bài học. |
+b) Nội dung: Trạm học tập 2 (tương ứng PHT mục 1 — ĐVKT 2): NV3 (Matching Matrix — ghép dụng cụ thí nghiệm với vai trò, có kèm sơ đồ bộ thí nghiệm), NV4 (Algorithmic Ordering — sắp xếp quy trình thí nghiệm).
 
----
+ready/hinh_anh/so_do_thi_nghiem_do_L.png
 
-## VI. XỬ LÝ TÌNH HUỐNG PHÁT SINH
+c) Sản phẩm: Phiếu học tập hoàn thành NV3-NV4 (tương ứng PHT mục 1 — ĐVKT 2).
 
-| Tình huống | Biện pháp xử lý |
-|------------|-----------------|
-| Thiết bị thí nghiệm bị lỗi oát kế hoặc không có điện. | Sử dụng video mô phỏng tiến trình thí nghiệm đo $L$ của nước và cung cấp bảng số liệu giả định cho học sinh xử lý. |
-| Học sinh nhầm lẫn công thức cân bằng nhiệt khi có chất chuyển pha (quên cộng ẩn nhiệt $Lm$). | Nhắc nhở bằng sơ đồ trục nhiệt độ: Quá trình chuyển pha là một đường nằm ngang ở $100^{\circ}\text{C}$, cần một năng lượng $Lm$ chỉ để bẻ gãy liên kết phân tử. |
+**Kĩ thuật dạy học tích cực:** Station Learning (trạm học tập)
 
----
+**Năng lực số:** Không tích hợp
 
-## VII. PHÂN BIỆT HÓA (Differentiation)
+d) Tổ chức thực hiện:
 
-| Nhóm học sinh | Biện pháp hỗ trợ | Nhiệm vụ nâng cao |
-|---------------|------------------|-------------------|
-| **Cần hỗ trợ** | Cung cấp sẵn các bước giải bài tập lớn, cho trước công thức $Q = Lm$ in đậm trên giấy. | — |
-| **Khá / Giỏi** | Khuyến khích tự chứng minh sai số thí nghiệm do tỏa nhiệt hao phí ra môi trường ngoài và đề xuất lớp bọc cách nhiệt mới. | Giải bài toán hiệu suất bếp điện khi đun hóa hơi có tính đến phần nhiệt làm nóng ấm đồng/nhôm đựng nước. |
+| Hoạt động của giáo viên và học sinh | Sản phẩm |
+| :--- | :--- |
+| **Bước 1: Chuyển giao nhiệm vụ:**<br>GV giao nhiệm vụ NV3 và NV4 cho Trạm 2. Hình thức: nhóm 4 học sinh (giữ nguyên nhóm của Trạm 1). Thời gian: 8 phút. Tài liệu: quan sát sơ đồ bộ thí nghiệm đo nhiệt hóa hơi riêng (xem hình minh họa ở mục Nội dung bên trên) và đọc SGK mục thực hành.<br>**Bước 2: Thực hiện nhiệm vụ:**<br>HS quan sát sơ đồ, thảo luận ghép dụng cụ với vai trò (NV3), sau đó sắp xếp đúng trình tự thao tác thí nghiệm (NV4).<br>**Bước 3: Báo cáo, thảo luận:**<br>Đại diện 1-2 nhóm trình bày kết quả NV3-NV4, các nhóm khác so sánh, nhận xét.<br>**Bước 4: Kết luận, nhận định:**<br>GV nhận xét, chốt đáp án đúng và chỉ ra những điểm cần lưu ý khi tiến hành thí nghiệm thật. | Phiếu học tập hoàn thành NV3-NV4 (tương ứng PHT mục 1 — ĐVKT 2). |
 
 ---
 
-## VIII. LIÊN HỆ CHUYÊN ĐỀ / STEM
+### 4. Hoạt động 4: Luyện tập
+a) Mục tiêu: HS vận dụng thành thạo công thức Q = Lm và phương trình cân bằng nhiệt có hóa hơi/ngưng tụ để giải bài tập.
 
-- ** STEM kỹ thuật:** Thiết kế mô hình máy lạnh mini đơn giản sử dụng quạt và bình nước đá kết hợp muối ăn.
-- **Liên môn Địa lý:** Hiện tượng mây mưa, vòng tuần hoàn của nước trong tự nhiên liên quan mật thiết đến sự hóa hơi và ngưng tụ của nước.
+b) Nội dung: Giải bài toán nồi hấp tiệt trùng và bài toán hơi nước ngưng tụ trong bình nước (tương ứng PHT mục 2 — Luyện tập, gồm cả 2 ĐVKT) — cả hai đều ở dạng trả lời ngắn có nêu rõ quy tắc làm tròn, đúng phong cách đề thi tốt nghiệp THPT.
 
----
+c) Sản phẩm: Bài giải chi tiết 2 bài toán vận dụng trong phiếu học tập.
 
-## IX. PHÂN TÍCH RỦI RO (Risk Assessment)
+**Kĩ thuật dạy học tích cực:** Chia sẻ nhóm đôi (Think-Pair-Share)
 
-- **Nguy cơ bỏng nhiệt:** Thí nghiệm sử dụng nước nóng sôi $100^{\circ}\text{C}$. GV cần giám sát chặt chẽ học sinh khi đổ nước sôi vào bình nhiệt lượng kế, yêu cầu mang găng tay bảo hộ.
-- **Rò rỉ điện đun:** Kiểm tra kỹ vỏ bọc dây nối đun nước trước khi cắm điện.
+**Năng lực số:** Không tích hợp
 
----
+d) Tổ chức thực hiện:
 
-## X. PHỤ LỤC
-
-- **Phụ lục 1:** Phiếu học tập của học sinh (đính kèm).
-- **Phụ lục 2:** Đáp án chi tiết PHT (đính kèm).
-- **Phụ lục 3:** Bài tập về nhà và Đáp án LaTeX (đính kèm).
-- **Phụ lục 4:** Bảng hằng số nhiệt hóa hơi riêng của một số chất (Nước, Cồn, Thủy ngân, v.v.).
+| Hoạt động của giáo viên và học sinh | Sản phẩm |
+| :--- | :--- |
+| **Bước 1: Chuyển giao nhiệm vụ:**<br>GV giao 2 bài toán ở PHT mục 2 (Luyện tập): tính Q hóa hơi nước trong nồi hấp tiệt trùng, và tính nhiệt độ cân bằng khi dẫn hơi nước vào bình nước lạnh. Hình thức: cá nhân, sau đó thảo luận cặp đôi. Thời gian: 7 phút (4 phút cá nhân + 3 phút cặp đôi). Tài liệu: Phiếu học tập mục Luyện tập, không dùng thêm tài liệu khác.<br>**Bước 2: Thực hiện nhiệm vụ:**<br>HS làm việc cá nhân sau đó thảo luận cặp đôi (Think-Pair-Share) để đối chiếu kết quả.<br>**Bước 3: Báo cáo, thảo luận:**<br>2 HS lên bảng trình bày lời giải chi tiết cho 2 bài toán.<br>**Bước 4: Kết luận, nhận định:**<br>GV nhận xét, sửa lỗi trình bày (nếu có), nhấn mạnh phải cộng đủ nhiệt lượng làm nguội hơi/nước sau ngưng tụ trong phương trình cân bằng nhiệt. | Bài giải chi tiết 2 bài toán vận dụng trong phiếu học tập. |
 
 ---
 
-*Kế hoạch bài dạy: Kha Khung Hiệp — Đòn Bẩy AI*
+### 5. Hoạt động 5: Vận dụng - Mở rộng
+a) Mục tiêu: HS phản biện và khắc phục lỗi thiết kế thí nghiệm thực tế, liên hệ ứng dụng kỹ thuật/tự nhiên của hiện tượng hóa hơi.
+
+b) Nội dung: Giao nhiệm vụ Engineering Debugger (NV5, tương ứng PHT mục 3 — Vận dụng) tìm lỗi phương án thí nghiệm của một nhóm học sinh khác; đọc và thảo luận phần Mở rộng về máy điều hòa (có kèm sơ đồ chu trình) và vòng tuần hoàn nước — cũng thuộc PHT mục 3.
+
+ready/hinh_anh/so_do_chu_trinh_dieu_hoa.png
+
+c) Sản phẩm: Bảng liệt kê 3 lỗi sai và cách khắc phục; câu trả lời phần Mở rộng kiến thức.
+
+**Kĩ thuật dạy học tích cực:** Đóng vai
+
+**Năng lực số:** Không tích hợp
+
+d) Tổ chức thực hiện:
+
+| Hoạt động của giáo viên và học sinh | Sản phẩm |
+| :--- | :--- |
+| **Bước 1: Chuyển giao nhiệm vụ:**<br>GV giao tình huống thí nghiệm có lỗi (dây đun cắm trực tiếp 220V, cốc không cách nhiệt, tính sai công thức) và yêu cầu HS đóng vai kiểm định viên. Hình thức: nhóm 4 học sinh. Thời gian: 8 phút. Tài liệu: đọc tình huống trong Phiếu học tập (NV5) và sơ đồ chu trình điều hòa (xem hình minh họa ở mục Nội dung bên trên).<br>**Bước 2: Thực hiện nhiệm vụ:**<br>HS thảo luận nhóm 4 người, liệt kê từng lỗi và đề xuất cách khắc phục cụ thể.<br>**Bước 3: Báo cáo, thảo luận:**<br>Đại diện nhóm trình bày trước lớp, các nhóm khác phản biện/bổ sung.<br>**Bước 4: Kết luận, nhận định:**<br>GV chuẩn hóa 3 lỗi đúng (an toàn điện, cách nhiệt, phương pháp tính Q=Pt thay vì dùng c), liên hệ ứng dụng máy điều hòa và giao bài tập về nhà. | Bảng liệt kê 3 lỗi sai và cách khắc phục; câu trả lời phần Mở rộng kiến thức. |
+
+---
+
+## IV. ĐIỀU CHỈNH BÀI DẠY
+1. **Ưu điểm:**
+
+
+2. **Hạn chế:**
+
+
+3. **Hướng điều chỉnh:**

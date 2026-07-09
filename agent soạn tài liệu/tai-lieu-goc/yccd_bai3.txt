@@ -1,3 +1,0 @@
-- Nêu được định nghĩa nhiệt độ, hệ thức chuyển đổi nhiệt độ giữa thang Celsius và Kelvin.
-- Mô tả được sự truyền nhiệt giữa hai vật tiếp xúc và khái niệm cân bằng nhiệt.
-- Nêu được nguyên tắc hoạt động của nhiệt kế và phân biệt các loại nhiệt kế thông dụng.

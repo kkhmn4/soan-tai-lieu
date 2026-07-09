@@ -1,8 +1,15 @@
 # NÂNG CẤP: Hệ Thống AI Tạo Tài Liệu GEMS Vật Lý 12
 
+> ⚠️ **Đã lỗi thời:** đề xuất dưới đây tham chiếu kiến trúc `engine/` + LaTeX/TikZ đã bị thay thế
+> hoàn toàn bởi package `gems/` (kiến trúc v9.0, 7/2026 — xem `changelog.md` mục [2026-07-06]).
+> Phần lớn hạng mục P0/P1 đã được giải quyết theo cách khác trong `gems/` (validation số câu ở
+> `gems/generation/stages.py`, xuất DOCX thay vì LaTeX ở `gems/docx_export/`). Giữ lại làm tư liệu
+> lịch sử; quy trình vận hành hiện tại xem
+> [`docs/reference/quy_trinh_tao_tai_lieu_chi_tiet.md`](quy_trinh_tao_tai_lieu_chi_tiet.md).
+>
 > **Ngày:** 2026-06-24  
 > **Nội dung kiểm tra:** Bài 4 — Nhiệt Dung Riêng  
-> **Thư mục:** `output/hermes/bai4_nhiet_dung_rieng/`
+> **Thư mục:** `output/hermes/bai4_nhiet_dung_rieng/` (đường dẫn cũ, nay là `output/bai4_nhiet_dung_rieng/`)
 
 ## I. VẤN ĐỀ CẤU TRÚC — Cross-File Validation
 

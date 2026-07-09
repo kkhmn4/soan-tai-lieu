@@ -1,19 +1,27 @@
-# ĐẶC TẢ GEMS: BÀI 4 - NHIỆT DUNG RIÊNG (VẬT LÝ 12)
-*Trường phái thiết kế: GEMS v7.1*
-*Bộ sách: Kết nối tri thức*
+# ĐẶC TẢ GEMS: BÀI 4 - NHIỆT DUNG RIÊNG
 
-## I. MỤC TIÊU DẠY HỌC (YCCĐ)
-1. **Định nghĩa:** Phát biểu được định nghĩa nhiệt dung riêng.
-2. **Hệ thức:** Viết được hệ thức tính nhiệt lượng $Q = mc\Delta t$ (hoặc $Q = mc\Delta T$). Nêu được tên và đơn vị của các đại lượng.
-3. **Thực hành:** Mô tả được phương án thực nghiệm đo nhiệt dung riêng của nước (dụng cụ, sơ đồ đấu nối, tiến trình đo, công thức tính và cách xử lý số liệu/sai số).
-4. **Vận dụng:** Giải bài tập và giải thích hiện tượng thực tế (khí hậu biển ôn hòa, chất làm mát...).
+## I. KIẾN THỨC CỐT LÕI
+- Khái niệm cốt lõi 1
+- Khái niệm cốt lõi 2
 
-## II. MA TRẬN PHÂN PHỐI ĐƠN VỊ KIẾN THỨC
-* **ĐVKT 1: Khái niệm nhiệt dung riêng**
-  * Nhiệm vụ 1: Matching Matrix (Ghép nối đại lượng, công thức và ý nghĩa vật lý).
-  * Nhiệm vụ 2: Assertion Reasoning (Đánh giá và lập luận hiện tượng đun nước và dầu ăn).
-  * Nhiệm vụ 3: Contextual MCQ (Bài toán đời sống về khí hậu ven biển).
-* **ĐVKT 2: Thực hành đo nhiệt dung riêng của nước**
-  * Nhiệm vụ 4: Algorithmic Ordering (Sắp xếp tiến trình 6 bước thực hành).
-  * Nhiệm vụ 5: Visual Cloze Test (Quan sát sơ đồ thực nghiệm nhiệt lượng kế để điền tên thiết bị).
-  * Nhiệm vụ 6: Fact Check Influencer (Kiểm chứng sai số đo nhiệt lượng và thất thoát nhiệt).
+## II. BẪY SAI LẦM PHỔ BIẾN (MISCONCEPTIONS)
+### Lỗi 1: Quan niệm sai mẫu
+- *Bản chất vật lý đúng:* Bản chất đúng mẫu
+- *Giải thích sư phạm:* Giải thích sư phạm mẫu.
+
+## III. PHƯƠNG PHÁP GIẢNG DẠY
+- Dạy học khám phá
+- Dạy học hợp tác nhóm
+
+## IV. MA TRẬN NHIỆM VỤ HỌC TẬP
+### [ĐVKT 1] Đơn vị kiến thức 1 của Bài 4 - Nhiệt dung riêng
+- Khái niệm chính: Khái niệm 1.1, Khái niệm 1.2
+- Chuỗi nhiệm vụ:
+  - **NV1.1 (Matching Matrix)**: Nhiệm vụ ghép nối 1 - Mô tả nhiệm vụ mẫu. (Bối cảnh: Bối cảnh thực tế mẫu.)
+  - **NV1.2 (Bug Buster)**: Nhiệm vụ tìm lỗi 1 - Mô tả nhiệm vụ mẫu thứ hai. (Bối cảnh: Bối cảnh thực tế mẫu khác.)
+
+### [ĐVKT 2] Đơn vị kiến thức 2 của Bài 4 - Nhiệt dung riêng
+- Khái niệm chính: Khái niệm 2.1, Khái niệm 2.2
+- Chuỗi nhiệm vụ:
+  - **NV2.1 (Matching Matrix)**: Nhiệm vụ ghép nối 2 - Mô tả nhiệm vụ mẫu. (Bối cảnh: Bối cảnh thực tế mẫu.)
+  - **NV2.2 (Bug Buster)**: Nhiệm vụ tìm lỗi 2 - Mô tả nhiệm vụ mẫu thứ hai. (Bối cảnh: Bối cảnh thực tế mẫu khác.)

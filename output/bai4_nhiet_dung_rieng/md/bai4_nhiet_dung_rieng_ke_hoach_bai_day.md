@@ -1,25 +1,85 @@
-# KẾ HOẠCH BÀI DẠY: BÀI 4 - NHIỆT DUNG RIÊNG
-**Giáo viên thực hiện:** Kha Khung Hiệp
-**Thời lượng:** 2 tiết
+Trường: ................................................
+Tổ: Tổ Vật lí - Công nghệ
 
-## I. MỤC TIÊU BÀI HỌC
-*   **Kiến thức:** Giúp học sinh hiểu khái niệm nhiệt dung riêng, viết công thức và nắm được phương pháp đo thực nghiệm.
-*   **Kỹ năng:** Lắp ráp dụng cụ thí nghiệm, thu thập số liệu, tính toán sai số vật lý.
+---
 
-## II. TIẾN TRÌNH DẠY HỌC
-### 1. Hoạt động 1: Khởi động (10 phút)
-*   Đặt vấn đề thông qua hiện tượng đun nước và dầu ăn.
-*   Cho học sinh thảo luận cặp đôi về mệnh đề của Nhiệm vụ 1 trong Phiếu học tập.
+# KẾ HOẠCH BÀI DẠY
+**Họ và tên giáo viên:** Kha Khung Hiệp  
+**Tên bài dạy:** Bài 4 - Nhiệt dung riêng  
+**Môn học/Hoạt động giáo dục:** Vật lí; **Lớp:** 12  
+**Thời gian thực hiện:** 2 tiết  
 
-### 2. Hoạt động 2: Hình thành kiến thức khái niệm (25 phút)
-*   Chốt định nghĩa nhiệt dung riêng, phân tích đơn vị $J/kg.K$.
-*   Hướng dẫn học sinh giải thích hiện tượng khí hậu biển (Nhiệm vụ 2).
+---
 
-### 3. Hoạt động 3: Hướng dẫn thực hành thí nghiệm (35 phút)
-*   Giới thiệu sơ đồ thiết bị nhiệt lượng kế và watt kế kỹ thuật số.
-*   Sắp xếp thứ tự các bước thực nghiệm của học sinh.
-*   Phân tích công thức tính sai số: $\frac{\Delta c}{c} = \frac{\Delta P}{P} + \frac{\Delta t}{t} + \frac{\Delta m}{m} + \frac{\Delta (\Delta T)}{\Delta T}$.
+## I. YÊU CẦU CẦN ĐẠT
+### 1. Năng lực đặc thù (Vật lí)
+- Năng lực vật lý mẫu
 
-### 4. Hoạt động 4: Vận dụng & Tổng kết (20 phút)
-*   Giao bài tập tính toán sai số thực hành đo.
-*   Giao bài tập về nhà bối cảnh thực tế.
+### 2. Năng lực chung
+- Năng lực tự học mẫu
+
+### 3. Năng lực số (Công văn 3456/BGDĐT-GDPT)
+- **1.2 — Đánh giá dữ liệu, thông tin và nội dung số:** Đánh giá độ tin cậy của dữ liệu số và hướng dẫn bạn kiểm tra nguồn. **Minh chứng:** Phiếu so sánh dữ liệu có liên kết và nhận xét nguồn.
+
+### 4. Phẩm chất
+- Chăm chỉ
+- Trách nhiệm
+
+---
+## II. THIẾT BỊ DẠY HỌC VÀ HỌC LIỆU
+### 1. Giáo viên
+- Máy chiếu
+- Phiếu học tập
+
+### 2. Học sinh
+- SGK
+- Vở ghi
+
+---
+## III. TIẾN TRÌNH DẠY HỌC
+### 1. Hoạt động 1: Hoạt động 1: Đơn vị kiến thức 1 của Bài 4 - Nhiệt dung riêng
+a) Mục tiêu: Mục tiêu hoạt động mẫu.
+
+b) Nội dung: Nội dung hoạt động mẫu.
+
+c) Sản phẩm: Sản phẩm học tập mẫu.
+
+**Kĩ thuật dạy học tích cực:** Chia sẻ nhóm đôi
+
+**Năng lực số:** 1.2
+
+d) Tổ chức thực hiện:
+
+| Hoạt động của giáo viên và học sinh | Sản phẩm |
+| :--- | :--- |
+| **Bước 1: Chuyển giao nhiệm vụ:**<br>Giáo viên giao nhiệm vụ mẫu.<br>**Bước 2: Thực hiện nhiệm vụ:**<br>Học sinh thực hiện nhiệm vụ mẫu.<br>**Bước 3: Báo cáo, thảo luận:**<br>Học sinh báo cáo kết quả mẫu.<br>**Bước 4: Kết luận, nhận định:**<br>Giáo viên kết luận, chuẩn hóa kiến thức mẫu. | Sản phẩm học tập mẫu. |
+
+---
+
+### 2. Hoạt động 2: Hoạt động 2: Đơn vị kiến thức 2 của Bài 4 - Nhiệt dung riêng
+a) Mục tiêu: Mục tiêu hoạt động mẫu.
+
+b) Nội dung: Nội dung hoạt động mẫu.
+
+c) Sản phẩm: Sản phẩm học tập mẫu.
+
+**Kĩ thuật dạy học tích cực:** Chia sẻ nhóm đôi
+
+**Năng lực số:** 1.2
+
+d) Tổ chức thực hiện:
+
+| Hoạt động của giáo viên và học sinh | Sản phẩm |
+| :--- | :--- |
+| **Bước 1: Chuyển giao nhiệm vụ:**<br>Giáo viên giao nhiệm vụ mẫu.<br>**Bước 2: Thực hiện nhiệm vụ:**<br>Học sinh thực hiện nhiệm vụ mẫu.<br>**Bước 3: Báo cáo, thảo luận:**<br>Học sinh báo cáo kết quả mẫu.<br>**Bước 4: Kết luận, nhận định:**<br>Giáo viên kết luận, chuẩn hóa kiến thức mẫu. | Sản phẩm học tập mẫu. |
+
+---
+
+## IV. ĐIỀU CHỈNH BÀI DẠY
+1. **Ưu điểm:**
+
+
+2. **Hạn chế:**
+
+
+3. **Hướng điều chỉnh:**

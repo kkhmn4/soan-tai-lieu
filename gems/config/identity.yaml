@@ -1,0 +1,10 @@
+# Nguồn thật duy nhất cho các giá trị thương hiệu/định danh.
+# Trước đây "Kha Khung Hiệp" và "Nguyễn Văn A" cùng tồn tại như 2 giá trị hardcode
+# lệch nhau ở 2 nơi khác nhau; brand_label từng là "GEMS v7.1" ở một chỗ và
+# "GEMS v8.0" ở chỗ khác. Từ giờ mọi nơi đọc đúng 1 giá trị từ đây.
+teacher_name: "Kha Khung Hiệp"
+department: "Tổ Vật lí - Công nghệ"
+brand_label: "GEMS v9.0"
+default_font: "Times New Roman"
+gemini_model_architect: "gemini-2.5-pro"
+gemini_model_content: "gemini-2.5-flash"

@@ -3,7 +3,6 @@ name: docx
 description: "Use this skill whenever the user wants to create, read, edit, or manipulate Word documents (.docx files). Triggers include: any mention of 'Word doc', 'word document', '.docx', or requests to produce professional documents with formatting like tables of contents, headings, page numbers, or letterheads. Also use when extracting or reorganizing content from .docx files, inserting or replacing images in documents, performing find-and-replace in Word files, working with tracked changes or comments, or converting content into a polished Word document. If the user asks for a 'report', 'memo', 'letter', 'template', or similar deliverable as a Word or .docx file, use this skill. Do NOT use for PDFs, spreadsheets, Google Docs, or general coding tasks unrelated to document generation."
 license: Proprietary. LICENSE.txt has complete terms
 ---
-
 # DOCX creation, editing, and analysis
 
 ## Overview
@@ -12,10 +11,10 @@ A .docx file is a ZIP archive containing XML files.
 
 ## Quick Reference
 
-| Task | Approach |
-|------|----------|
-| Read/analyze content | `pandoc` or unpack for raw XML |
-| Create new document | Use `docx-js` - see Creating New Documents below |
+| Task                   | Approach                                                            |
+| ---------------------- | ------------------------------------------------------------------- |
+| Read/analyze content   | `pandoc` or unpack for raw XML                                    |
+| Create new document    | Use`docx-js` - see Creating New Documents below                   |
 | Edit existing document | Unpack → edit XML → repack - see Editing Existing Documents below |
 
 ### Converting .doc to .docx
@@ -58,6 +57,7 @@ python scripts/accept_changes.py input.docx output.docx
 Generate .docx files with JavaScript, then validate. Install: `npm install -g docx`
 
 ### Setup
+
 ```javascript
 const { Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell, ImageRun,
         Header, Footer, AlignmentType, PageOrientation, LevelFormat, ExternalHyperlink,
@@ -72,7 +72,9 @@ Packer.toBuffer(doc).then(buffer => fs.writeFileSync("doc.docx", buffer));
 ```
 
 ### Validation
+
 After creating the file, validate it. If validation fails, unpack, fix the XML, and repack.
+
 ```bash
 python scripts/office/validate.py doc.docx
 ```
@@ -98,12 +100,13 @@ sections: [{
 
 **Common page sizes (DXA units, 1440 DXA = 1 inch):**
 
-| Paper | Width | Height | Content Width (1" margins) |
-|-------|-------|--------|---------------------------|
-| US Letter | 12,240 | 15,840 | 9,360 |
-| A4 (default) | 11,906 | 16,838 | 9,026 |
+| Paper        | Width  | Height | Content Width (1" margins) |
+| ------------ | ------ | ------ | -------------------------- |
+| US Letter    | 12,240 | 15,840 | 9,360                      |
+| A4 (default) | 11,906 | 16,838 | 9,026                      |
 
 **Landscape orientation:** docx-js swaps width/height internally, so pass portrait dimensions and let it handle the swap:
+
 ```javascript
 size: {
   width: 12240,   // Pass SHORT edge as width
@@ -144,7 +147,7 @@ const doc = new Document({
 ```javascript
 // ❌ WRONG - never manually insert bullet characters
 new Paragraph({ children: [new TextRun("• Item")] })  // BAD
-new Paragraph({ children: [new TextRun("\u2022 Item")] })  // BAD
+new Paragraph({ children: [new TextRun("• Item")] })  // BAD
 
 // ✅ CORRECT - use numbering config with LevelFormat.BULLET
 const doc = new Document({
@@ -214,6 +217,7 @@ columnWidths: [7000, 2360]  // Must sum to table width
 ```
 
 **Width rules:**
+
 - **Always use `WidthType.DXA`** — never `WidthType.PERCENTAGE` (incompatible with Google Docs)
 - Table width must equal the sum of `columnWidths`
 - Cell `width` must match corresponding `columnWidth`
@@ -400,9 +404,11 @@ sections: [{
 **Follow all 3 steps in order.**
 
 ### Step 1: Unpack
+
 ```bash
 python scripts/office/unpack.py document.docx unpacked/
 ```
+
 Extracts XML, pretty-prints, merges adjacent runs, and converts smart quotes to XML entities (`&#x201C;` etc.) so they survive editing. Use `--merge-runs false` to skip run merging.
 
 ### Step 2: Edit XML
@@ -414,36 +420,44 @@ Edit files in `unpacked/word/`. See XML Reference below for patterns.
 **Use the Edit tool directly for string replacement. Do not write Python scripts.** Scripts introduce unnecessary complexity. The Edit tool shows exactly what is being replaced.
 
 **CRITICAL: Use smart quotes for new content.** When adding text with apostrophes or quotes, use XML entities to produce smart quotes:
+
 ```xml
 <!-- Use these entities for professional typography -->
-<w:t>Here&#x2019;s a quote: &#x201C;Hello&#x201D;</w:t>
+<w:t>Here's a quote: "Hello"</w:t>
 ```
-| Entity | Character |
-|--------|-----------|
-| `&#x2018;` | ' (left single) |
+
+| Entity       | Character                     |
+| ------------ | ----------------------------- |
+| `&#x2018;` | ' (left single)               |
 | `&#x2019;` | ' (right single / apostrophe) |
-| `&#x201C;` | " (left double) |
-| `&#x201D;` | " (right double) |
+| `&#x201C;` | " (left double)               |
+| `&#x201D;` | " (right double)              |
 
 **Adding comments:** Use `comment.py` to handle boilerplate across multiple XML files (text must be pre-escaped XML):
+
 ```bash
-python scripts/comment.py unpacked/ 0 "Comment text with &amp; and &#x2019;"
+python scripts/comment.py unpacked/ 0 "Comment text with & and '"
 python scripts/comment.py unpacked/ 1 "Reply text" --parent 0  # reply to comment 0
 python scripts/comment.py unpacked/ 0 "Text" --author "Custom Author"  # custom author name
 ```
+
 Then add markers to document.xml (see Comments in XML Reference).
 
 ### Step 3: Pack
+
 ```bash
 python scripts/office/pack.py unpacked/ output.docx --original document.docx
 ```
+
 Validates with auto-repair, condenses XML, and creates DOCX. Use `--validate false` to skip.
 
 **Auto-repair will fix:**
+
 - `durableId` >= 0x7FFFFFFF (regenerates valid ID)
 - Missing `xml:space="preserve"` on `<w:t>` with whitespace
 
 **Auto-repair won't fix:**
+
 - Malformed XML, invalid element nesting, missing relationships, schema violations
 
 ### Common Pitfalls
@@ -464,6 +478,7 @@ Validates with auto-repair, condenses XML, and creates DOCX. Use `--validate fal
 ### Tracked Changes
 
 **Insertion:**
+
 ```xml
 <w:ins w:id="1" w:author="Claude" w:date="2025-01-01T00:00:00Z">
   <w:r><w:t>inserted text</w:t></w:r>
@@ -471,6 +486,7 @@ Validates with auto-repair, condenses XML, and creates DOCX. Use `--validate fal
 ```
 
 **Deletion:**
+
 ```xml
 <w:del w:id="2" w:author="Claude" w:date="2025-01-01T00:00:00Z">
   <w:r><w:delText>deleted text</w:delText></w:r>
@@ -480,6 +496,7 @@ Validates with auto-repair, condenses XML, and creates DOCX. Use `--validate fal
 **Inside `<w:del>`**: Use `<w:delText>` instead of `<w:t>`, and `<w:delInstrText>` instead of `<w:instrText>`.
 
 **Minimal edits** - only mark what changes:
+
 ```xml
 <!-- Change "30 days" to "60 days" -->
 <w:r><w:t>The term is </w:t></w:r>
@@ -493,6 +510,7 @@ Validates with auto-repair, condenses XML, and creates DOCX. Use `--validate fal
 ```
 
 **Deleting entire paragraphs/list items** - when removing ALL content from a paragraph, also mark the paragraph mark as deleted so it merges with the next paragraph. Add `<w:del/>` inside `<w:pPr><w:rPr>`:
+
 ```xml
 <w:p>
   <w:pPr>
@@ -506,9 +524,11 @@ Validates with auto-repair, condenses XML, and creates DOCX. Use `--validate fal
   </w:del>
 </w:p>
 ```
+
 Without the `<w:del/>` in `<w:pPr><w:rPr>`, accepting changes leaves an empty paragraph/list item.
 
 **Rejecting another author's insertion** - nest deletion inside their insertion:
+
 ```xml
 <w:ins w:author="Jane" w:id="5">
   <w:del w:author="Claude" w:id="10">
@@ -518,6 +538,7 @@ Without the `<w:del/>` in `<w:pPr><w:rPr>`, accepting changes leaves an empty pa
 ```
 
 **Restoring another author's deletion** - add insertion after (don't modify their deletion):
+
 ```xml
 <w:del w:author="Jane" w:id="5">
   <w:r><w:delText>deleted text</w:delText></w:r>
@@ -557,14 +578,19 @@ After running `comment.py` (see Step 2), add markers to document.xml. For replie
 
 1. Add image file to `word/media/`
 2. Add relationship to `word/_rels/document.xml.rels`:
+
 ```xml
 <Relationship Id="rId5" Type=".../image" Target="media/image1.png"/>
 ```
+
 3. Add content type to `[Content_Types].xml`:
+
 ```xml
 <Default Extension="png" ContentType="image/png"/>
 ```
+
 4. Reference in document.xml:
+
 ```xml
 <w:drawing>
   <wp:inline>
@@ -593,110 +619,34 @@ After running `comment.py` (see Step 2), add markers to document.xml. For replie
 
 ## Adaptation cho hệ thống GEMS (python-docx)
 
-Hệ thống GEMS sử dụng **python-docx** thay vì docx-js. Các nguyên tắc cốt lõi từ skill này được ánh xạ sang python-docx như sau:
+Hệ thống GEMS dùng **python-docx**, không phải docx-js. Các nguyên tắc cốt lõi từ
+skill này đã được cài đặt sẵn thành helper dùng chung trong
+[`gems/docx_export/styles.py`](../gems/docx_export/styles.py) — KHÔNG tự viết
+lại XML bảng/ô/footer ở nơi khác trong dự án này (bản trước 7/2026 từng có tới
+4 bản sao chép logic set-độ-rộng-bảng khác nhau vì mỗi exporter tự viết lại).
 
-### Bảng (Tables) — python-docx equivalents
+| Việc cần làm | Hàm/module đã có sẵn |
+|---|---|
+| Set lề trang theo loại tài liệu | `styles.setup_margins(doc, doc_type)` — số liệu thật ở `gems/docx_export/layout.py` |
+| Set độ rộng bảng bằng DXA (dual width bảng + từng cột) | `styles.set_table_width_dxa(table, width_cm)`, `styles.make_table(...)` |
+| Tô nền ô (shading) | `styles.set_cell_shading(cell, hex_color)` |
+| Đệm/viền ô | `styles.set_cell_margins(cell, ...)`, `styles.set_cell_borders(cell)` / `remove_cell_borders(cell)` |
+| Footer số trang động `Trang X/Y` | `styles.add_page_number_footer(doc)` |
+| Nháy thẳng → nháy cong | `gems.docx_export.latex_clean.smart_typography(text)` |
+| Dịch LaTeX → Unicode | `gems.docx_export.latex_clean.clean_latex(text)` |
+| **bold**/*italic*/$latex$/==highlight== trong 1 đoạn | `gems.docx_export.run_formatter.add_formatted_runs(...)` |
 
-```python
-from docx.shared import Cm, Pt, RGBColor
-from docx.oxml.ns import qn
-from docx.oxml import OxmlElement
+### Quy tắc vàng (đã cài đặt, không cần tự viết lại)
 
-# ❌ SAI - Không set độ rộng bảng
-table = doc.add_table(rows=1, cols=2)
-
-# ✅ ĐÚNG - Set cả bảng lẫn từng cột
-table = doc.add_table(rows=1, cols=2)
-table.style = 'Table Grid'
-# Set table width via XML
-tbl = table._tbl
-tblPr = tbl.tblPr
-tblW = OxmlElement('w:tblW')
-tblW.set(qn('w:w'), '9026')   # A4 content width in DXA
-tblW.set(qn('w:type'), 'dxa')
-tblPr.append(tblW)
-
-# Set each cell width explicitly
-cell.width = Cm(8.5)
-```
-
-### Shading — Dùng XML trực tiếp (tránh đen bảng)
-
-```python
-def set_cell_shading(cell, fill_hex):
-    """fill_hex: 'E8F5E9' (không có #)"""
-    tc = cell._tc
-    tcPr = tc.get_or_add_tcPr()
-    shd = OxmlElement('w:shd')
-    shd.set(qn('w:val'), 'clear')   # CLEAR not solid — avoids black background
-    shd.set(qn('w:color'), 'auto')
-    shd.set(qn('w:fill'), fill_hex)
-    tcPr.append(shd)
-```
-
-### Footer với số trang động (XML field codes)
-
-```python
-from docx.oxml.ns import qn
-from docx.oxml import OxmlElement
-
-def add_page_number_footer(doc):
-    section = doc.sections[0]
-    footer = section.footer
-    p = footer.paragraphs[0]
-    p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    p.clear()
-
-    # "Trang "
-    run = p.add_run("Trang ")
-    run.font.name = "Times New Roman"
-    run.font.size = Pt(10)
-
-    # PAGE field
-    fldChar1 = OxmlElement('w:fldChar'); fldChar1.set(qn('w:fldCharType'), 'begin')
-    instrText = OxmlElement('w:instrText'); instrText.text = ' PAGE '
-    fldChar2 = OxmlElement('w:fldChar'); fldChar2.set(qn('w:fldCharType'), 'end')
-    for el in [fldChar1, instrText, fldChar2]:
-        r = OxmlElement('w:r')
-        r.append(el)
-        p._p.append(r)
-
-    run2 = p.add_run(" / ")
-    run2.font.name = "Times New Roman"; run2.font.size = Pt(10)
-
-    # NUMPAGES field
-    fldChar3 = OxmlElement('w:fldChar'); fldChar3.set(qn('w:fldCharType'), 'begin')
-    instrText2 = OxmlElement('w:instrText'); instrText2.text = ' NUMPAGES '
-    fldChar4 = OxmlElement('w:fldChar'); fldChar4.set(qn('w:fldCharType'), 'end')
-    for el in [fldChar3, instrText2, fldChar4]:
-        r = OxmlElement('w:r')
-        r.append(el)
-        p._p.append(r)
-```
-
-### Smart Typography — Dấu câu chuyên nghiệp
-
-Thay `"` bằng `"` / `"`, `'` bằng `'` / `'` trong nội dung text bằng cách thay thế trước khi đưa vào Word.
-
-```python
-def smart_quotes(text):
-    """Convert straight quotes to smart quotes."""
-    text = text.replace('"', '\u201c').replace('"', '\u201d')  # Requires positional logic
-    text = text.replace("'", '\u2019')  # apostrophe
-    return text
-```
-
-### Quy tắc vàng từ skill này (áp dụng cho python-docx)
-
-1. **Luôn set kích thước trang rõ ràng** — python-docx mặc định A4, nhưng cần set margins theo chuẩn GEMS (Left 3cm, Right 1.5cm, Top/Bottom 2cm).
-2. **Không dùng `\n` trong text run** — mỗi đoạn là một `add_paragraph()` riêng.
-3. **Không dùng ký tự bullet unicode thô (`•`)** — dùng list style hoặc gạch đầu dòng `-` được parse thành list paragraph có indent.
-4. **Bảng cần dual widths** — set cả `table width` lẫn từng `cell.width` rõ ràng.
-5. **Shading dùng `w:val='clear'`** — không dùng `solid` để tránh nền đen.
-6. **Footer số trang dùng XML field codes** — không hard-code số trang, sử dụng dynamic fields `PAGE` và `NUMPAGES`.
-7. **Alt text cho ảnh** — luôn set `pic.alt_text` (hoặc `wp:docPr` name/descr) khi nhúng ảnh để tuân thủ XML.
-8. **Cell margins** — cell padding: top/bottom 4pt (hoặc 50 dxa), left/right 8pt (hoặc 100 dxa) cho dễ đọc.
-9. **Administrative Header KHBD** — KHBD sử dụng single-column header (left-aligned) cho Sở GD và Trường THPT, không kèm Quốc hiệu/Tiêu ngữ.
-10. **Tự động chèn dòng chấm rút kinh nghiệm** — tự động thêm 2 dòng chấm viết tay sau các từ khóa "Ưu điểm:", "Hạn chế:", "Hướng điều chỉnh:".
-11. **Tự động quét và nhúng ảnh** — phát hiện link ảnh local (`ready/hinh_anh/...`) trong text paragraph để tự động nhúng ảnh căn giữa ngay phía dưới.
-12. **Blockquote handling** — dòng bắt đầu bằng `>` được thụt lề 1.0cm và chuyển toàn bộ text run sang in nghiêng.
+1. **Lề trang theo loại tài liệu, không có 1 giá trị chung** — PHT 2/2/2/2cm, KHBD 2/2/3/2cm, Bài tập 1.5/1.5/2/2cm (`gems/docx_export/layout.py`).
+2. **Không dùng `\n` trong text run** — mỗi đoạn là một `add_paragraph()` riêng, trừ vài khối tiêu đề/chữ ký cố định nơi python-docx tự tách `\n` thành `<w:br/>`.
+3. **Không dùng ký tự bullet unicode thô (`•`)** — bullet luôn là text run `"- "`/`"+ "` trên paragraph có indent.
+4. **Bảng luôn dual widths** — `make_table()`/`set_table_width_dxa()` tự set cả độ rộng bảng lẫn từng `cell.width`, và tự dọn `w:tblW` mặc định của python-docx trước khi ghi giá trị mới (nếu không dọn, XML sẽ có 2 phần tử `w:tblW` xung đột).
+5. **Shading dùng `w:val` mặc định của `w:shd`** qua `set_cell_shading()` — không tự viết XML rời.
+6. **Footer số trang dùng XML field codes** qua `add_page_number_footer()` — không hard-code số trang.
+7. **Alt text cho ảnh:** chưa cài đặt trong `gems/docx_export/renderer.py::embed_image()` — biết đây là khoảng trống, không phải đã có sẵn.
+8. **Cell margins mặc định:** top/bottom 5.7pt, left/right 8.5pt (`set_cell_margins()` mặc định) — đổi giá trị qua tham số, không hard-code lại nơi khác.
+9. **Header hành chính KHBD:** single-column, left-aligned cho Sở GD&ĐT/Trường THPT, không kèm Quốc hiệu/Tiêu ngữ.
+10. **Dòng chấm rút kinh nghiệm KHBD:** 1 dòng chấm dự phòng sau mỗi mục Ưu điểm/Hạn chế/Hướng điều chỉnh (`khbd_exporter._add_adjustments_section`).
+11. **Tự động quét và nhúng ảnh:** `gems.docx_export.markdown_ir.resolve_image_path()` phát hiện link `ready/hinh_anh/...` trong dòng văn bản, thử 3 cách suy ra đường dẫn thật, rồi `renderer.embed_image()` chèn ảnh căn giữa dưới đoạn văn.
+12. **Blockquote:** dòng bắt đầu bằng `>` được thụt lề 1.0cm và toàn bộ run trong đoạn chuyển sang in nghiêng.

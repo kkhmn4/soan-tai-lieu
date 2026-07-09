@@ -46,3 +46,6 @@ scratch/
 # OS temporary files
 .DS_Store
 Thumbs.db
+
+# Temp skill install artifacts
+.skill-install-temp/

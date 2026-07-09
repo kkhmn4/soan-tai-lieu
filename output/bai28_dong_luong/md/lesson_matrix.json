@@ -1,0 +1,55 @@
+{
+  "lesson_name": "Bài 28 - Động lượng",
+  "units": [
+    {
+      "unit_id": "2.1",
+      "unit_name": "Động lượng",
+      "concepts": [
+        "Khả năng truyền chuyển động khi tương tác giữa các vật",
+        "Định nghĩa và công thức động lượng p = m.v",
+        "Tính chất vectơ và đơn vị của động lượng"
+      ],
+      "tasks": [
+        {
+          "task_id": "NV1",
+          "task_type": "Contextual MCQ",
+          "task_name": "Xe nào khó dừng lại hơn? Bóng nào khó bắt hơn?",
+          "description": "Quan sát 2 tình huống mở bài (xe tải/xe con cùng tốc độ khi phanh gấp; cầu thủ sút phạt 11 m) để dự đoán vật nào 'khó dừng lại hơn' và giải thích ban đầu bằng trực giác, làm nền cho khái niệm động lượng.",
+          "context_real": "Xe tải và xe con cùng chạy trên đường; thủ môn bắt bóng sút phạt 11 m."
+        },
+        {
+          "task_id": "NV2",
+          "task_type": "Thí nghiệm khám phá",
+          "task_name": "Thí nghiệm ba viên bi A, B, C",
+          "description": "Học sinh trực tiếp làm 2 thí nghiệm với bộ dụng cụ máng trượt + 3 viên bi (Hình 28.1 SGK): (1) so sánh bi A và bi B (khác khối lượng) cùng thả từ một độ cao; (2) chỉ thả bi A nhưng đổi độ dốc. Quan sát, đo quãng đường bi C dịch chuyển sau va chạm, tự rút ra kết luận về các yếu tố ảnh hưởng đến khả năng truyền chuyển động — dẫn tới định nghĩa động lượng.",
+          "context_real": "Thí nghiệm thật với máng trượt và 3 viên bi khác khối lượng."
+        }
+      ]
+    },
+    {
+      "unit_id": "2.2",
+      "unit_name": "Xung lượng của lực",
+      "concepts": [
+        "Định nghĩa xung lượng của lực F.Δt",
+        "Liên hệ xung lượng của lực và độ biến thiên động lượng F.Δt = Δp",
+        "Dạng tổng quát của định luật II Newton F = Δp/Δt"
+      ],
+      "tasks": [
+        {
+          "task_id": "NV3",
+          "task_type": "Infographic Decryption",
+          "task_name": "Đọc đồ thị lực - thời gian",
+          "description": "Khai thác đồ thị F-t (lực không đổi tác dụng trong Δt) để nhận ra diện tích hình chữ nhật chính là độ lớn xung lượng của lực, liên hệ với tình huống thủ môn co tay lùi người khi bắt bóng.",
+          "context_real": "Đồ thị lực-thời gian khi thủ môn bắt bóng sút phạt."
+        },
+        {
+          "task_id": "NV4",
+          "task_type": "Model Builder",
+          "task_name": "Suy luận công thức liên hệ",
+          "description": "Từ định luật II Newton dạng F = m.a đã học, xây dựng từng bước để suy ra công thức liên hệ giữa xung lượng của lực và độ biến thiên động lượng, từ đó viết dạng tổng quát F = Δp/Δt.",
+          "context_real": "Vận dụng lại kiến thức định luật II Newton đã học ở bài trước."
+        }
+      ]
+    }
+  ]
+}

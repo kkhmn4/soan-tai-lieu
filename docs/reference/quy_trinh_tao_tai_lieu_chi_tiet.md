@@ -3,465 +3,405 @@ tags: [GEMS, training, workflow, SOP, team]
 ---
 
 # 📋 QUY TRÌNH TẠO TÀI LIỆU DẠY HỌC CHI TIẾT
-> Phiên bản: 1.0 | Dành cho giáo viên hướng dẫn
-> Hệ thống: GEMS v8.0 | Chương trình: GDPT 2018 - Vật lý 12 KNTT
+> Phiên bản: 2.0 | Dành cho giáo viên hướng dẫn
+> Hệ thống: package `gems/` kiến trúc v9.0 (viết lại toàn bộ 7/2026) | Chương trình: GDPT 2018 - Vật lý 12 KNTT
+>
+> Tài liệu này mô tả đúng quy trình mà code trong `gems/` đang chạy — không phải một bản mô tả lý
+> tưởng tách rời thực tế. Số liệu định dạng (lề/font/màu) KHÔNG lặp lại ở đây, xem
+> [`.agents/agents.md`](../../.agents/agents.md). Chuẩn NỘI DUNG (nguyên tắc sư phạm, 12 loại
+> nhiệm vụ, chuẩn cấu trúc đề thi tốt nghiệp, 15 tiêu chí QA) KHÔNG lặp lại ở đây, xem
+> [`skills/gems_physics_skill.md`](../../skills/gems_physics_skill.md) — tài liệu này chỉ nói
+> **thứ tự vận hành, lệnh CLI và vai trò từng giai đoạn**, để tránh 3 nguồn lệch nhau theo thời
+> gian (bài học từng xảy ra: bản v1.0 tham chiếu `engine/`, Hermes Telegram bot, LaTeX/TikZ và bảng
+> màu Navy/Mint — tất cả đã bị thay thế hoàn toàn bởi package `gems/` từ 7/2026, xem `changelog.md`).
 
 ---
 
 ## MỤC LỤC
 1. [Tổng quan hệ thống](#1-tổng-quan-hệ-thống)
-2. [Quy trình 6 bước chi tiết](#2-quy-trình-6-bước-chi-tiết)
-3. [Cấu trúc đầu ra cho mỗi bài học](#3-cấu-trúc-đầu-ra-cho-mỗi-bài-học)
-4. [Mẫu Prompt cho từng bước](#4-mẫu-prompt-cho-từng-bước)
-5. [Tiêu chí kiểm định chất lượng (15 QA)](#5-tiêu-chí-kiểm-định-chất-lượng-15-qa)
-6. [Công cụ & Tài nguyên](#6-công-cụ--tài-nguyên)
-7. [Checklist xuất bản](#7-checklist-xuất-bản)
+2. [Quy trình 6 giai đoạn của GEMSPipeline](#2-quy-trình-6-giai-đoạn-của-gemspipeline)
+3. [Nguyên tắc "luyện đề ngay khi học"](#3-nguyên-tắc-luyện-đề-ngay-khi-học)
+4. [Cấu trúc đầu ra cho mỗi bài học](#4-cấu-trúc-đầu-ra-cho-mỗi-bài-học)
+5. [2 cách vận hành: generate (Gemini API) vs. compose (AI agent tự soạn)](#5-2-cách-vận-hành-generate-gemini-api-vs-compose-ai-agent-tự-soạn)
+6. [Kiểm định chất lượng (QA)](#6-kiểm-định-chất-lượng-qa)
+7. [Công cụ & tài nguyên](#7-công-cụ--tài-nguyên)
+8. [Checklist xuất bản](#8-checklist-xuất-bản)
 
 ---
 
 ## 1. TỔNG QUAN HỆ THỐNG
 
 ### 1.1 Mục tiêu & Vai trò các tài liệu
-Tạo **bộ tài liệu dạy học hoàn chỉnh và đồng bộ** cho mỗi bài học Vật lý 12 GDPT 2018. Mối quan hệ và định vị vai trò của các tài liệu được quy định nghiêm ngặt như sau:
-*   **Kế hoạch bài dạy (Giáo án / Lesson Plan):** Là tài liệu **chuẩn cốt lõi (Source of Truth)** làm gốc cho toàn bộ hệ thống. Tất cả các phần trong Phiếu học tập và Slide bài giảng bắt buộc phải bám sát theo các hoạt động và tiến trình trong Kế hoạch bài dạy.
-*   **Slide bài giảng (Slide Deck):** Thiết kế bám sát từng bước trong Kế hoạch bài dạy, đóng vai trò là công cụ trực quan để **Giáo viên** sử dụng dẫn dắt, điều khiển và hướng dẫn học sinh học tập trên lớp.
-*   **Phiếu học tập (Student Worksheet):** Thiết kế bám sát nội dung nhiệm vụ trong Kế hoạch bài dạy, đóng vai trò là công cụ tự học để **Học sinh** sử dụng tự tìm hiểu, thảo luận và thực hiện nhiệm vụ học tập nhằm đạt mục tiêu.
-*   **Infographic:** Phiên bản trực quan hóa của Phiếu học tập (đục lỗ trống) phục vụ cho học sinh thực hành điền khuyết trên lớp.
-*   **Bài tập về nhà & Đáp án chi tiết (Homework & Answer Key):** Hệ thống câu hỏi củng cố biên dịch qua LaTeX.
+Tạo **bộ tài liệu dạy học hoàn chỉnh và đồng bộ** cho mỗi bài học Vật lý 12 GDPT 2018, từ 1 ma
+trận sư phạm duy nhất. Vai trò từng tài liệu:
+*   **Kế hoạch bài dạy (KHBD):** Chuẩn Phụ lục IV — Công văn 5512/BGDĐT-GDTrH, là tài liệu **cốt
+    lõi (Source of Truth)** cho toàn bộ tiến trình dạy — học. Bước 1 (Chuyển giao) của KHBD PHẢI nêu
+    đúng 3 ý (hình thức/thời gian/tài liệu) khớp với `instructions` của nhiệm vụ tương ứng trong PHT
+    (xem skill mục 4.3) — 2 bộ Slide đọc trực tiếp `instructions` này từ PHT (qua
+    `worksheet_data.json`), không tự parse lại KHBD.
+*   **Phiếu học tập (PHT):** Công cụ tự học cho **Học sinh**, bám sát nhiệm vụ trong KHBD; đồng thời
+    là nguồn dữ liệu cấu trúc chính (`worksheet_data.json`) mà 2 bộ Slide đọc trực tiếp.
+*   **Slide Giáo viên:** Công cụ trực quan cho **Giáo viên** dẫn dắt cả lớp, sinh qua NotebookLM —
+    màu sắc/đồ họa đẹp, có đầy đủ đáp án, tách slide Nhiệm vụ/Đáp án riêng biệt cho mọi nhiệm vụ.
+*   **Slide Phiếu học tập:** Bản chiếu số hóa của PHT giấy cho **Học sinh**, sinh qua NotebookLM cùng
+    notebook với Slide Giáo viên — nền trắng/ảnh trắng-đen-xám, có khoảng trống viết trực tiếp,
+    **không có slide đáp án nào**. Thay thế hoàn toàn cơ chế Infographic cũ (xem Giai đoạn 5).
+*   **Bài tập về nhà & Đáp án:** Hệ thống câu hỏi củng cố, bám sát cấu trúc VÀ phong cách đề thi
+    tốt nghiệp THPT thật (không chỉ đúng số lượng câu — xem mục 3 và
+    [skill mục 4.4](../../skills/gems_physics_skill.md)).
 
 ### 1.2 Công nghệ sử dụng
 | Công cụ | Dùng cho | Yêu cầu |
 |---------|----------|---------|
-| **Hermes Agent** | Chạy pipeline tạo nội dung | Đã cài sẵn |
-| **GEMS Engine (Python)** | Tự động hóa các bước | `GEMINI_API_KEY` |
-| **Groq API** | STT voice note + Chat | `GROQ_API_KEY` |
-| **Google Flow** | Tạo ảnh/video minh họa | 8 Google Pro accounts |
-| **Edge TTS** | Voiceover cho video | Free, không cần key |
-| **NotebookLM (nlm CLI)** | Tạo Slide PPTX + Infographic | Google account |
-| **python-docx** | Xuất file .docx | Python 3.11 |
-| **xelatex** | Biên dịch LaTeX → PDF | MiKTeX / TeX Live |
+| **Package `gems/` (Python)** | Toàn bộ pipeline: sinh nội dung, xuất DOCX, QA lint | Python 3.11, `pip install -e .` |
+| **Gemini API** | Sinh nội dung có cấu trúc (đường `generate`) | `GEMINI_API_KEY` trong `.env` |
+| **AI agent trò chuyện (Claude/Antigravity)** | Tự soạn nội dung trực tiếp, không cần API key (đường `compose`) | Không cần key |
+| **python-docx** | Xuất PHT/KHBD/Bài tập về nhà thành `.docx` in được | Có sẵn trong `requirements.txt` |
+| **NotebookLM (`nlm` CLI)** | Sinh Slide PPTX + Infographic đục lỗ | Tài khoản Google, `nlm login` trước |
+| **pytest** | Kiểm thử `gems/` (~85 test, fixture markdown thật) | `pip install -e ".[dev]"` |
 
-### 1.3 Thư mục dự án
+> Đã loại bỏ khỏi kiến trúc hiện tại (không còn dùng, chỉ còn dấu vết trong `.brain/` lịch sử):
+> Hermes Telegram bot, Groq STT, Google Flow, Edge TTS, biên dịch LaTeX/TikZ cho bài tập về nhà
+> (Bài tập về nhà giờ xuất `.docx` giống PHT/KHBD, qua `gems/docx_export/homework_exporter.py`).
+
+### 1.3 Thư mục dự án (đúng theo `readme.md`)
 ```
-C:\Users\Admin\.antigravity-ide\soạn tài liệu\
-├── engine/                    # Python scripts
-│   ├── main.py               # Orchestrator chính
-│   ├── gems_analyzer.py      # Phân tích sư phạm
-│   ├── worksheet_generator.py# Sinh PHT
-│   ├── homework_generator.py # Sinh bài tập
-│   ├── image_renderer.py     # Vẽ ảnh
-│   ├── quality_checker.py    # QA
-│   └── export_docx.py        # Markdown→docx
-├── tai-lieu-goc/              # SGK, YCCĐ, chương trình
-├── output/hermes/             # Đầu ra
-│   └── [baiX_slug]/          
-│       ├── md/               # File markdown nguồn
-│       ├── notebooklm/       # Dữ liệu NotebookLM
-│       ├── assets/           # Ảnh minh họa
-│       └── ready/            # File sẵn sàng (docx, tex, pdf)
-└── .brain/                   # Obsidian vault kiến thức
-```
-
----
-
-## 2. QUY TRÌNH 6 BƯỚC CHI TIẾT
-
-### ⚠️ QUY TẮC VÀNG: DỪNG sau mỗi bước — chờ phê duyệt
-
----
-
-### BƯỚC 1: PHÂN TÍCH SƯ PHẠM
-
-**Mục tiêu:** Trích xuất YCCĐ, xác định kiến thức cốt lõi, quan niệm sai lầm.
-
-**Input:** 
-- SGK Vật lý 12 KNTT (file DOCX từ `tai-lieu-goc/`)
-- Khung chương trình GDPT 2018 môn Vật lý
-- Công văn hướng dẫn của Bộ GD&ĐT
-
-**Các bước thực hiện:**
-
-1a. Đọc YCCĐ từ tài liệu nguồn (mỗi bài có 2-4 YCCĐ)
-1b. Xác định Đơn vị Kiến thức (ĐVKT) — mỗi bài 2-3 ĐVKT
-1c. Xác định:
-   - Kiến thức cốt lõi (core knowledge)
-   - Quan niệm sai lầm phổ biến của học sinh
-   - Hiện tượng thực tế có thể liên hệ
-1d. Đề xuất kỹ thuật dạy học tích cực: KWL, Think-Pair-Share, Station Learning
-
-**Đầu ra:** `[slug]_dac_ta_gems.md`
-
-**Ví dụ đã làm:** Bài 4 — Nhiệt dung riêng
-- 4 YCCĐ: định nghĩa, hệ thức, thực hành, vận dụng
-- 2 ĐVKT: Khái niệm nhiệt dung riêng, Thực hành đo nhiệt dung riêng
-- Sai lầm: nhầm nhiệt dung riêng với nhiệt dung, quên đơn vị
-
----
-
-### BƯỚC 2: MA TRẬN NỘI DUNG
-
-**Mục tiêu:** Xây dựng ma trận chi tiết ĐVKT → Nhiệm vụ → Bài tập.
-
-**Cấu trúc ma trận:**
-```
-| ĐVKT | Nội dung cốt lõi | Hiện tượng thực tế | Nhiệm vụ PHT | Homework |
-|------|-------------------|--------------------|--------------|----------|
+soạn tài liệu/
+├── gems/                    # TOÀN BỘ logic thật
+│   ├── cli.py / __main__.py    # python -m gems <lệnh> --lesson baiN
+│   ├── config/                 # curriculum.yaml + identity.yaml
+│   ├── models/                  # Pydantic schema (architect, worksheet, homework, lesson_plan)
+│   ├── prompts/                  # Prompt hệ thống gửi Gemini (build_prompt mỗi giai đoạn)
+│   ├── generation/                # Gọi Gemini + ghi Markdown + tự sửa lỗi
+│   ├── docx_export/                # Markdown -> DOCX (layout/palette/3 exporter)
+│   ├── qa/                          # Lint Markdown + lint DOCX
+│   ├── notebooklm/                  # nlm CLI wrapper + pipeline Slide/Infographic
+│   ├── pipeline/                     # RunReport + GEMSPipeline (orchestrator.py — 1 nguồn duy nhất)
+│   └── offline/                       # Fixture mẫu — chạy thử không cần API/mạng
+├── tai-lieu-goc/            # YCCĐ, SGK, mẫu KHBD/đề thi tốt nghiệp thật (`tai-lieu-goc/mẫu/`)
+├── output/<slug>/           # md/ (nguồn) + ready/ (.docx) + notebooklm/ + authored/ (đường compose)
+├── skills/                  # gems_physics_skill.md (chuẩn NỘI DUNG) + docx_skill.md (kỹ thuật)
+├── .agents/agents.md        # Chuẩn ĐỊNH DẠNG chính thức — nguồn thật duy nhất
+└── tests/                   # pytest cho toàn bộ gems/
 ```
 
-**Homework format (Bộ GD&ĐT 2025 - BẮT BUỘC):**
-- **Phần I:** 18 câu trắc nghiệm (6 Nhận biết + 6 Thông hiểu + 6 Vận dụng)
-- **Phần II:** 4 câu Đúng/Sai (mỗi câu 4 ý a,b,c,d)
-- **Phần III:** 6 câu trả lời ngắn (tính toán ra kết quả)
+---
 
-**Đầu ra:** File ma trận (tích hợp trong `dac_ta_gems.md`)
+## 2. QUY TRÌNH 6 GIAI ĐOẠN CỦA GEMSPipeline
+
+Đúng theo `gems/pipeline/orchestrator.py::GEMSPipeline.generate()` — mỗi giai đoạn ghi kết quả
+thật (thành công/thất bại/cảnh báo) vào `RunReport`, không có banner "HOÀN THÀNH" giả khi thiếu
+tài liệu. Lỗi ở Giai đoạn 1 chặn toàn bộ pipeline; lỗi ở các giai đoạn sau chỉ ghi nhận, không
+chặn các nhánh độc lập còn lại.
+
+### GIAI ĐOẠN 1 — `phan_tich_yccd`: Phân tích sư phạm + Ma trận (1 lệnh gọi Gemini duy nhất)
+
+**Hàm:** `gems.generation.stages.analyze_yccd` → trả về 1 đối tượng `GEMSArchitect` gồm **cả 2**
+phần `analysis` (phân tích sư phạm) và `matrix` (ma trận ĐVKT/nhiệm vụ) — đây KHÔNG phải 2 bước
+tuần tự tách rời như bản tài liệu trước, mà là 1 lệnh gọi cấu trúc (`gems/models/architect.py`).
+
+**Input:** YCCĐ từ `tai-lieu-goc/` (file thật hoặc `yccd_fallback` trong `curriculum.yaml`).
+
+**Nội dung `analysis` (`PedagogicalAnalysis`):**
+- `key_concepts`: kiến thức cốt lõi của bài học.
+- `misconceptions`: danh sách quan niệm sai lầm phổ biến — **đây là nguồn bẫy sai lầm duy nhất**
+  được tái sử dụng xuyên suốt Phần I (phương án nhiễu), Phần II (ý sai) của Bài tập về nhà.
+- `teaching_methods`: phương pháp giảng dạy đề xuất.
+
+**Nội dung `matrix` (`LessonMatrix`):** 2-3 `KnowledgeUnit` (ĐVKT), mỗi ĐVKT có chuỗi `TaskItem`
+(nhiệm vụ) gồm mã, loại (1 trong 12 loại GEMS), tên, mô tả và bối cảnh thực tế.
+
+**Đầu ra:** `[slug]_dac_ta_gems.md` + `lesson_matrix.json` trong `output/<slug>/md/`.
 
 ---
 
-### BƯỚC 3: PHIẾU HỌC TẬP (PHT)
+### GIAI ĐOẠN 2 — Sinh nội dung 4 nhánh song song, cùng đọc 1 `matrix_json`
 
-**Mục tiêu:** Tạo PHT chất lượng cao, in được, đúng chuẩn GEMS.
+Mỗi nhánh độc lập (lỗi 1 nhánh không chặn nhánh khác), đều dùng `identity.gemini_model_content`:
 
-**Cấu trúc mỗi ĐVKT (4 phần bắt buộc):**
+| Giai đoạn | Hàm sinh | Prompt (`gems/prompts/`) | Schema |
+|---|---|---|---|
+| `sinh_phieu_hoc_tap` | `generate_worksheet_content` | `worksheet.py` | `LessonWorksheet` |
+| `sinh_ke_hoach_bai_day` | `generate_lesson_plan_content` | `lesson_plan.py` | `LessonPlanContent` |
+| `sinh_huong_dan_slide` | `write_slide_guide_markdown` | (dựng trực tiếp từ `matrix`, không gọi Gemini riêng) | — |
+| `sinh_bai_tap_ve_nha` | `generate_homework_content` | `homework.py` | `HomeworkContent` |
 
-| Phần | Nội dung | Loại nhiệm vụ gợi ý |
-|------|----------|--------------------|
-| 1. **Khám phá** | Tình huống có vấn đề, kích thích tò mò | Assertion Reasoning, Contextual MCQ, Meme Analyzer |
-| 2. **Trọng tâm** | Định nghĩa, công thức, kiến thức cốt lõi | Visual Cloze Test, Bug Buster |
-| 3. **Vận dụng** | Bài tập áp dụng, tình huống mới | Matching Matrix, Engineering Debugger |
-| 4. **Mở rộng** | Ứng dụng thực tế, STEM, có trích nguồn | Infographic Decryption, Model Builder |
+**Ràng buộc số lượng Bài tập về nhà:** đúng 18 câu Phần I + 4 câu Phần II + 6 câu Phần III.
+KHÔNG ép bằng Pydantic validator (sẽ làm hỏng cả response nếu model lệch 1 câu, không có đường
+sửa) — `generate_homework_content` tự kiểm tra `question_counts` sau khi sinh, retry tối đa 2 lần
+kèm nhắc lại yêu cầu, còn sai thì vẫn ghi file kèm cảnh báo trong `RunReport` thay vì âm thầm bỏ
+qua hoặc chặn toàn bộ pipeline.
 
-**12 loại nhiệm vụ (chọn 1-2/ĐVKT):**
-1. ✅ Matching Matrix — Ghép nối đa biến
-2. ✅ Algorithmic Ordering — Sắp xếp tiến trình
-3. ✅ Bug Buster — Tìm và sửa lỗi vật lý
-4. ✅ Assertion Reasoning — Đúng/Sai có biện giải
-5. ✅ Contextual MCQ — Trắc nghiệm bối cảnh
-6. ✅ Visual Cloze Test — Điền khuyết trực quan
-7. ✅ Meme Analyzer — Giải mã Meme vật lý
-8. ✅ Engineering Debugger — Gỡ lỗi thiết kế
-9. ✅ Fact Check Influencer — Bóc phốt TikTok/Shorts
-10. ✅ Decision Tree — Bản đồ lựa chọn sinh tử
-11. ✅ Infographic Decryption — Khai thác Infographic
-12. ✅ Model Builder — Xây dựng mô hình
+**Chuẩn nội dung/phong cách từng nhánh:** xem
+[`skills/gems_physics_skill.md` mục 4](../../skills/gems_physics_skill.md) — đặc biệt mục 4.4 có
+đặc tả chi tiết cấu trúc nhận thức Phần I (6 Nhận biết + 6 Thông hiểu + 6 Vận dụng), phong cách
+"1 bối cảnh — chuỗi 4 ý liên kết" của Phần II, và "ghép cặp dùng chung dữ kiện" của Phần III, đúc
+kết từ đối chiếu trực tiếp đề thi tốt nghiệp THPT thật (mã đề 0227/2025, 0214/2026).
 
-**Design System (áp dụng cho docx):**
-- Font: Times New Roman (body 11pt, header 14-18pt)
-- Màu: Navy #1E3A5F (header), Dark #212121 (body)
-- Dòng kẻ chấm: `[DOT_LINE_90]` (90 ký tự)
-- White space: 35-40% trang
-- Căn lề: 2cm các cạnh
-- Header PHT: Tên bài + Họ tên + Lớp + Ngày
+**PHT là 1 trình tự phẳng 3 mục** (1. Hình thành kiến thức mới — mỗi ĐVKT 1 mục con, 2. Luyện tập,
+3. Vận dụng; không có mục cho Khởi động) bám thẳng tiến trình KHBD, thay cho khung riêng của GEMS
+lặp lại 4 phần/ĐVKT ở bản trước v9.4.0 — xem skill mục 4.1. Mỗi nhiệm vụ bắt buộc có dòng "Hướng dẫn
+thực hiện" (hình thức/thời gian/tài liệu). `write_slide_guide_markdown` tự sinh bảng outline X.Y
+lấy X từ đúng số mục PHT (`1.i.y`/`2.y`/`3.y`) — không cần tự tay đồng bộ.
 
-**Đầu ra:** 
-- `[slug]_phieu_hoc_tap.md` (bản markdown thuần)
-- `[slug]_phieu_hoc_tap.docx` (bản Word in được — **ƯU TIÊN**)
+**Minh họa khoa học** (sơ đồ thí nghiệm, đồ thị, sơ đồ nguyên lý...) vẽ bằng matplotlib qua
+`gems/illustrations/style.py` (không dùng SVG→PNG vì máy thiếu thư viện `cairo` gốc), lưu vào
+`output/<slug>/ready/hinh_anh/` rồi tham chiếu bằng dòng text chứa tên file — xem quy tắc chọn
+vector vs ảnh AI ở [skill mục 4.6](../../skills/gems_physics_skill.md).
+
+**Đầu ra:** `[slug]_phieu_hoc_tap.md`, `[slug]_ke_hoach_bai_day.md`, `[slug]_huong_dan_slide.md`,
+`[slug]_bai_tap_ve_nha.md` trong `output/<slug>/md/`.
 
 ---
 
-### BƯỚC 4: HƯỚNG DẪN SLIDE & TÍCH HỢP NOTEBOOKLM
-**Mục tiêu:** Tạo tệp tin `[slug]_huong_dan_slide.md` đồng bộ 1:1 với Phiếu học tập và chuẩn bị Prompt tự động hóa tích hợp trên Google NotebookLM để tạo slide PPTX và ảnh Infographic.
+### GIAI ĐOẠN 3 — `bien_dich_docx:*`: Biên dịch Markdown → DOCX
 
-**Cấu trúc mỗi ĐVKT (7 slide bắt buộc):**
+**Hàm:** `GEMSPipeline._compile_docx` — quét mọi file `.md` trong `md_dir`, khớp theo tên file với
+1 trong 3 exporter (`export_pht`, `export_khbd`, `export_homework` — `gems/docx_export/`). File
+`huong_dan_slide.md` KHÔNG được biên dịch DOCX (chỉ dùng làm nguồn cho prompt NotebookLM ở Giai
+đoạn 5). Lỗi biên dịch 1 file được ghi nhận riêng, không chặn các file khác.
 
-| Slide | Nội dung | Ghi chú |
-|:-----:|----------|---------|
-| **X.0** | Đề mục ĐVKT | Mã phân cấp X.Y |
-| **X.1** | Nhiệm vụ Khám phá | Slide RIÊNG, không gộp đáp án |
-| **X.2** | Đáp án Khám phá | Slide TIẾP THEO |
-| **X.3** | Kiến thức Trọng tâm | Highlight vàng #FFD600 từ khóa |
-| **X.4** | Thử thách Vận dụng | Tình huống mới, khác PHT |
-| **X.5** | Đáp án Vận dụng | Lời giải chi tiết |
-| **X.6** | Mở rộng Kiến thức | Ứng dụng STEM, trích nguồn |
-
-**Slide bổ sung:**
-- **Slide mở đầu:** Tên bài + "Giáo viên: Kha Khung Hiệp"
-- **Slide kết bài:** Mindmap tổng hợp toàn bài
-
-**Quy trình tự động hóa tích hợp NotebookLM:**
-1. **Sinh File Prompt trung tâm:** Hệ thống tự động tạo tệp `output/hermes/[slug_bai]/notebooklm/[slug]_notebooklm_prompt.md` chứa cấu trúc bài học, nội dung slide guide và các chỉ dẫn thiết kế infographic đục lỗ.
-2. **Nạp nguồn vào NotebookLM:** Tải tệp tài liệu đặc tả GEMS và giáo án đã duyệt lên Google NotebookLM làm tài liệu nguồn (sources).
-3. **Thực thi sinh Slide & Infographic:** **Bắt buộc sao chép toàn bộ nội dung của tệp `[slug]_notebooklm_prompt.md` và nhập trực tiếp lên Google NotebookLM**. Prompt này hướng dẫn chi tiết cách tạo nội dung slide và infographic đồng bộ 1-1 với cấu trúc nhiệm vụ của `phieu_hoc_tap.docx` và `ke_hoach_bai_day.docx`.
-4. **Đồng bộ Theme và Thiết kế (Theme & Design Sync):** Các tệp Slide PPTX và Infographic tải xuống phải tuân thủ đồng bộ bảng màu và phong cách thiết kế GEMS v8.0:
-   - Sử dụng gam màu Navy `#1E3A5F` làm màu chủ đạo cho tiêu đề, khung viền chính.
-   - Sử dụng gam màu Mint `#E8F5E9` cho các nền vùng phụ trợ, hộp ghi nhớ.
-   - Đồng nhất sử dụng font chữ Times New Roman xuyên suốt.
-5. **Xuất bản & Tải về:** Xuất slide thành tệp PowerPoint (`[slug]_slide_deck.pptx` hoặc `.pdf`) và tải các hình ảnh infographic đục lỗ về, lưu trực tiếp vào thư mục `output/hermes/[slug_bai]/ready/` của bài học.
-
-**Quy tắc thiết kế slide (7 rules):**
-1. Phân cấp tiêu đề X.Y (1.0, 1.1, 2.0, 2.1...)
-2. Tách nhiệm vụ & đáp án — TUYỆT ĐỐI KHÔNG gộp chung
-3. Đồng bộ tiêu đề PHT-Slide (khớp 1-1)
-4. Mở rộng kiến thức sau Vận dụng (có trích nguồn uy tín)
-5. 100% tiếng Việt
-6. Highlight vàng #FFD600 cho từ khóa, định nghĩa, công thức
-7. Tối đa 6-8 dòng chữ/slide, nền sáng
-
-**Đầu ra:** 
-*   `[slug]_huong_dan_slide.md`
-*   `notebooklm/[slug]_notebooklm_prompt.md`
-*   Slide và Infographic tải về lưu trong thư mục `ready/` của bài học.
+**Đầu ra:** `[slug]_phieu_hoc_tap.docx`, `[slug]_ke_hoach_bai_day.docx`,
+`[slug]_bai_tap_ve_nha.docx` trong `output/<slug>/ready/`.
 
 ---
 
-### BƯỚC 5: BÀI TẬP VỀ NHÀ (LaTeX/TikZ)
+### GIAI ĐOẠN 4 — `tu_sua_loi:*`: Tự sửa lỗi Markdown (CHỈ áp dụng cho đường `generate`)
 
-**Mục tiêu:** Tạo homework + đáp án dạng LaTeX biên dịch được.
+**Hàm:** `GEMSPipeline._self_correct` → `gems/generation/self_correction.py::correct_markdown_file`.
+Chạy lint quy tắc (`gems/qa/markdown_lint.py`) trên từng file Markdown (trừ `dac_ta_gems`/`matrix`),
+nếu phát hiện lỗi thì gọi lại Gemini để tự sửa, rồi biên dịch lại DOCX cho file vừa sửa.
 
-**Cấu trúc:**
-
-**Phần I — Trắc nghiệm (18 câu):**
-- 6 câu Nhận biết: định nghĩa, đơn vị, công thức
-- 6 câu Thông hiểu: quy trình thí nghiệm, hiện tượng
-- 6 câu Vận dụng: tính toán đơn giản
-
-**Phần II — Đúng/Sai (4 câu × 4 ý):**
-- Mỗi câu phải có ít nhất 1 ý sai
-- Yêu cầu giải thích cho ý sai
-
-**Phần III — Trả lời ngắn (6 câu):**
-- Tính toán ra kết quả cụ thể
-- Cung cấp hằng số vật lý nếu cần
-
-**Yêu cầu chất lượng:**
-- 50% câu hỏi có bối cảnh thực tế từ nguồn quốc tế
-- Có citation cụ thể
-- Bao gồm bẫy sai lầm từ Bước 1
-- TikZ chính xác vật lý
-
-**Kỹ thuật LaTeX:**
-- Dùng XeLaTeX (fontspec), KHÔNG dùng inputenc
-- Packages: `pgfplots`, `tikz`, `amsmath`, `amssymb`, `vietnam`
-- Nhãn 100% tiếng Việt
-- File riêng: `[slug]_bai_tap_ve_nha.tex` + `[slug]_dap_an.tex`
+> Lưu ý: giai đoạn này **không chạy** ở đường `offline` (dữ liệu mẫu, không gọi API) và **không
+> chạy** ở đường `compose` (nội dung do AI agent trò chuyện tự soạn — agent tự chịu trách nhiệm
+> đối chiếu chuẩn trước khi ghi JSON, xem mục 5).
 
 ---
 
-### BƯỚC 6: KIỂM ĐỊNH CHẤT LƯỢNG (QA)
+### GIAI ĐOẠN 5 — NotebookLM: 2 bộ Slide (Giáo viên + Phiếu học tập) (lệnh riêng `notebooklm`/`full`)
 
-**Mục tiêu:** Đánh giá 15 tiêu chí, đạt ≥ 135/150 mới xuất bản.
+Từ 2026-07-08 (skill v9.5.0): sinh **2 bộ Slide tách biệt** — Slide Giáo viên (màu sắc, tách Nhiệm
+vụ/Đáp án cho MỌI nhiệm vụ không ngoại lệ, mục lục, 1 slide phân đoạn mỗi mục lớn, cỡ chữ cố định
+32/28pt) và Slide Phiếu học tập (nền trắng/ảnh trắng-đen-xám, KHÔNG có slide đáp án nào, cỡ chữ cố
+định 24/20pt) — thay hoàn toàn cơ chế "1 Slide + N+2 Infographic" trước đây.
 
-**15 tiêu chí QA:**
+**Không nằm trong `generate`/`offline`/`compose`** — chạy riêng bằng
+`python -m gems notebooklm --lesson bai4` (hoặc `full` để nối tiếp `generate` + `notebooklm`).
+1 lệnh duy nhất: sinh 2 prompt (`gems/notebooklm/prompt_builder.py`, đọc THẲNG
+`{slug}_worksheet_data.json` — ghi bởi `gems.generation.stages.write_worksheet_json` cùng lúc với
+`{slug}_phieu_hoc_tap.md`, KHÔNG regex-parse Markdown như bản cũ) → đăng nhập (`nlm login --check`)
+→ tìm/tạo notebook → upload nguồn (dedup) → tạo 2 yêu cầu sinh Slide (`create_slides` gọi 2 lần) →
+poll trạng thái (kiểm tra ngay lần đầu, tối đa 1 giờ, chờ 5 phút giữa các lần tiếp theo) → tải về
+`output/<slug>/ready/{slug}_slide_giao_vien.pptx` và `{slug}_slide_phieu_hoc_tap.pptx`. Trạng thái
+`failed/error/cancelled` được ghi nhận là lỗi thật, không bị coi là "đã xong".
 
-**PHT (60 điểm):**
-| Mã | Tiêu chí | Điểm |
-|:--:|----------|:----:|
-| TC-PHT-01 | 35-40% white space, bố cục gọn | 10 |
-| TC-PHT-02 | Ảnh khoa học thực tế (không cartoon) | 10 |
-| TC-PHT-03 | Tiến trình 4 bước (KP→TT→VD→MR) | 10 |
-| TC-PHT-04 | 100% tiếng Việt | 10 |
-| TC-PHT-05 | Dòng kẻ chấm đủ độ dài | 10 |
-| TC-PHT-06 | Đủ nhiệm vụ, đa dạng loại, logic | 10 |
+**Chống cắt ngang (silent truncation):** sau khi tải về mỗi file, `pipeline.py` tự đếm số slide
+THẬT bằng `python-pptx` và so với số slide kỳ vọng (tính sẵn lúc dựng prompt) — nếu lệch, ghi cảnh
+báo `slide_count_mismatch:X/Y` vào `RunReport` thay vì báo "downloaded" như đã xong đầy đủ (không
+tin số "Trang X/Y" tự ghi trên slide — xem bài học chi tiết ngay dưới đây).
 
-**Slide (50 điểm):**
-| Mã | Tiêu chí | Điểm |
-|:--:|----------|:----:|
-| TC-SLD-01 | Đồng bộ 1:1 với PHT | 10 |
-| TC-SLD-02 | Ảnh thực tế trên mọi slide | 10 |
-| TC-SLD-03 | Font UVN bai sau, highlight vàng | 10 |
-| TC-SLD-04 | Đủ 7 slide/ĐVKT + mở đầu + kết bài | 10 |
-| TC-SLD-05 | 100% tiếng Việt | 10 |
+Danh sách slide được dựng động từ dữ liệu PHT thật, dạng "SLIDE N: ..." đánh số tường minh (không
+phải mô tả outline rời rạc) — kỹ thuật đã kiểm chứng qua 7 vòng thử thực tế ở đợt Bài 28, giảm mạnh
+rủi ro AI tự gộp/bỏ sót slide. Bản thiết kế (theme Anthropic, box bo góc nhẹ không đổ bóng, cấm ảnh
+hoạt hình, master slide dùng chung 2 bộ...) nằm trong các hằng số quy tắc của
+`gems/notebooklm/prompt_builder.py` — khối `## QUY TẮC THIẾT KẾ BẮT BUỘC` trong
+`[slug]_huong_dan_slide.md` vẫn được trích thêm quy tắc bổ sung qua `parse_slide_guide_for_prompt`.
 
-**Homework (40 điểm):**
-| Mã | Tiêu chí | Điểm |
-|:--:|----------|:----:|
-| TC-HW-01 | Bẫy sai lầm, bối cảnh chi tiết | 10 |
-| TC-HW-02 | 50% câu hỏi thực tế từ nguồn QT | 10 |
-| TC-HW-03 | Đúng số lượng (18 MCQ + 4 T/F + 6 SA) | 10 |
-| TC-HW-04 | LaTeX sạch, TikZ chính xác | 10 |
+### Bài học vận hành NotebookLM đáng tin cậy (đúc kết từ đợt Bài 28 — Động lượng, 7 vòng tạo lại)
 
-**Thang điểm:**
+`nlm create slides`/`create infographic` là AI sinh nội dung thật, không phải template máy móc — độ
+tin cậy giảm rõ rệt khi prompt quá dài/quá nhiều ràng buộc cùng lúc. Áp dụng các quy tắc sau cho MỌI
+lần gọi NotebookLM, kể cả trong `gems/notebooklm/` dùng chung:
+
+- **Giới hạn tần suất (rate limit) theo giờ:** gọi `create_slides` quá dồn dập (nhiều vòng tạo lại
+  liên tiếp trong vài giờ) sẽ bị chặn `RESOURCE_EXHAUSTED` ("Wait a few minutes before retrying").
+  Thực tế đã gặp: chờ 5 phút CHƯA đủ để hồi phục — cần chờ dài hơn hẳn (~25-30 phút) trước khi thử
+  lại. Không lặp lại việc thử ngay lập tức nhiều lần liên tiếp khi gặp lỗi này.
+- **Rủi ro bị cắt ngang (silent truncation) khi yêu cầu quá nhiều slide/quy tắc cùng lúc:** 1 prompt
+  đòi ~27 slide phức tạp (nhiều loại slide khác nhau, nhiều ràng buộc thiết kế) có thể khiến
+  NotebookLM dừng sinh giữa chừng (ví dụ chỉ ra 21/27 slide) mà KHÔNG báo lỗi gì — luôn đếm lại số
+  slide thực tế trong file `.pptx` tải về, không tin số trang tự ghi trên slide ("Trang X/27" vẫn có
+  thể xuất hiện dù chỉ có 21 slide thật). Nếu bị cắt ngang: **không cần tạo lại toàn bộ** — viết 1
+  prompt bổ sung CHỈ yêu cầu đúng các slide còn thiếu (đánh số tiếp nối, ví dụ "SLIDE 22...SLIDE 27"),
+  gọi `create_slides` lần nữa trong CÙNG notebook, tải về file riêng, rồi ghép nối bằng `python-pptx`:
+  mỗi slide NotebookLM xuất ra là **1 ảnh full-bleed duy nhất** (không có text layer thật), nên ghép
+  chỉ cần copy đúng ảnh (`shape.image.blob`) + vị trí/kích thước sang cuối presentation gốc — xem ví
+  dụ đầy đủ tại `output/bai28_dong_luong/scripts/build_notebooklm_phan4.py`.
+- **Tránh dùng ký hiệu ngoặc vuông `[...]` (hay bất kỳ ký hiệu placeholder nào) để đánh dấu "chỗ cần
+  điền tên/nội dung thật" trong ví dụ minh hoạ của prompt** — AI có thể chép y nguyên cả dấu ngoặc vào
+  slide thật thay vì hiểu đó là chỉ dẫn. Nếu cần đưa ví dụ, viết rõ bằng lời: "đây là ví dụ nội dung
+  cần viết, KHÔNG in dấu ngoặc/ký hiệu placeholder nào lên slide". (Ngoại lệ: `[ ? ]` dùng làm ô trống
+  điền khuyết THẬT SỰ trên Infographic — đó là nội dung cố ý, không phải placeholder cho AI tự thay.)
+- **Dùng danh sách slide đánh số tường minh** ("SLIDE 1: ...", "SLIDE 2: ...", mỗi dòng = đúng 1
+  slide) thay vì outline dạng gạch đầu dòng rời rạc — giảm mạnh rủi ro AI tự gộp 2 nội dung vào 1
+  slide hoặc bỏ sót slide. Ràng buộc "không gộp" (ví dụ Nhiệm vụ + Đáp án luôn phải tách 2 slide
+  riêng) cần nêu kèm ví dụ cụ thể về đúng lỗi đã từng xảy ra, không chỉ nói chung chung.
+- **Nhắc lại các yêu cầu dễ bị bỏ sót ở CẢ đầu và cuối prompt**, không chỉ 1 chỗ duy nhất (ví dụ: số
+  trang trên mọi slide kể cả slide bìa, cấm tiếng Anh kể cả trong nhãn khung/hộp, cấm đáp án lộ qua
+  chú thích ảnh minh họa) — 1 lần nhắc ở giữa 1 prompt dài dễ bị "trôi" khi AI sinh đến các slide sau.
+- **Lỗi console cp1252 khi script Python in tiếng Việt ở dòng cuối là lỗi biết trước, không phải lỗi
+  thật** — luôn kiểm tra file `.pptx` đã tải về có tồn tại trước khi kết luận thất bại từ exit code.
+  Có thể phòng tránh hoàn toàn bằng `sys.stdout.reconfigure(encoding="utf-8")` ở đầu script nếu cần
+  đọc log in ra giữa chừng một cách tin cậy (ví dụ để chẩn đoán lỗi thật như rate limit).
+
+---
+
+### GIAI ĐOẠN 6 — `lint`: Kiểm định chất lượng DOCX đã biên dịch
+
+**Lệnh riêng:** `python -m gems lint --lesson bai4` — không sinh lại học liệu, chỉ đọc DOCX có sẵn
+trong `ready/`. `gems/qa/docx_lint.py::lint_khbd_docx` kiểm tra đủ 3 mục lớn I/II/III của KHBD, có
+bảng tổ chức thực hiện, mục Điều chỉnh + chữ ký 3 bên; `lint_docx_margins` đối chiếu lề trang/font
+với `gems/docx_export/layout.py` cho PHT và Bài tập về nhà. Đây là kiểm tra **kỹ thuật/cấu trúc**
+(máy đọc được); phần **nội dung/phong cách sư phạm** (15 tiêu chí QA) vẫn cần người soát theo
+[skill mục 5](../../skills/gems_physics_skill.md#5-bộ-15-tiêu-chí-qa-self-check).
+
+---
+
+## 3. NGUYÊN TẮC "LUYỆN ĐỀ NGAY KHI HỌC"
+
+Phân tích đề thi tốt nghiệp THPT thật (2025-2026) cho thấy học sinh cần làm quen **cấu trúc và
+phong cách ra đề** càng sớm càng tốt, không phải lần đầu tiếp xúc là lúc làm Bài tập về nhà cuối
+bài. Từ v2.0, quy trình gắn nguyên tắc này xuyên suốt 3 điểm chạm — cùng 1 chuẩn dùng chung (1
+trong 3 dạng: trắc nghiệm 4 phương án A-D / Đúng-Sai 4 ý a-d / trả lời ngắn dạng số có nêu rõ quy
+tắc làm tròn):
+
+1. **PHT — phần Vận dụng của mỗi ĐVKT** (`gems/prompts/worksheet.py`): tình huống Vận dụng phải
+   diễn đạt bằng đúng 1 trong 3 dạng trên — học sinh gặp "hình dạng" câu hỏi đề thi ngay trong giờ
+   học, khi kiến thức còn mới.
+2. **KHBD — hoạt động Luyện tập** (`gems/prompts/lesson_plan.py`): câu hỏi luyện tập trên lớp cũng
+   soạn theo đúng 1 trong 3 dạng trên, để giáo viên có sẵn ngữ liệu luyện đề ngay tại lớp.
+3. **Bài tập về nhà** (`gems/prompts/homework.py`): áp dụng đầy đủ, quy mô lớn (18/4/6 câu) với
+   toàn bộ chi tiết cấu trúc nhận thức và phong cách ra đề — xem mục 2, Giai đoạn 2.
+
+Không yêu cầu 3 điểm chạm này trùng lặp nội dung — PHT/KHBD chỉ cần 1 câu mẫu mỗi ĐVKT để làm quen
+"hình dạng" đề thi; Bài tập về nhà mới là nơi luyện tập quy mô đầy đủ.
+
+---
+
+## 4. CẤU TRÚC ĐẦU RA CHO MỖI BÀI HỌC
+
+```
+output/<slug>/
+├── md/
+│   ├── <slug>_dac_ta_gems.md            # Giai đoạn 1: Phân tích + Ma trận
+│   ├── lesson_matrix.json               # Giai đoạn 1: ma trận thuần JSON (input cho Giai đoạn 2)
+│   ├── <slug>_phieu_hoc_tap.md
+│   ├── <slug>_ke_hoach_bai_day.md
+│   ├── <slug>_huong_dan_slide.md
+│   └── <slug>_bai_tap_ve_nha.md
+├── notebooklm/
+│   └── <slug>_notebooklm_prompt.md      # Giai đoạn 5: prompt gửi lên NotebookLM
+├── authored/                            # Chỉ có khi dùng đường compose — 4 file JSON do AI agent soạn
+│   ├── <slug>_architect.json
+│   ├── <slug>_worksheet.json
+│   ├── <slug>_homework.json
+│   └── <slug>_lesson_plan.json
+├── ready/
+│   ├── <slug>_phieu_hoc_tap.docx
+│   ├── <slug>_ke_hoach_bai_day.docx
+│   ├── <slug>_bai_tap_ve_nha.docx
+│   ├── <slug>_slide_deck.pptx / .pdf    # Giai đoạn 5
+│   └── <slug>_infographic_*.png         # Giai đoạn 5
+└── metadata.json                        # Danh sách file + trạng thái từng giai đoạn (RunReport)
+```
+
+Danh mục bài học (khoá `key` → `slug`, `yccd_file`, `num_knowledge_units`) khai ở
+`gems/config/curriculum.yaml` — thêm bài mới chỉ cần thêm 1 mục YAML, không sửa code.
+
+---
+
+## 5. 2 CÁCH VẬN HÀNH: `generate` (Gemini API) vs. `compose` (AI agent tự soạn)
+
+### 5.1 `generate` — gọi Gemini API thật
+```powershell
+python -m gems generate --lesson bai4
+python -m gems generate --prompt "soạn bài 4 nhiệt dung riêng"
+```
+Cần `GEMINI_API_KEY` trong `.env`. Chạy đủ 6 giai đoạn ở mục 2 (trừ Giai đoạn 5, phải gọi
+`notebooklm` hoặc `full` riêng).
+
+### 5.2 `compose` — AI agent đang trò chuyện tự soạn nội dung (không cần API key)
+Dùng khi chính AI agent (Claude chạy trong Antigravity IDE) đang tự soạn nội dung bằng suy luận
+trực tiếp thay vì gọi Gemini. Agent tự viết 4 file JSON khớp đúng schema Pydantic
+(`gems/models/*.py`) vào `output/<slug>/authored/`, rồi chạy:
+```powershell
+python -m gems compose --lesson bai4
+```
+`compose` dùng lại đúng 100% đường ghi Markdown + xuất DOCX như `generate`/`offline` — chỉ khác
+nguồn nội dung. **Không chạy Giai đoạn 4 (tự sửa lỗi)** — agent tự đối chiếu chuẩn ở
+`skills/gems_physics_skill.md` trước khi ghi JSON, và nên tự chạy `python -m gems lint --lesson
+bai4` sau khi biên dịch để kiểm tra kỹ thuật/cấu trúc.
+
+### 5.3 `offline` — chạy thử bằng dữ liệu mẫu, không cần API/mạng
+```powershell
+python -m gems offline --lesson bai4
+```
+Dùng để demo/kiểm thử nhanh toàn bộ đường biên dịch DOCX mà không tốn quota Gemini.
+
+---
+
+## 6. KIỂM ĐỊNH CHẤT LƯỢNG (QA)
+
+- **Kỹ thuật/cấu trúc (máy đọc được):** `python -m gems lint --lesson bai4` — xem Giai đoạn 6.
+- **Nội dung/phong cách sư phạm (người soát):** 15 tiêu chí QA, thang điểm 150, ngưỡng đạt ≥135 —
+  đặc tả đầy đủ ở [`skills/gems_physics_skill.md` mục 5](../../skills/gems_physics_skill.md).
+
 | Mức | Điểm | Hành động |
 |:---:|:----:|-----------|
-| ✅ **Đạt** | ≥ 135 | Chuyển sang `ready/` |
-| ⚠️ **Có điều kiện** | 120-134 | Sửa P1 rồi chuyển |
-| ❌ **Không đạt** | < 120 | Block, về `failed/` |
+| ✅ **Đạt** | ≥ 135/150 | Xuất bản, giữ nguyên trong `ready/` |
+| ⚠️ **Có điều kiện** | 120-134/150 | Sửa các tiêu chí thấp điểm nhất rồi soát lại |
+| ❌ **Không đạt** | < 120/150 | Sinh lại (Giai đoạn 2) trước khi xuất bản |
+
+### Cross-file validation (kiểm tra chéo giữa các file, soát thủ công)
+- [ ] Số nhiệm vụ trong `dac_ta_gems.md` khớp 1-1 với PHT và Slide guide (tên + thứ tự).
+- [ ] Bài tập về nhà đúng 18/4/6 câu — nếu `RunReport` có cảnh báo số câu lệch, phải sửa tay.
+- [ ] Không còn placeholder kiểu "(Các câu hỏi...)", "TODO", `[DOT_LINE_90]` chưa được thay thế.
 
 ---
 
-## 3. CẤU TRÚC ĐẦU RA CHO MỖI BÀI HỌC
+## 7. CÔNG CỤ & TÀI NGUYÊN
 
-```
-output/hermes/[slug_bai]/
-├── md/
-│   ├── [slug]_dac_ta_gems.md           # Bước 1+2: Phân tích + Ma trận
-│   ├── [slug]_phieu_hoc_tap.md          # Bước 3: PHT bản thô
-│   ├── [slug]_dap_an.md                 # Đáp án PHT
-│   ├── [slug]_ke_hoach_bai_day.md       # Kế hoạch bài giảng
-│   ├── [slug]_huong_dan_slide.md        # Bước 4: Slide guide
-│   ├── [slug]_bai_tap_ve_nha.md         # Bước 5: Homework bản thô
-├── notebooklm/
-│   └── [slug]_notebooklm_prompt.md      # Prompt cho NotebookLM
-├── assets/images/                       # Ảnh minh họa
-└── ready/
-    ├── [slug]_phieu_hoc_tap.docx        # PHT Word (in được)
-    ├── [slug]_slide_deck.pptx/.pdf      # Slide PowerPoint/PDF
-    ├── [slug]_infographic_*.png         # Infographic
-    ├── [slug]_bai_tap_ve_nha.tex        # Homework LaTeX
-    └── [slug]_dap_an.tex               # Đáp án LaTeX
+```powershell
+# Cài đặt (1 lần)
+pip install -r requirements.txt        # hoặc: pip install -e .
+
+# Xem danh mục bài học hiện có
+python -m gems list-lessons
+
+# Đăng nhập NotebookLM trước khi chạy notebooklm/full lần đầu
+nlm login
+
+# Kiểm thử toàn bộ gems/
+python -m pytest tests/ -q
 ```
 
-**Cách đặt tên slug:**
-
-| Bài | Slug |
-|:---:|------|
-| Bài 4 — Nhiệt dung riêng | `bai4_nhiet_dung_rieng` |
-| Bài 5 — Nhiệt độ nhiệt kế | `bai5_nhiet_do_nhiet_ke` |
-| Bài 6 — Nhiệt nóng chảy riêng | `bai6_nhiet_nong_chay_rieng` |
-| Bài 7 — Nhiệt hóa hơi riêng | `bai7_nhiet_hoa_hoi_rieng` |
+Tên giáo viên, phông chữ chủ đạo, tên model Gemini và năm thi (`exam_year` — dùng cho tiêu đề Bài
+tập về nhà) đọc từ `gems/config/identity.yaml`, sửa 1 chỗ áp dụng toàn hệ thống.
 
 ---
 
-## 4. MẪU PROMPT CHO TỪNG BƯỚC
-
-### Bước 1+2: Phân tích & Ma trận
-```
-Bạn là chuyên gia sư phạm Vật lý GDPT 2018. Hãy phân tích bài học sau:
-
-[PASTE YCCĐ + nội dung SGK]
-
-Yêu cầu:
-1. Xác định YCCĐ (2-4 mục tiêu)
-2. Chia ĐVKT (2-3 đơn vị)
-3. Mỗi ĐVKT: xác định nội dung cốt lõi, hiện tượng thực tế, sai lầm phổ biến
-4. Đề xuất loại nhiệm vụ cho PHT (chọn từ 12 loại)
-5. Lên cấu trúc homework: 18 MCQ + 4 T/F + 6 short answer
-
-Đầu ra: File markdown có cấu trúc [slug]_dac_ta_gems.md
-```
-
-### Bước 3: Phiếu học tập
-```
-Dựa vào ma trận sau, hãy tạo Phiếu học tập:
-
-[PASTE MA TRẬN]
-
-Yêu cầu:
-- Mỗi ĐVKT: 4 phần (Khám phá, Trọng tâm, Vận dụng, Mở rộng)
-- Chọn 1 loại nhiệm vụ phù hợp cho mỗi phần
-- 100% tiếng Việt, giọng giáo viên tự nhiên
-- Dòng kẻ chấm [DOT_LINE_90] cho chỗ điền
-- Header: Họ tên + Lớp + Ngày
-
-Đầu ra: [slug]_phieu_hoc_tap.md
-```
-
-### Bước 4: Slide guide
-```
-Dựa vào PHT sau, tạo hướng dẫn slide:
-
-[PASTE PHT]
-
-Yêu cầu:
-- Mỗi ĐVKT: 7 slide (đề mục, nhiệm vụ, đáp án, trọng tâm, vận dụng, đáp án VD, mở rộng)
-- Mở đầu: tên bài + "Giáo viên: Kha Khung Hiệp"
-- Kết bài: mindmap
-- 7 rules thiết kế (phân cấp X.Y, tách NV/ĐA, đồng bộ PHT, 100% TV, highlight vàng...)
-
-Đầu ra: [slug]_huong_dan_slide.md
-```
-
-### Bước 5: Homework LaTeX
-```
-Dựa vào ma trận, tạo bài tập về nhà LaTeX:
-
-[PASTE MA TRẬN]
-
-Yêu cầu:
-- Phần I: 18 MCQ (6 NB + 6 TH + 6 VD)
-- Phần II: 4 câu Đ/S (mỗi câu 4 ý)
-- Phần III: 6 câu trả lời ngắn
-- 50% bối cảnh thực tế
-- Dùng XeLaTeX (fontspec), KHÔNG inputenc
-- TikZ chính xác, nhãn tiếng Việt
-- File riêng: homework.tex + answers.tex
-```
-
----
-
-## 5. TIÊU CHÍ KIỂM ĐỊNH CHẤT LƯỢNG
-
-### Cross-file Validation (KIỂM TRA CHÉO GIỮA CÁC FILE)
-
-- [ ] **Số lượng NV đồng nhất**: "Nhiệm vụ X" trong `dac_ta_gems` = PHT = Slide
-- [ ] **Thứ tự NV giống nhau**: Trình tự đánh số nhất quán
-- [ ] **Tên NV khớp nhau**: Matching Matrix = Matching Matrix (không lệch)
-- [ ] **ĐVKT giống nhau**: Cùng số lượng, cùng tên
-- [ ] **Homework đủ số lượng**: 18 MCQ + 4 T/F + 6 SA
-
-### Placeholder Detection
-
-- [ ] Không còn `(.*Các câu hỏi.*)` trong homework
-- [ ] Không còn `(.*TODO.*)` trong bất kỳ file nào
-- [ ] `[DOT_LINE_90]` đã được thay thế đúng
-
----
-
-## 6. CÔNG CỤ & TÀI NGUYÊN
-
-### Hermes Agent
-```bash
-# Load skill GEMS
-/skill gems-physics-v8
-
-# Xem hướng dẫn
-/skill ai-media-suite
-
-# Tạo ảnh minh họa
-/skill image-gen-flow
-```
-
-### Google Flow — Tạo ảnh/video
-```bash
-cd ~/.hermes/google-flow/toolflow && npm start
-# Mở http://localhost:3737
-```
-
-### Edge TTS — Voiceover
-```python
-# Tạo file audio giọng Việt
-edge-tts --text "Nội dung" --voice vi-VN-HoaiMyNeural --write-media output.mp3
-```
-
-### Groq STT — Voice note
-```bash
-# Voice → text bằng Groq Whisper
-# (tích hợp sẵn trong Hermes Telegram)
-```
-
----
-
-## 7. CHECKLIST XUẤT BẢN
+## 8. CHECKLIST XUẤT BẢN
 
 ### Trước khi xuất bản (Pre-flight)
-- [ ] Đọc YCCĐ từ SGK gốc
-- [ ] Chia ĐVKT hợp lý
-- [ ] PHT: đúng 4 phần/ĐVKT
-- [ ] Slide: đúng 7 slide/ĐVKT
-- [ ] Homework: đúng format 2025
-- [ ] QA Score ≥ 135/150
-- [ ] Đồng bộ tiêu đề cross-file
-- [ ] 100% tiếng Việt
-- [ ] LaTeX compile được
-- [ ] .docx in được, font đẹp
+- [ ] Giai đoạn 1 chạy thành công (`phan_tich_yccd` = `ok: true` trong `metadata.json`)
+- [ ] Đủ 4 file Markdown nguồn (PHT, KHBD, Slide guide, Bài tập về nhà)
+- [ ] PHT: đúng 4 phần/ĐVKT (Khám phá → Trọng tâm → Vận dụng → Mở rộng); Vận dụng bám 1 trong 3
+      dạng câu hỏi đề tốt nghiệp (mục 3)
+- [ ] KHBD: đủ 4 hoạt động, hoạt động Luyện tập có câu hỏi đúng dạng đề tốt nghiệp (mục 3)
+- [ ] Bài tập về nhà: đúng 18/4/6 câu, đúng tỉ lệ nhận thức 6+6+6 ở Phần I, Phần III ghép cặp dùng
+      chung dữ kiện (mục 2, Giai đoạn 2)
+- [ ] `python -m gems lint --lesson <slug>` không còn cảnh báo nghiêm trọng
+- [ ] QA nội dung ≥ 135/150 (mục 6)
+- [ ] Slide + Infographic đã tải về `ready/` (nếu đã chạy Giai đoạn 5)
 
 ### Sau khi xuất bản (Post-flight)
-- [ ] Upload lên website dongbayai.vn
-- [ ] Copy vào Obsidian vault (.brain/)
-- [ ] Ghi nhận vào learning journal
-- [ ] Announce trên Telegram group
+- [ ] Cập nhật `metadata.json` phản ánh đúng file cuối cùng trong `ready/`
+- [ ] Ghi nhận thay đổi đáng chú ý vào `changelog.md` nếu có sửa quy trình/chuẩn nội dung
 
 ---
 
-*Tài liệu này được cập nhật từ phiên bản GEMS v8.0 — dựa trên dữ liệu thực tế từ quá trình soạn Bài 4 (Nhiệt dung riêng) và Bài 5 (Nhiệt độ nhiệt kế).*
-*Cập nhật lần cuối: 24/06/2026*
-
-### Sau khi xuất bản (Post-flight)
-- [ ] Upload lên website dongbayai.vn
-- [ ] Copy vào Obsidian vault (.brain/)
-- [ ] Ghi nhận vào learning journal
-- [ ] Announce trên Telegram group
-
----
-
-*Tài liệu này được cập nhật từ phiên bản GEMS v8.0 — dựa trên dữ liệu thực tế từ quá trình soạn Bài 4 (Nhiệt dung riêng) và Bài 5 (Nhiệt độ nhiệt kế).*
-*Cập nhật lần cuối: 24/06/2026*
+*Cập nhật lần cuối: 2026-07-08 — bổ sung mục "Bài học vận hành NotebookLM đáng tin cậy" (Giai đoạn 5)
+đúc kết từ đợt soạn Bài 28 - Động lượng (7 vòng tạo lại Slide qua NotebookLM). Trước đó: 2026-07-07 —
+đồng bộ với kiến trúc `gems/` v9.0 và chuẩn cấu trúc đề thi tốt nghiệp THPT (skill v9.2.0). Bản v1.0
+(24/06/2026) đã lỗi thời do tham chiếu kiến trúc `engine/` cũ, xem `changelog.md` mục [2026-07-06] để
+biết lý do viết lại toàn bộ pipeline.*

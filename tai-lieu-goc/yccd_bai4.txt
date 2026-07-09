@@ -1,4 +1,0 @@
-- Phát biểu được định nghĩa nhiệt dung riêng (c).
-- Viết được hệ thức tính nhiệt lượng trong quá trình truyền nhiệt để làm thay đổi nhiệt độ của vật: Q = mcΔT (hoặc Q = mcΔt). Nêu được tên và đơn vị đo của các đại lượng trong công thức.
-- Mô tả được phương án thí nghiệm thực hành đo nhiệt dung riêng của nước (dụng cụ, sơ đồ đấu nối, tiến trình đo, công thức tính và cách xử lý số liệu/sai số).
-- Vận dụng được hệ thức Q = mcΔT để giải các bài tập liên quan và giải thích được một số hiện tượng thực tế đời sống.

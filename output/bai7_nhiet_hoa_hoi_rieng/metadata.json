@@ -1,0 +1,91 @@
+{
+  "lesson_name": "Bài 7 - Nhiệt hóa hơi riêng",
+  "slug": "bai7_nhiet_hoa_hoi_rieng",
+  "updated_at": "2026-07-07T18:54:47",
+  "files": [
+    {
+      "name": "bai7_nhiet_hoa_hoi_rieng_bai_tap_ve_nha.docx",
+      "size_bytes": 142356,
+      "type": "DOCX"
+    },
+    {
+      "name": "bai7_nhiet_hoa_hoi_rieng_infographic_dvkt1.png",
+      "size_bytes": 4484848,
+      "type": "PNG"
+    },
+    {
+      "name": "bai7_nhiet_hoa_hoi_rieng_infographic_dvkt2.png",
+      "size_bytes": 4605695,
+      "type": "PNG"
+    },
+    {
+      "name": "bai7_nhiet_hoa_hoi_rieng_infographic_luyen_tap.png",
+      "size_bytes": 4462282,
+      "type": "PNG"
+    },
+    {
+      "name": "bai7_nhiet_hoa_hoi_rieng_infographic_van_dung.png",
+      "size_bytes": 4448335,
+      "type": "PNG"
+    },
+    {
+      "name": "bai7_nhiet_hoa_hoi_rieng_ke_hoach_bai_day.docx",
+      "size_bytes": 242704,
+      "type": "DOCX"
+    },
+    {
+      "name": "bai7_nhiet_hoa_hoi_rieng_phieu_hoc_tap.docx",
+      "size_bytes": 343740,
+      "type": "DOCX"
+    },
+    {
+      "name": "bai7_nhiet_hoa_hoi_rieng_slide_deck.pdf",
+      "size_bytes": 15242444,
+      "type": "PDF"
+    },
+    {
+      "name": "bai7_nhiet_hoa_hoi_rieng_slide_deck.pptx",
+      "size_bytes": 17587539,
+      "type": "PPTX"
+    },
+    {
+      "name": "~$i7_nhiet_hoa_hoi_rieng_bai_tap_ve_nha.docx",
+      "size_bytes": 162,
+      "type": "DOCX"
+    }
+  ],
+  "stages": [
+    {
+      "stage": "phan_tich_yccd",
+      "ok": true
+    },
+    {
+      "stage": "sinh_phieu_hoc_tap",
+      "ok": true
+    },
+    {
+      "stage": "sinh_bai_tap_ve_nha",
+      "ok": true
+    },
+    {
+      "stage": "sinh_ke_hoach_bai_day",
+      "ok": true
+    },
+    {
+      "stage": "sinh_huong_dan_slide",
+      "ok": true
+    },
+    {
+      "stage": "bien_dich_docx:bai_tap_ve_nha",
+      "ok": true
+    },
+    {
+      "stage": "bien_dich_docx:ke_hoach_bai_day",
+      "ok": true
+    },
+    {
+      "stage": "bien_dich_docx:phieu_hoc_tap",
+      "ok": true
+    }
+  ]
+}

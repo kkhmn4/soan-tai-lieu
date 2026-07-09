@@ -1,0 +1,53 @@
+{
+  "lesson_name": "Bài 4 - Nhiệt dung riêng",
+  "units": [
+    {
+      "unit_id": "ĐVKT 1",
+      "unit_name": "Đơn vị kiến thức 1 của Bài 4 - Nhiệt dung riêng",
+      "concepts": [
+        "Khái niệm 1.1",
+        "Khái niệm 1.2"
+      ],
+      "tasks": [
+        {
+          "task_id": "NV1.1",
+          "task_type": "Matching Matrix",
+          "task_name": "Nhiệm vụ ghép nối 1",
+          "description": "Mô tả nhiệm vụ mẫu.",
+          "context_real": "Bối cảnh thực tế mẫu."
+        },
+        {
+          "task_id": "NV1.2",
+          "task_type": "Bug Buster",
+          "task_name": "Nhiệm vụ tìm lỗi 1",
+          "description": "Mô tả nhiệm vụ mẫu thứ hai.",
+          "context_real": "Bối cảnh thực tế mẫu khác."
+        }
+      ]
+    },
+    {
+      "unit_id": "ĐVKT 2",
+      "unit_name": "Đơn vị kiến thức 2 của Bài 4 - Nhiệt dung riêng",
+      "concepts": [
+        "Khái niệm 2.1",
+        "Khái niệm 2.2"
+      ],
+      "tasks": [
+        {
+          "task_id": "NV2.1",
+          "task_type": "Matching Matrix",
+          "task_name": "Nhiệm vụ ghép nối 2",
+          "description": "Mô tả nhiệm vụ mẫu.",
+          "context_real": "Bối cảnh thực tế mẫu."
+        },
+        {
+          "task_id": "NV2.2",
+          "task_type": "Bug Buster",
+          "task_name": "Nhiệm vụ tìm lỗi 2",
+          "description": "Mô tả nhiệm vụ mẫu thứ hai.",
+          "context_real": "Bối cảnh thực tế mẫu khác."
+        }
+      ]
+    }
+  ]
+}

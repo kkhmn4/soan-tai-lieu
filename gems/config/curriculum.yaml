@@ -1,0 +1,62 @@
+# Nguồn thật duy nhất cho danh mục bài học GEMS.
+# Thay thế LESSON_MAP (từng khai 2 lần: gems_agent.py + scratch/generate_notebook_materials.py)
+# và default_yccds (fallback hardcode trong gems_agent.py). Thêm bài mới = thêm 1 mục ở đây.
+version: 1
+lessons:
+  bai1:
+    name: "Bài 1 - Cấu trúc của chất"
+    slug: bai1_cau_truc_chat
+    yccd_file: yccd_bai1.txt
+    num_knowledge_units: 2
+    yccd_fallback: >
+      Trình bày được các nội dung cơ bản của mô hình động học phân tử chất.
+      Sử dụng mô hình động học phân tử, nêu được sơ lược cấu trúc của chất rắn,
+      chất lỏng, chất khí.
+  bai2:
+    name: "Bài 2 - Sự chuyển thể"
+    slug: bai2_su_chuyen_the
+    yccd_file: yccd_bai2.txt
+    num_knowledge_units: 2
+    yccd_fallback: >
+      Mô tả được sự chuyển thể của các chất. Giải thích được các hiện tượng
+      nóng chảy, đông đặc, hóa hơi, ngưng tụ.
+  bai3:
+    name: "Bài 3 - Nội năng, nhiệt lượng"
+    slug: bai3_noi_nang_nhiet_luong
+    yccd_file: yccd_bai3.txt
+    num_knowledge_units: 2
+    yccd_fallback: >
+      Định nghĩa được nội năng. Viết được công thức tính nhiệt lượng
+      Q = mc.Delta t. Phát biểu được nguyên lí I nhiệt động lực học.
+  bai4:
+    name: "Bài 4 - Nhiệt dung riêng"
+    slug: bai4_nhiet_dung_rieng
+    yccd_file: yccd_bai4.txt
+    num_knowledge_units: 2
+    yccd_fallback: >
+      Định nghĩa được nhiệt dung riêng. Nêu được ý nghĩa của nhiệt dung riêng.
+      Đề xuất phương án thí nghiệm đo nhiệt dung riêng.
+  bai5:
+    name: "Bài 5 - Nhiệt độ, thang nhiệt độ, nhiệt kế"
+    slug: bai5_nhiet_do_nhiet_ke
+    yccd_file: yccd_bai5.txt
+    num_knowledge_units: 2
+    yccd_fallback: >
+      Định nghĩa được nhiệt độ, thang nhiệt độ Celsius và Kelvin. Nêu được
+      nguyên tắc hoạt động của nhiệt kế.
+  bai6:
+    name: "Bài 6 - Nhiệt nóng chảy riêng"
+    slug: bai6_nhiet_nong_chay_rieng
+    yccd_file: yccd_bai6.txt
+    num_knowledge_units: 2
+    yccd_fallback: >
+      Định nghĩa được nhiệt nóng chảy riêng. Thiết lập công thức tính nhiệt
+      lượng nóng chảy. Đo được nhiệt nóng chảy riêng của nước đá.
+  bai7:
+    name: "Bài 7 - Nhiệt hóa hơi riêng"
+    slug: bai7_nhiet_hoa_hoi_rieng
+    yccd_file: yccd_bai7.txt
+    num_knowledge_units: 2
+    yccd_fallback: >
+      Định nghĩa được nhiệt hóa hơi riêng. Thiết lập công thức tính nhiệt
+      lượng hóa hơi. Đo được nhiệt hóa hơi riêng của nước.

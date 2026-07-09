@@ -1,60 +1,46 @@
-# GEMS Skills — Hướng dẫn Tài liệu Tri thức & Điều phối
+ 
 
-Thư mục này chứa các tệp tin tri thức (GEMS standard) và điều phối tương tác (AWF skills) của dự án. 
+# GEMS Skills — Hướng dẫn Tài liệu Tri thức
 
----
+Từ kiến trúc v9.0 (7/2026), quy trình vận hành GEMS là **code chạy thật**
+(`gems/` + `python -m gems ...`), không còn là chuỗi hướng dẫn thao tác thủ
+công nhiều bước (AWF workflow cũ) — nên thư mục này chỉ còn 2 tài liệu tri
+thức, mỗi tài liệu là nguồn thật cho đúng 1 việc, không chồng chéo:
 
-## 📚 Bản đồ Kỹ năng (Skills Map)
+## 1. [gems_physics_skill.md](gems_physics_skill.md) — Chuẩn sư phạm (nội dung)
 
+* Vai trò/phong cách, 7 nguyên tắc sư phạm cốt lõi, 12 loại hình nhiệm vụ học tập.
+* Yêu cầu nội dung theo từng loại tài liệu (PHT/Slide/KHBD/Bài tập/Infographic).
+* 15 tiêu chí QA Self-Check.
+* **Không** mô tả số liệu định dạng kỹ thuật (lề, font, màu) — xem mục 2.
+
+## 2. [docx_skill.md](docx_skill.md) — Kỹ thuật xuất file Word
+
+* Phần đầu là skill docx-js/XML tổng quát (dùng khi làm việc với .docx nói chung).
+* Phần cuối "Adaptation cho hệ thống GEMS" ánh xạ sang các hàm thật trong
+  [`gems/docx_export/styles.py`](../gems/docx_export/styles.py) — tra cứu ở đây
+  trước khi tự viết lại logic set lề/bảng/footer.
+
+## Số liệu định dạng chính thức (lề, màu, font, cấu trúc Markdown nhận diện được)
+
+Nằm ở [`.agents/agents.md`](../.agents/agents.md) — tài liệu **duy nhất** cho
+việc này, lấy trực tiếp từ `gems/docx_export/layout.py` và `palette.py`.
+
+## Cách vận hành pipeline
+
+Không còn quy trình thủ công nhiều bước — chạy thẳng CLI:
+
+```powershell
+python -m gems generate --lesson bai4      # Sinh Markdown + DOCX bằng Gemini API (cần GEMINI_API_KEY)
+python -m gems compose --lesson bai4       # Như trên nhưng nội dung do AI agent tự soạn (JSON), không cần API key
+python -m gems notebooklm --lesson bai4    # Tạo Slide + Infographic qua NotebookLM
+python -m gems full --lesson bai4          # generate/compose + notebooklm liên tiếp
+python -m gems offline --lesson bai4       # Chạy thử bằng fixture, không cần API/mạng
+python -m gems lint --lesson bai4          # Kiểm định DOCX đã có trong ready/
+python -m gems list-lessons                # Xem danh mục bài học (curriculum.yaml)
 ```
-                       ┌──────────────────────┐
-                       │  gems_physics_skill  │ (Single Source of Truth)
-                       │  - Định nghĩa chuẩn  │
-                       │  - Quy chuẩn in ấn   │
-                       └──────────┬───────────┘
-                                  │
-                                  ▼ (Tham chiếu luật)
-                       ┌──────────────────────┐
-                       │ awf-gems_workflow_sk.│ (Điều phối 6 bước tương tác)
-                       │  - Cách viết Markdown│
-                       │  - Hướng dẫn chạy    │
-                       └──────────┬───────────┘
-                                  │
-                                  ▼ (Vận hành tự động)
-                       ┌──────────────────────┐
-                       │  hermes-gems-automa. │ (Pipeline tự động hóa 1 click)
-                       │  - Cấu trúc Hermes   │
 
-
-
-
-
-
-
-
-
-* **Mô tả:** Là nguồn tri thức cốt lõi (Single Source of Truth) của hệ thống.
-* **Nhiệm vụ:**
-  * Định nghĩa 7 nguyên tắc sư phạm cốt lõi trong biên soạn tài liệu Vật lý.
-  * Hướng dẫn cụ thể về 12 loại hình nhiệm vụ học tập GEMS mới.
-  * Định hình quy chuẩn in ấn bắt buộc: dòng chấm điền khuyết dài đúng 90 ký tự (`..........................................................................................`), phông chữ, định dạng LaTeX công thức vật lý, biên dịch sơ đồ TikZ.
-  * Cung cấp 15 tiêu chí QA Self-Check giúp đánh giá tính chính xác của tài liệu.
-
-### 2. **[awf-gems_workflow_skill.md](file:///c:/Users/Admin/.antigravity-ide/soạn%20tài%20liệu/skills/awf-gems_workflow_skill.md) — AWF GEMS Workflow**
-* **Mô tả:** Điều phối tiến trình tương tác 6 bước giữa người dùng và trợ lý AI.
-* **Nhiệm vụ:**
-  * Hướng dẫn cách sinh và kiểm định cấu trúc các tệp tin đặc tả (SPEC), phiếu học tập, giáo án và slide thô.
-  * Hướng dẫn cách gọi các script hậu kỳ ở cuối mỗi bước.
-
-### 3. **[hermes-gems-automation.md](file:///c:/Users/Admin/.antigravity-ide/soạn%20tài%20liệu/skills/hermes-gems-automation.md) — GEMS Hermes Pipeline**
-* **Mô tả:** Kỹ năng tự động hóa quy trình sản xuất học liệu.
-* **Nhiệm vụ:**
-  * Định nghĩa cấu trúc phân loại đầu ra Hermes chuẩn: `md/`, `ready/`, `assets/`, `notebooklm/`.
-  * Hướng dẫn quy trình nạp tài liệu và tạo slide/infographic dạng dọc theo từng đơn vị kiến thức trên Google NotebookLM thông qua CLI.
-
-### 4. **[gems_khbd_generation_skill.md](file:///c:/Users/Admin/.antigravity-ide/soạn%20tài%20liệu/skills/gems_khbd_generation_skill.md) — GEMS KHBD Generation Standards**
-* **Mô tả:** Hướng dẫn Agent AI tự động biên soạn Kế hoạch bài dạy (Giáo án) chi tiết theo Công văn 5512 môn Vật lý.
-* **Nhiệm vụ:**
-  * Định nghĩa chi tiết cấu trúc 4 hoạt động sư phạm của Công văn 5512.
-  * Quy định định dạng Microsoft Word (.docx) chuyên sâu (lề trang động, giãn dòng 1.3 lines, spacing 6pt, thụt đầu dòng 1cm, bảng hoạt động 2 cột).
-  * Tự động bôi đậm các từ khóa hành động sư phạm cốt lõi.
+`compose` dùng khi không cấu hình `GEMINI_API_KEY` — chính AI agent đang chạy
+trong Antigravity IDE tự soạn nội dung, ghi ra JSON khớp schema
+`gems/models/*.py` vào `output/<slug>/authored/`, xem chi tiết ở
+[readme.md](../readme.md#không-dùng-gemini_api_key--để-ai-agent-claudeantigravity-tự-soạn-nội-dung).

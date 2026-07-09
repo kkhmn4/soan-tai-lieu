@@ -1,108 +1,129 @@
-# GEMS Physics Material Generation Engine (GEMS v8.0)
+# GEMS — Hệ thống Tự động Biên soạn Học liệu Vật lý 12 (v9.0)
+
 ========================================================================
 
-Hệ thống tự động biên soạn và xuất bản học liệu Vật lý 12 chất lượng cao theo chuẩn giáo dục hiện đại và quy chuẩn thiết kế GEMS v8.0.
+Agent tự động biên soạn và xuất bản học liệu Vật lý 12 chất lượng cao (Phiếu
+học tập, Kế hoạch bài dạy chuẩn CV5512, Bài tập về nhà, Slide bài giảng và
+Infographic) theo chương trình GDPT 2018, dùng Gemini API + Google NotebookLM.
+
+Kiến trúc v9.0 (7/2026) là bản viết lại toàn bộ, hợp nhất 2 pipeline từng
+tách rời và không tương thích nhau, xoá code chết, và dọn sạch 2 cây thư mục
+dự án từng bị nhân đôi. Chi tiết lý do xem [changelog.md](changelog.md).
 
 ---
 
-## 📁 Sơ đồ Cấu trúc Workspace Chuẩn hóa
-
-Thư mục gốc của dự án được tổ chức một cách khoa học để phân tách rõ ràng giữa mã nguồn, tài liệu hướng dẫn, tài nguyên thô và thành phẩm đầu ra:
+## 📁 Cấu trúc thư mục
 
 ```text
-soạn tài liệu/ (Thư mục gốc)
-├── .agents/                    # Cấu hình Agent IDE & Luật thiết kế GEMS (AGENTS.md)
-├── docs/                       # Tài liệu hướng dẫn & Thiết kế hệ thống
-│   ├── diagrams/               # Sơ đồ thiết kế luồng xử lý (Mermaid .mmd)
-│   └── reference/              # Kịch bản gốc môn học, tài liệu nâng cấp, quy trình chi tiết
-├── engine/                     # Bộ nhân xử lý chính của GEMS Engine
-│   ├── templates/              # Biểu mẫu và tệp định dạng Word (.docx)
-│   └── backup/                 # Sao lưu mã nguồn cũ
-├── output/                     # Thư mục thành phẩm học liệu (Không sử dụng thư mục con trung gian hermes)
-│   ├── bai2_su_chuyen_the/     # Học liệu Bài 2
-│   ├── bai3_noi_nang/          # Học liệu Bài 3
-│   ├── bai4_nhiet_dung_rieng/  # Học liệu Bài 4 (Hoàn chỉnh 100%)
-│   ├── bai5_nhiet_do_nhiet_ke/ # Học liệu Bài 5
-│   ├── bai6_nhiet_nong_chay_rieng/ # Học liệu Bài 6
-│   ├── bai7_nhiet_hoa_hoi_rieng/   # Học liệu Bài 7
-│   └── generated_docs/         # Thư mục tổng hợp các bản phân phối trước đó
-├── research/                   # Tài liệu phân tích sư phạm học thuật
-├── scratch/                    # Kịch bản tự động hóa NotebookLM và các tệp công cụ nháp
-├── skills/                     # Các skill hỗ trợ tự động hóa trong IDE (.md)
-├── tai-lieu-goc/               # Dữ liệu văn bản yêu cầu cần đạt (YCCĐ) và tài liệu thô đầu vào
-├── .gitignore                  # Cấu hình bỏ qua tệp của Git
-├── changelog.md                # Nhật ký cập nhật phiên bản của dự án
-└── readme.md                   # Tài liệu hướng dẫn hệ thống chính (Tệp này)
+soạn tài liệu/ (thư mục gốc)
+├── gems/                        # Package chính — TOÀN BỘ logic thật nằm ở đây
+│   ├── cli.py / __main__.py     # Điểm vào: python -m gems <lệnh> --lesson baiN
+│   ├── config/                  # curriculum.yaml (danh mục bài) + identity.yaml (tên GV/brand)
+│   ├── models/                  # Pydantic schema (khai đúng 1 lần/schema)
+│   ├── prompts/                 # Prompt hệ thống gửi Gemini
+│   ├── generation/               # Gọi Gemini + ghi Markdown + tự sửa lỗi
+│   ├── docx_export/              # Markdown -> DOCX (layout/palette/styles/exporter)
+│   ├── qa/                       # Lint Markdown (regex) + lint DOCX (cấu trúc)
+│   ├── notebooklm/                # nlm CLI wrapper + tạo prompt + poll/tải Slide-Infographic
+│   ├── pipeline/                  # RunReport + GEMSPipeline (điều phối 1 pipeline duy nhất)
+│   └── offline/                    # Fixture mẫu — chạy thử không cần API/mạng
+├── tests/                        # pytest cho toàn bộ gems/ (fixture markdown thật trong tests/fixtures/)
+├── tai-lieu-goc/                 # YCCĐ, SGK, khung chương trình GDPT 2018 (tài liệu nguồn)
+├── output/                       # output/<slug>/{md,ready,notebooklm}/ + metadata.json mỗi bài
+├── docs/                         # Sơ đồ & tài liệu tham khảo bổ sung
+├── skills/                       # Tri thức sư phạm (gems_physics_skill.md) + kỹ thuật docx (docx_skill.md)
+├── .agents/agents.md             # Quy chuẩn định dạng chính thức — nguồn thật duy nhất
+├── .brain/                       # Bộ nhớ phiên làm việc AI (handover, session log)
+├── pyproject.toml / requirements.txt
+└── changelog.md
 ```
 
 ---
 
-## ⚙️ Quy trình Vận hành Toàn phần (GEMS Pipeline)
-
-Quy trình biên soạn học liệu bao gồm 6 giai đoạn khép kín, được tự động hóa tối đa:
+## ⚙️ Quy trình vận hành (GEMS Pipeline)
 
 ```mermaid
 graph TD
-    A[YCCĐ & SGK] -->|gems_analyzer.py| B[dac_ta_gems.md & lesson_matrix.json]
-    B -->|worksheet_generator.py & homework_generator.py| C[Tạo file nguồn Markdown]
-    C -->|main.py DOCX pipeline| D[Biên dịch file DOCX CV5512 & LaTeX]
-    D -->|notebooklm_executor.py| E[Tự động phân tách 2 file Prompt Slide & Infographic]
-    E -->|generate_notebook_materials.py| F[Tải tài liệu nguồn & nạp Prompt tương ứng lên NotebookLM]
-    F -->|Smart Polling 5 phút| G[Tải xuống Slide Deck .pptx/pdf & Infographic .png]
-    G -->|restructure_output.py & quality_checker.py| H[Chuẩn hóa ready/ & QA report]
+    A[YCCĐ tai-lieu-goc/] -->|gems/generation/stages.py: analyze_yccd| B[dac_ta_gems.md + lesson_matrix.json]
+    B -->|generate_worksheet/homework/lesson_plan_content| C[Markdown nguồn: PHT, KHBD, Bài tập, Slide guide]
+    C -->|gems/docx_export| D[DOCX chuẩn in ấn: PHT/KHBD/Bài tập]
+    D -->|gems/generation/self_correction.py| E[Tự kiểm lỗi Markdown + tự sửa bằng Gemini]
+    E -->|gems/notebooklm| F[Prompt Slide + Infographic -> nlm CLI -> Poll -> Tải về ready/]
+    F -->|gems/qa/docx_lint.py| G[metadata.json + báo cáo QA]
 ```
 
-### Chi tiết các Giai đoạn:
-1. **Phân tích Sư phạm:** Trích xuất YCCĐ giáo dục phổ thông năm 2018 và phân chia thành các Đơn vị Kiến thức (ĐVKT).
-2. **Sinh Học liệu MD:** Sinh tự động các tệp markdown nguồn như phiếu học tập, kế hoạch bài dạy, hướng dẫn slide và bài tập về nhà.
-3. **Biên dịch DOCX (GEMS Formatting Engine):** Áp dụng luật GEMS v8.0 và SKILL định dạng giáo dục Việt Nam nâng cao:
-   - **Căn lề động theo loại tài liệu:** Phiếu học tập (2cm đều bốn bên); KHBD (Trái 3cm, Phải 2cm, Trên/Dưới 2cm); Đề thi (Trái/Phải 2cm, Trên/Dưới 1.5cm).
-   - **Giãn dòng & Thụt đầu dòng:** Thống nhất phông chữ Times New Roman, giãn dòng **1.3 lines** (Fixed 22pt), khoảng cách đoạn **6pt before/after**, và thụt dòng đầu **1.0 cm** cho văn bản thường.
-   - **Bảng biểu nâng cao:** Header màu Navy (`#1E3A5F`), dòng dữ liệu xen kẽ Mint (`#E8F5E9`), độ rộng bảng luôn là 16.5cm. Dòng bảng tự động chống ngắt trang (`cantSplit`) và lặp lại header (`tblHeader`).
-   - **Tối ưu hóa Đề thi:** Chống ngắt trang mồ côi (keepNext/keepLines) cho câu hỏi. Tự động xếp các phương án lựa chọn ABCD vào bảng không viền 2-4 cột linh hoạt theo độ dài phương án.
-4. **NotebookLM Cloud Integration:** 
-   - Tự động quét file Phiếu học tập để phân tích ĐVKT và file Hướng dẫn slide để bóc tách thông tin thiết kế đặc thù (giáo viên, phông chữ chủ đạo, trường phái thiết kế, quy tắc bắt buộc).
-   - Tạo ra **hai file prompt chuyên biệt**: prompt slide (`_slide_prompt.md`) và prompt infographic (`_info_prompt.md`) nạp tương ứng khi gọi CLI tạo slides và infographic để loại bỏ sự nhầm lẫn giữa hai loại.
-5. **Smart Polling & Auto-Download:** Tự động gửi yêu cầu thăm dò trạng thái lên Google Cloud mỗi **5 phút**, khi hoàn tất sẽ tự động tải các tệp PowerPoint (`.pptx`), Slide dạng `.pdf` và Infographic (`.png`) về thư mục bài học.
-6. **Hậu kỳ & QA:** Sắp xếp cấu trúc cây thư mục sạch sẽ, tự động tạo tệp `metadata.json` làm mục lục tài nguyên và đánh giá chất lượng học liệu dựa trên 15 tiêu chí QA của GEMS.
+## 🚀 Cách chạy
 
----
-
-## 🚀 Hướng dẫn Sử dụng Hệ thống
-
-### Bước 1: Sinh nội dung học liệu & Biên dịch DOCX cục bộ
-Chạy lệnh orchestrator chính của GEMS để sinh phiếu học tập, giáo án và bài tập về nhà từ file YCCĐ thô:
 ```powershell
-# Chạy toàn bộ pipeline sinh MD và biên dịch DOCX
-python engine/main.py --yccd tai-lieu-goc/yccd_bai4.txt -o output/bai4_nhiet_dung_rieng -l "Bài 4 - Nhiệt dung riêng"
+# Cài đặt (1 lần)
+pip install -r requirements.txt
+# hoặc: pip install -e .
 
-# Hoặc chỉ biên dịch lại file DOCX từ MD có sẵn
-python engine/main.py --docx-only -o output/bai4_nhiet_dung_rieng -l "Bài 4 - Nhiệt dung riêng"
+# Sinh học liệu bằng Gemini API (cần GEMINI_API_KEY trong .env)
+python -m gems generate --lesson bai4
+python -m gems generate --prompt "soạn bài 4 nhiệt dung riêng"
+
+# Tạo Slide + Infographic qua Google NotebookLM (cần `nlm login` trước)
+python -m gems notebooklm --lesson bai4
+
+# Cả 2 bước trên liên tiếp
+python -m gems full --lesson bai4
+
+# Chạy thử toàn bộ pipeline bằng dữ liệu mẫu — KHÔNG cần API key/mạng
+python -m gems offline --lesson bai4
+
+# Kiểm định chất lượng DOCX đã có sẵn trong ready/
+python -m gems lint --lesson bai4
+
+# Xem danh mục bài học hiện có
+python -m gems list-lessons
 ```
 
-### Bước 2: Tự động hóa NotebookLM sinh Slide & Infographic
-1. Đảm bảo bạn đã cài đặt công cụ `nlm` và đăng nhập thành công:
-   ```powershell
-   nlm login
-   ```
-2. Chạy kịch bản tự động hóa trung tâm (hỗ trợ Smart Polling 5 phút):
-   ```powershell
-   python scratch/generate_notebook_materials.py --lesson "Bài 4"
-   ```
-   Kịch bản sẽ tự động quét danh sách Notebook hiện tại, tái sử dụng Notebook Bài 4 có sẵn, tải lên các file nguồn, kích hoạt tạo Slide & Infographic, đợi Cloud xử lý và tự động tải về thư mục `output/bai4_nhiet_dung_rieng/ready/`.
+Thêm bài học mới: chỉ cần thêm 1 mục vào `gems/config/curriculum.yaml`, không
+cần sửa code (trước đây `LESSON_MAP` bị khai trùng ở 2 file khác nhau).
 
----
+### Không dùng GEMINI_API_KEY — để AI agent (Claude/Antigravity) tự soạn nội dung
 
-## 🎨 Quy định Việt hóa nhãn NotebookLM (Bắt buộc)
-Các prompt chỉ chỉ thị gửi lên Cloud yêu cầu Việt hóa 100% các phần đầu việc của GEMS:
-* **Assertion Reasoning** $\rightarrow$ **Nhận định & Lý do**
-* **Matching Matrix** $\rightarrow$ **Ghép nối đa biến**
-* **Bug Buster** $\rightarrow$ **Tìm và sửa lỗi vật lý**
-* **Algorithmic Ordering** $\rightarrow$ **Sắp xếp tiến trình**
-* **Visual Cloze Test** $\rightarrow$ **Điền khuyết trực quan**
+Nếu không muốn cấu hình `GEMINI_API_KEY`, dùng `compose` thay cho `generate`:
+AI agent đang trò chuyện (chạy trong Antigravity IDE) tự soạn nội dung bằng
+suy luận trực tiếp — không gọi API ngoài nào — rồi ghi ra 4 file JSON khớp
+đúng schema Pydantic (`gems/models/*.py`) vào `output/<slug>/authored/`:
 
----
+```
+output/<slug>/authored/<slug>_architect.json     # khớp gems.models.architect.GEMSArchitect
+output/<slug>/authored/<slug>_worksheet.json     # khớp gems.models.worksheet.LessonWorksheet
+output/<slug>/authored/<slug>_homework.json      # khớp gems.models.homework.HomeworkContent
+output/<slug>/authored/<slug>_lesson_plan.json   # khớp gems.models.lesson_plan.LessonPlanContent
+```
 
-## 📊 Nhật ký Thay đổi Phiên bản
-Xem nhật ký cập nhật chi tiết tại [changelog.md](file:///c:/Users/Admin/.antigravity-ide/so%E1%BA%A1n%20t%C3%A0i%20li%E1%BB%87u/changelog.md).
-Sơ đồ Mermaid chi tiết có thể được tham chiếu tại [gems_agent_pipeline.mmd](file:///c:/Users/Admin/.antigravity-ide/so%E1%BA%A1n%20t%C3%A0i%20li%E1%BB%87u/docs/diagrams/gems_agent_pipeline.mmd).
+Sau đó chạy:
+
+```powershell
+python -m gems compose --lesson bai4                        # Markdown + DOCX từ JSON đã soạn
+python -m gems full --lesson bai4 --content-dir output/bai4_nhiet_dung_rieng/authored  # + NotebookLM
+```
+
+`compose` dùng lại đúng bộ `gems/docx_export` như `generate`/`offline` — chỉ
+khác nguồn nội dung, không có đường xử lý DOCX riêng nào khác.
+
+## 🎨 Quy định thương hiệu & Việt hóa
+
+Tên giáo viên, phông chữ chủ đạo và nhãn phiên bản GEMS đọc từ
+`gems/config/identity.yaml` — sửa 1 chỗ, áp dụng toàn hệ thống.
+
+Nhãn tiếng Anh của GEMS luôn được dịch khi gửi lên NotebookLM:
+* **Assertion Reasoning** → **Nhận định & Lý do**
+* **Matching Matrix** → **Ghép nối đa biến**
+* **Bug Buster** → **Tìm và sửa lỗi vật lý**
+* **Algorithmic Ordering** → **Sắp xếp tiến trình**
+* **Visual Cloze Test** → **Điền khuyết trực quan**
+
+## 🧪 Kiểm thử
+
+```powershell
+python -m pytest tests/ -q
+```
+
+## 📊 Nhật ký thay đổi
+
+Xem [changelog.md](changelog.md).

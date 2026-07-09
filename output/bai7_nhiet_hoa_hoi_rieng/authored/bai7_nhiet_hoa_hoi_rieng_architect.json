@@ -1,0 +1,102 @@
+{
+  "analysis": {
+    "key_concepts": [
+      "Định nghĩa nhiệt hóa hơi riêng L của chất lỏng, đơn vị J/kg",
+      "Công thức tính nhiệt lượng hóa hơi Q = Lm",
+      "Phân biệt L với nhiệt dung riêng c và nhiệt nóng chảy riêng λ",
+      "Phương án thí nghiệm xác định L của nước bằng nhiệt lượng kế và oát kế",
+      "Phương trình cân bằng nhiệt khi có quá trình hóa hơi/ngưng tụ"
+    ],
+    "misconceptions": [
+      {
+        "misconception": "Nhiệt hóa hơi riêng của một chất lỏng phụ thuộc vào khối lượng của nó.",
+        "correct_concept": "L là hằng số đặc trưng cho bản chất chất lỏng ở một nhiệt độ xác định, không phụ thuộc khối lượng.",
+        "explanation": "Trong công thức Q = Lm, chính m biến thiên theo khối lượng chất lỏng, còn L luôn là hằng số tra bảng ứng với từng chất ở nhiệt độ sôi xác định — giống như c trong Q = mcΔt vậy."
+      },
+      {
+        "misconception": "Sự hóa hơi chỉ xảy ra ở nhiệt độ sôi.",
+        "correct_concept": "Sự bay hơi xảy ra ở mọi nhiệt độ từ bề mặt chất lỏng; sự sôi (hóa hơi cả trong lòng chất lỏng) mới xảy ra ở nhiệt độ sôi xác định.",
+        "explanation": "Nhiệt hóa hơi riêng thường được đo và công bố tại nhiệt độ sôi vì đó là điều kiện dễ kiểm soát và tái lập trong thí nghiệm, nhưng bản thân hiện tượng bay hơi (như cồn bay hơi ở nhiệt độ phòng) không đòi hỏi phải sôi."
+      },
+      {
+        "misconception": "Nhiệt hóa hơi riêng L tăng khi nhiệt độ của chất lỏng tăng.",
+        "correct_concept": "Nhiệt hóa hơi riêng của một chất giảm khi nhiệt độ tăng (và ngược lại, tăng khi nhiệt độ giảm).",
+        "explanation": "Ở nhiệt độ càng thấp, lực liên kết giữa các phân tử chất lỏng càng mạnh nên cần nhiều năng lượng hơn để tách chúng ra thành thể khí, do đó L lớn hơn."
+      },
+      {
+        "misconception": "Đơn vị của nhiệt hóa hơi riêng L giống đơn vị của nhiệt dung riêng c, đều là J/(kg·K).",
+        "correct_concept": "Đơn vị của L là J/kg (không có thành phần K hay °C), khác với đơn vị J/(kg·K) của c.",
+        "explanation": "L đặc trưng cho sự biến đổi pha ở nhiệt độ không đổi (không có ΔT trong công thức Q = Lm), còn c đặc trưng cho sự thay đổi nhiệt độ (có ΔT trong công thức Q = mcΔt) — vì bản chất vật lý khác nhau nên đơn vị đo cũng khác nhau."
+      }
+    ],
+    "teaching_methods": [
+      "Station Learning (trạm học tập luân phiên)",
+      "Think-Pair-Share khi phân tích thí nghiệm",
+      "Kỹ thuật KWL (Know-Want-Learn) mở đầu bài học",
+      "Engineering Debugger — phản biện lỗi thiết kế thí nghiệm"
+    ]
+  },
+  "matrix": {
+    "lesson_name": "Bài 7 - Nhiệt hóa hơi riêng",
+    "units": [
+      {
+        "unit_id": "ĐVKT 1",
+        "unit_name": "Khái niệm và công thức nhiệt hóa hơi riêng",
+        "concepts": [
+          "Định nghĩa L",
+          "Công thức Q = Lm",
+          "Đơn vị J/kg",
+          "Phân biệt L với c và λ"
+        ],
+        "tasks": [
+          {
+            "task_id": "NV1",
+            "task_type": "Visual Cloze Test",
+            "task_name": "Điền khuyết định nghĩa và công thức",
+            "description": "Quan sát hình ảnh ấm nước sôi bốc hơi, điền khuyết định nghĩa L, kí hiệu, đơn vị và công thức Q = Lm.",
+            "context_real": "Ấm nước đun sôi bốc hơi mạnh trong bếp ăn gia đình."
+          },
+          {
+            "task_id": "NV2",
+            "task_type": "Bug Buster",
+            "task_name": "Tìm lỗi phát biểu sai về nhiệt hóa hơi riêng",
+            "description": "Phát hiện và sửa các phát biểu sai liên quan tới 4 quan niệm sai lầm phổ biến về L.",
+            "context_real": "Cồn y tế bay hơi làm mát da khi bôi lên tay."
+          }
+        ]
+      },
+      {
+        "unit_id": "ĐVKT 2",
+        "unit_name": "Thí nghiệm đo nhiệt hóa hơi riêng và vận dụng cân bằng nhiệt",
+        "concepts": [
+          "Dụng cụ thí nghiệm đo L",
+          "Quy trình thực nghiệm",
+          "Phương trình cân bằng nhiệt có hóa hơi/ngưng tụ"
+        ],
+        "tasks": [
+          {
+            "task_id": "NV3",
+            "task_type": "Matching Matrix",
+            "task_name": "Ghép dụng cụ thí nghiệm với vai trò",
+            "description": "Ghép 5 dụng cụ (nhiệt lượng kế, oát kế, nhiệt kế, cân điện tử, biến thế nguồn) với đúng vai trò trong thí nghiệm đo L của nước.",
+            "context_real": "Bộ thí nghiệm đo nhiệt hóa hơi riêng trong phòng thực hành Vật lý ở trường THPT."
+          },
+          {
+            "task_id": "NV4",
+            "task_type": "Algorithmic Ordering",
+            "task_name": "Sắp xếp quy trình thí nghiệm",
+            "description": "Sắp xếp đúng 5 thao tác tiến hành thí nghiệm đo L của nước bằng nhiệt lượng kế và oát kế.",
+            "context_real": "Quy trình thực hành đo đạc trong phòng thí nghiệm Vật lý."
+          },
+          {
+            "task_id": "NV5",
+            "task_type": "Engineering Debugger",
+            "task_name": "Tìm và sửa lỗi thiết kế thí nghiệm",
+            "description": "Phát hiện 3 lỗi nghiêm trọng (an toàn điện, cách nhiệt, phương pháp tính) trong phương án thí nghiệm của một nhóm học sinh và đề xuất cách khắc phục.",
+            "context_real": "Sự cố mất an toàn điện khi học sinh tự ý cắm dây đun trực tiếp vào nguồn 220V."
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "lesson_name": "Bài 7 - Nhiệt hóa hơi riêng",
+  "duration": "2 tiết (90 phút)",
+  "objectives": {
+    "physics_competency": [
+      "Nêu được khái niệm nhiệt hóa hơi riêng, kí hiệu L, đơn vị J/kg.",
+      "Viết được công thức Q = Lm và vận dụng giải bài tập tính nhiệt lượng hóa hơi.",
+      "Mô tả được phương án thí nghiệm xác định nhiệt hóa hơi riêng của nước.",
+      "Giải thích được các hiện tượng thực tế liên quan đến hóa hơi/ngưng tụ (máy điều hòa, nồi hấp tiệt trùng, ngưng tụ ở nắp vung)."
+    ],
+    "general_competency": [
+      "Tự chủ và tự học: chủ động đọc phiếu học tập, tra cứu hằng số vật lý.",
+      "Giao tiếp và hợp tác: làm việc nhóm hiệu quả khi thực hiện Station Learning và thảo luận thí nghiệm.",
+      "Giải quyết vấn đề và sáng tạo: phát hiện và đề xuất khắc phục lỗi thiết kế thí nghiệm (Engineering Debugger)."
+    ],
+    "qualities": [
+      "Chăm chỉ: tích cực hoàn thành nhiệm vụ cá nhân và nhóm.",
+      "Trung thực: ghi nhận đúng số liệu thực nghiệm và kết quả tính toán."
+    ]
+  },
+  "materials": {
+    "teacher_materials": [
+      "Bộ thí nghiệm đo L: biến thế nguồn, oát kế tích hợp đo thời gian, nhiệt lượng kế nhựa vỏ xốp kèm dây đun điện trở, nhiệt kế điện tử, cân điện tử, nước nóng đun sẵn.",
+      "Sơ đồ bộ thí nghiệm đo L, đồ thị nhiệt độ-thời gian, sơ đồ chu trình điều hòa (xem hình minh họa trong nội dung Hoạt động 3 và Hoạt động 5).",
+      "Slide bài giảng, video minh họa nguyên lý máy điều hòa nhiệt độ."
+    ],
+    "student_materials": [
+      "Phiếu học tập",
+      "SGK Vật lí 12 (Kết nối tri thức)",
+      "Bảng hằng số nhiệt hóa hơi riêng một số chất"
+    ]
+  },
+  "activities": [
+    {
+      "activity_id": "HĐ1",
+      "activity_name": "Khởi động",
+      "objectives": "Tạo tình huống có vấn đề, kích thích tò mò về hiện tượng thu nhiệt khi hóa hơi.",
+      "content": "Đặt câu hỏi: Tại sao đổ cồn lên da rồi đứng trước quạt lại thấy mát buốt?",
+      "product": "Câu trả lời dự đoán ban đầu của học sinh (chưa cần chính xác).",
+      "active_learning_techniques": ["Kỹ thuật KWL"],
+      "digital_competency_codes": [],
+      "steps": {
+        "step1_transfer": "GV đặt câu hỏi khởi động về hiện tượng cồn bay hơi làm mát da, yêu cầu HS dự đoán nguyên nhân. Hình thức: cá nhân. Thời gian: 3 phút. Tài liệu: không cần tài liệu, HS tự suy luận dựa trên kinh nghiệm thực tế đã trải qua.",
+        "step2_execution": "HS suy nghĩ cá nhân trong 2 phút và ghi dự đoán ra giấy nháp.",
+        "step3_report": "Gọi 2-3 HS chia sẻ dự đoán trước lớp.",
+        "step4_conclusion": "GV chưa chốt đáp án đúng/sai, dẫn dắt vào bài học nhiệt hóa hơi riêng."
+      }
+    },
+    {
+      "activity_id": "HĐ2",
+      "activity_name": "Hình thành kiến thức mới - ĐVKT 1: Khái niệm và công thức nhiệt hóa hơi riêng",
+      "objectives": "HS nêu được định nghĩa, công thức, đơn vị của L và phân biệt được các phát biểu đúng/sai liên quan.",
+      "content": "Trạm học tập 1 (tương ứng PHT mục 1 — ĐVKT 1): NV1 (Visual Cloze Test — điền khuyết định nghĩa và công thức), NV2 (Bug Buster — tìm phát biểu sai).",
+      "product": "Phiếu học tập hoàn thành NV1-NV2 (tương ứng PHT mục 1 — ĐVKT 1).",
+      "active_learning_techniques": ["Station Learning (trạm học tập)"],
+      "digital_competency_codes": [],
+      "steps": {
+        "step1_transfer": "GV phát Phiếu học tập, giao nhiệm vụ NV1 và NV2 cho Trạm 1. Hình thức: nhóm 4 học sinh. Thời gian: 8 phút. Tài liệu: quan sát hình ảnh ấm nước đang sôi trong Phiếu học tập và đọc SGK mục I.",
+        "step2_execution": "HS trong nhóm lần lượt hoàn thành NV1 (điền khuyết định nghĩa/công thức) rồi thảo luận NV2 (tìm phát biểu sai) dựa trên kết quả NV1.",
+        "step3_report": "Đại diện 1-2 nhóm trình bày đáp án NV1-NV2, các nhóm khác nhận xét bổ sung.",
+        "step4_conclusion": "GV chốt đáp án trên slide, nhấn mạnh công thức Q = Lm, đơn vị J/kg, và phân biệt L với c."
+      }
+    },
+    {
+      "activity_id": "HĐ3",
+      "activity_name": "Hình thành kiến thức mới - ĐVKT 2: Thí nghiệm đo nhiệt hóa hơi riêng và vận dụng cân bằng nhiệt",
+      "objectives": "HS mô tả được quy trình thí nghiệm đo L của nước và nêu được vai trò từng dụng cụ.",
+      "content": "Trạm học tập 2 (tương ứng PHT mục 1 — ĐVKT 2): NV3 (Matching Matrix — ghép dụng cụ thí nghiệm với vai trò, có kèm sơ đồ bộ thí nghiệm), NV4 (Algorithmic Ordering — sắp xếp quy trình thí nghiệm).\n\nready/hinh_anh/so_do_thi_nghiem_do_L.png",
+      "product": "Phiếu học tập hoàn thành NV3-NV4 (tương ứng PHT mục 1 — ĐVKT 2).",
+      "active_learning_techniques": ["Station Learning (trạm học tập)"],
+      "digital_competency_codes": [],
+      "steps": {
+        "step1_transfer": "GV giao nhiệm vụ NV3 và NV4 cho Trạm 2. Hình thức: nhóm 4 học sinh (giữ nguyên nhóm của Trạm 1). Thời gian: 8 phút. Tài liệu: quan sát sơ đồ bộ thí nghiệm đo nhiệt hóa hơi riêng (xem hình minh họa ở mục Nội dung bên trên) và đọc SGK mục thực hành.",
+        "step2_execution": "HS quan sát sơ đồ, thảo luận ghép dụng cụ với vai trò (NV3), sau đó sắp xếp đúng trình tự thao tác thí nghiệm (NV4).",
+        "step3_report": "Đại diện 1-2 nhóm trình bày kết quả NV3-NV4, các nhóm khác so sánh, nhận xét.",
+        "step4_conclusion": "GV nhận xét, chốt đáp án đúng và chỉ ra những điểm cần lưu ý khi tiến hành thí nghiệm thật."
+      }
+    },
+    {
+      "activity_id": "HĐ4",
+      "activity_name": "Luyện tập",
+      "objectives": "HS vận dụng thành thạo công thức Q = Lm và phương trình cân bằng nhiệt có hóa hơi/ngưng tụ để giải bài tập.",
+      "content": "Giải bài toán nồi hấp tiệt trùng và bài toán hơi nước ngưng tụ trong bình nước (tương ứng PHT mục 2 — Luyện tập, gồm cả 2 ĐVKT) — cả hai đều ở dạng trả lời ngắn có nêu rõ quy tắc làm tròn, đúng phong cách đề thi tốt nghiệp THPT.",
+      "product": "Bài giải chi tiết 2 bài toán vận dụng trong phiếu học tập.",
+      "active_learning_techniques": ["Chia sẻ nhóm đôi (Think-Pair-Share)"],
+      "digital_competency_codes": [],
+      "steps": {
+        "step1_transfer": "GV giao 2 bài toán ở PHT mục 2 (Luyện tập): tính Q hóa hơi nước trong nồi hấp tiệt trùng, và tính nhiệt độ cân bằng khi dẫn hơi nước vào bình nước lạnh. Hình thức: cá nhân, sau đó thảo luận cặp đôi. Thời gian: 7 phút (4 phút cá nhân + 3 phút cặp đôi). Tài liệu: Phiếu học tập mục Luyện tập, không dùng thêm tài liệu khác.",
+        "step2_execution": "HS làm việc cá nhân sau đó thảo luận cặp đôi (Think-Pair-Share) để đối chiếu kết quả.",
+        "step3_report": "2 HS lên bảng trình bày lời giải chi tiết cho 2 bài toán.",
+        "step4_conclusion": "GV nhận xét, sửa lỗi trình bày (nếu có), nhấn mạnh phải cộng đủ nhiệt lượng làm nguội hơi/nước sau ngưng tụ trong phương trình cân bằng nhiệt."
+      }
+    },
+    {
+      "activity_id": "HĐ5",
+      "activity_name": "Vận dụng - Mở rộng",
+      "objectives": "HS phản biện và khắc phục lỗi thiết kế thí nghiệm thực tế, liên hệ ứng dụng kỹ thuật/tự nhiên của hiện tượng hóa hơi.",
+      "content": "Giao nhiệm vụ Engineering Debugger (NV5, tương ứng PHT mục 3 — Vận dụng) tìm lỗi phương án thí nghiệm của một nhóm học sinh khác; đọc và thảo luận phần Mở rộng về máy điều hòa (có kèm sơ đồ chu trình) và vòng tuần hoàn nước — cũng thuộc PHT mục 3.\n\nready/hinh_anh/so_do_chu_trinh_dieu_hoa.png",
+      "product": "Bảng liệt kê 3 lỗi sai và cách khắc phục; câu trả lời phần Mở rộng kiến thức.",
+      "active_learning_techniques": ["Đóng vai"],
+      "digital_competency_codes": [],
+      "steps": {
+        "step1_transfer": "GV giao tình huống thí nghiệm có lỗi (dây đun cắm trực tiếp 220V, cốc không cách nhiệt, tính sai công thức) và yêu cầu HS đóng vai kiểm định viên. Hình thức: nhóm 4 học sinh. Thời gian: 8 phút. Tài liệu: đọc tình huống trong Phiếu học tập (NV5) và sơ đồ chu trình điều hòa (xem hình minh họa ở mục Nội dung bên trên).",
+        "step2_execution": "HS thảo luận nhóm 4 người, liệt kê từng lỗi và đề xuất cách khắc phục cụ thể.",
+        "step3_report": "Đại diện nhóm trình bày trước lớp, các nhóm khác phản biện/bổ sung.",
+        "step4_conclusion": "GV chuẩn hóa 3 lỗi đúng (an toàn điện, cách nhiệt, phương pháp tính Q=Pt thay vì dùng c), liên hệ ứng dụng máy điều hòa và giao bài tập về nhà."
+      }
+    }
+  ],
+  "adjustments": {
+    "advantages": "",
+    "limitations": "",
+    "solutions": ""
+  }
+}
